@@ -1,0 +1,137 @@
+.footer {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    var(--cream) 0%,
+    #f5f0eb 45%,
+    #efeae4 100%
+  );
+  color: var(--ink);
+  --footer-pad-y: clamp(2.5rem, 5vw, 3.5rem);
+  padding: var(--footer-pad-y) clamp(1.25rem, 4vw, 3rem) var(--footer-pad-y);
+  overflow: hidden;
+  margin-top: 2rem;
+  min-height: auto;
+  border-top: 1px solid var(--border);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+  padding-bottom: 0;
+}
+
+.brandBlock {
+  margin-top: -0.2rem;
+}
+
+.tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.2vw, 2.7rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 0.85rem;
+  line-height: 1.15;
+}
+
+.taglineSecond {
+  display: inline-block;
+  margin-top: 0.2em;
+}
+
+.madeWith {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.65rem;
+}
+
+.madeWith span {
+  color: var(--purple);
+}
+
+.localTime {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.linkColumns {
+  display: flex;
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+}
+
+.linkList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.linkList a {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: color 0.2s ease;
+}
+
+.linkList a:hover,
+.linkList a:focus-visible {
+  color: var(--purple);
+}
+
+.bottom {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  padding-top: 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.copyright {
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    min-height: auto;
+  }
+
+  .top {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+
+  .linkColumns {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

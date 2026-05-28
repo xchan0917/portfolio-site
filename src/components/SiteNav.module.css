@@ -1,0 +1,232 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.25rem clamp(1.25rem, 4vw, 3rem);
+  pointer-events: none;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.headerHidden {
+  opacity: 0;
+  transform: translateY(-0.75rem);
+}
+
+.headerHidden .inner {
+  pointer-events: none;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  pointer-events: auto;
+}
+
+.brand {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+
+.brand:hover {
+  color: var(--purple);
+}
+
+.brandMark {
+  color: var(--purple);
+  font-weight: 500;
+}
+
+.desktopNav {
+  display: block;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  list-style: none;
+}
+
+.navLink {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.2rem;
+  width: 100%;
+  height: 1px;
+  background: var(--purple);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--ink);
+}
+
+.navLink:hover::after,
+.navLink:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.mobileNav {
+  display: none;
+  position: relative;
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.65);
+  backdrop-filter: blur(8px);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.menuButton:hover,
+.menuButton:focus-visible {
+  border-color: rgb(75 44 127 / 0.35);
+  outline: none;
+}
+
+.menuIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 16px;
+  height: 12px;
+}
+
+.menuBar {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 1px;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.menuBar:first-child.menuBarOpen {
+  transform: translateY(3.25px) rotate(45deg);
+}
+
+.menuBar:last-child.menuBarOpen {
+  transform: translateY(-3.25px) rotate(-45deg);
+}
+
+.menuLabel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.65rem);
+  right: 0;
+  width: max-content;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: rgb(250 247 244 / 0.98);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgb(28 21 36 / 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease,
+    visibility 0.22s ease;
+}
+
+.dropdownOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdownList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: max-content;
+}
+
+.dropdownLink {
+  display: block;
+  padding: 0.35rem 0;
+  border-radius: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.dropdownLink:hover,
+.dropdownLink:focus-visible {
+  background: rgb(75 44 127 / 0.08);
+  color: var(--purple);
+  outline: none;
+}
+
+@media (max-width: 767px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .mobileNav {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: opacity 0.2s ease;
+  }
+
+  .headerHidden {
+    transform: none;
+  }
+}

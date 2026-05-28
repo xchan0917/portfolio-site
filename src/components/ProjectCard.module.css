@@ -1,0 +1,160 @@
+.card {
+  --card-index: 0;
+  animation: rise 0.7s ease both;
+  animation-delay: calc(var(--card-index) * 0.08s);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.55);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgb(28 21 36 / 0.08);
+  border-color: rgb(75 44 127 / 0.25);
+}
+
+.linkStatic {
+  cursor: default;
+}
+
+.linkStatic:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border);
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.mediaInner {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.5s ease;
+}
+
+.link:hover .mediaInner,
+.link:focus-visible .mediaInner {
+  transform: scale(1.04);
+}
+
+.accent_purple .mediaInner {
+  background: linear-gradient(
+    145deg,
+    #4b2c7f 0%,
+    #7c5cad 55%,
+    #f5e6e8 100%
+  );
+}
+
+.accent_peach .mediaInner {
+  background: linear-gradient(
+    145deg,
+    #f0d5c8 0%,
+    #f8e8e8 50%,
+    #faf7f4 100%
+  );
+}
+
+.accent_pink .mediaInner {
+  background: linear-gradient(
+    145deg,
+    #f5e6e8 0%,
+    #e8c4d4 45%,
+    #faf7f4 100%
+  );
+}
+
+.accent_ink .mediaInner {
+  background: linear-gradient(
+    145deg,
+    #1c1524 0%,
+    #4b2c7f 60%,
+    #f0d5c8 100%
+  );
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.9);
+  color: var(--ink);
+}
+
+.body {
+  padding: 1.35rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.65rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.description {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  flex: 1;
+}
+
+.cta {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-top: 0.25rem;
+}
