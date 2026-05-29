@@ -5,9 +5,9 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { navLinks, site } from "@/lib/site";
 import styles from "./SiteNav.module.css";
 
-export function SiteNav() {
+export function SiteNav({ glass = false }: { glass?: boolean } = {}) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [headerVisible, setHeaderVisible] = useState(true);
+  const [headerVisible, setHeaderVisible] = useState(false);
   const menuId = useId();
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -16,25 +16,16 @@ export function SiteNav() {
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   useEffect(() => {
-    const getThreshold = () => {
-      const credentials = document.getElementById("hero-credentials");
-      if (!credentials) return 380;
-      return credentials.offsetTop + credentials.offsetHeight + 24;
-    };
+    // Hidden at the top; reveals when scrolling up, hides when scrolling down.
+    const TOP_GUARD = 60;
 
     const onScroll = () => {
       const currentY = window.scrollY;
-      const threshold = getThreshold();
-
-      if (currentY <= threshold) {
-        setHeaderVisible(true);
-        lastScrollY.current = currentY;
-        return;
-      }
-
       const delta = currentY - lastScrollY.current;
 
-      if (delta < -4) {
+      if (currentY <= TOP_GUARD) {
+        setHeaderVisible(false);
+      } else if (delta < -4) {
         setHeaderVisible(true);
       } else if (delta > 4) {
         setHeaderVisible(false);
@@ -91,13 +82,11 @@ export function SiteNav() {
 
   return (
     <header
-      className={`${styles.header} ${!headerVisible && !menuOpen ? styles.headerHidden : ""}`}
+      className={`${styles.header} ${glass ? styles.headerGlass : ""} ${!headerVisible && !menuOpen ? styles.headerHidden : ""}`}
     >
       <div className={styles.inner}>
-        <Link href="/" className={styles.brand} onClick={closeMenu}>
-          <span className={styles.brandMark}>[</span>
-          {site.name}
-          <span className={styles.brandMark}>]</span>
+        <Link href="/" className={styles.brand} onClick={closeMenu} aria-label={site.name}>
+          <span className={styles.brandChar}>鑫洁</span>
         </Link>
 
         <nav className={styles.desktopNav} aria-label="Primary">

@@ -23,12 +23,10 @@ type Segment =
   | { kind: "loves"; value: string };
 
 const HERO_COPY: Segment[] = [
-  { kind: "text", value: "She is an interdiciplinary designer who " },
-  { kind: "loves", value: "loves" },
   {
     kind: "text",
     value:
-      " all work in product and AI. SHaping meaningful human experiences through interaction and good intentions.",
+      "She is an interdisciplinary designer focusing on AI products. Her work is centered around human experiences and good intentions.",
   },
 ];
 
@@ -205,6 +203,28 @@ export function Hero() {
             ))}
           </div>
         </div>
+
+        {typingDone || reduceMotion ? (
+          <div className={styles.meetAnnotation} aria-hidden="true">
+            <span className={styles.meetText}>meet cynthia</span>
+            <svg
+              className={styles.meetArrow}
+              viewBox="0 0 100 88"
+              fill="none"
+            >
+              <path
+                className={styles.meetArrowPath}
+                pathLength={1}
+                d="M66 6 C84 3 90 19 76 24 C65 28 66 13 77 15 C90 17 88 34 72 38 C59 41 62 25 74 28 C86 31 82 52 64 58 C56 61 50 66 46 78"
+              />
+              <path
+                className={styles.meetArrowHead}
+                pathLength={1}
+                d="M46 78 L58 75 M46 78 L50 65"
+              />
+            </svg>
+          </div>
+        ) : null}
 
         <h1
           id="hero-heading"

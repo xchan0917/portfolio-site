@@ -131,6 +131,72 @@
   }
 }
 
+.meetAnnotation {
+  position: absolute;
+  top: -5.4rem;
+  left: 0.5rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.meetText {
+  font-family: var(--font-cursive), cursive;
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--purple);
+  transform: rotate(-7deg);
+  opacity: 0;
+  animation: meetTextIn 0.55s ease 0.05s forwards;
+}
+
+@keyframes meetTextIn {
+  from {
+    opacity: 0;
+    transform: rotate(-7deg) translateY(6px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-7deg) translateY(0) scale(1);
+  }
+}
+
+.meetArrow {
+  width: 78px;
+  height: 64px;
+  margin-top: -2px;
+  margin-left: 2.6rem;
+  overflow: visible;
+}
+
+.meetArrowPath,
+.meetArrowHead {
+  fill: none;
+  stroke: var(--purple);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.meetArrowPath {
+  animation: meetDraw 1s ease 0.45s forwards;
+}
+
+.meetArrowHead {
+  animation: meetDraw 0.3s ease 1.4s forwards;
+}
+
+@keyframes meetDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 .heading {
   position: relative;
   z-index: 1;
@@ -326,5 +392,16 @@
 
   .headingHidden {
     opacity: 1;
+  }
+
+  .meetText {
+    opacity: 1;
+    animation: none;
+  }
+
+  .meetArrowPath,
+  .meetArrowHead {
+    stroke-dashoffset: 0;
+    animation: none;
   }
 }

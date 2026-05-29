@@ -13,6 +13,14 @@
     transform 0.35s ease;
 }
 
+.headerGlass {
+  background: rgb(255 252 247 / 0.45);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-bottom: 1px solid rgb(75 44 127 / 0.08);
+  box-shadow: 0 1px 24px rgb(75 44 127 / 0.06);
+}
+
 .headerHidden {
   opacity: 0;
   transform: translateY(-0.75rem);
@@ -32,21 +40,29 @@
 }
 
 .brand {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink);
-  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  color: var(--purple);
+  transition: opacity 0.2s ease;
 }
 
 .brand:hover {
-  color: var(--purple);
+  opacity: 0.78;
 }
 
-.brandMark {
+.brandChar {
+  font-family: "Ma Shan Zheng", var(--font-cursive), cursive;
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: 0.06em;
   color: var(--purple);
-  font-weight: 500;
+  /* Soft brushed / sketched edge */
+  text-shadow:
+    0.5px 0.5px 0 rgb(75 44 127 / 0.18),
+    -0.4px 0.4px 0 rgb(75 44 127 / 0.12);
+  transform: rotate(-3deg);
+  transform-origin: center;
 }
 
 .desktopNav {

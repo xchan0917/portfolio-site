@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FooterFlorals } from "@/components/FooterFlorals";
 import { LocalTime } from "@/components/LocalTime";
+import { Reveal } from "@/components/Reveal";
 import { site } from "@/lib/site";
 import styles from "./SiteFooter.module.css";
 
@@ -11,7 +12,7 @@ export function SiteFooter() {
 
       <div className={styles.inner}>
         <div className={styles.top}>
-          <div className={styles.brandBlock}>
+          <Reveal className={styles.brandBlock}>
             <p className={styles.tagline}>
               Glad you&apos;ve made it here,
               <br />
@@ -23,9 +24,9 @@ export function SiteFooter() {
             <p className={styles.localTime}>
               <LocalTime label="Your local time" />
             </p>
-          </div>
+          </Reveal>
 
-          <div className={styles.linkColumns}>
+          <Reveal className={styles.linkColumns} delay={120}>
             <ul className={styles.linkList}>
               <li>
                 <Link
@@ -54,7 +55,7 @@ export function SiteFooter() {
                 <Link href="/about">About</Link>
               </li>
             </ul>
-          </div>
+          </Reveal>
         </div>
 
         <div className={styles.bottom}>

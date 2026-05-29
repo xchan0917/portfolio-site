@@ -5,17 +5,10 @@ export type Project = {
   tags: string[];
   comingSoon?: boolean;
   accent: "purple" | "peach" | "pink" | "ink";
+  cover?: string;
 };
 
 export const featuredProjects: Project[] = [
-  {
-    slug: "pgh-childrens-museum",
-    title: "PGH Children's Museum",
-    description:
-      "Reimagining the Pittsburgh Children's Museum website to better serve its audience.",
-    tags: ["Case Study", "User Research"],
-    accent: "peach",
-  },
   {
     slug: "snitch",
     title: "Snitch",
@@ -23,6 +16,16 @@ export const featuredProjects: Project[] = [
       "Agentic AI product for accountability in self-scheduled work.",
     tags: ["Agentic AI", "Hackathon"],
     accent: "purple",
+    cover: "/projects/snitch.gif",
+  },
+  {
+    slug: "pgh-childrens-museum",
+    title: "PGH Children's Museum",
+    description:
+      "Reimagining the Pittsburgh Children's Museum website to better serve its audience.",
+    tags: ["Case Study", "User Research"],
+    accent: "peach",
+    cover: "/projects/pgh-childrens-museum.gif",
   },
   {
     slug: "canvas-integration",
@@ -31,6 +34,7 @@ export const featuredProjects: Project[] = [
       "Canvas restructured to reduce friction in everyday student workflows.",
     tags: ["App Design", "Hackathon"],
     accent: "pink",
+    cover: "/projects/canvas-integration.gif",
   },
   {
     slug: "plus-rebrand",
@@ -40,6 +44,7 @@ export const featuredProjects: Project[] = [
     tags: ["Research", "Product Strategy"],
     comingSoon: true,
     accent: "ink",
+    cover: "/projects/plus-rebrand.gif",
   },
   {
     slug: "punchcard",
@@ -49,5 +54,6 @@ export const featuredProjects: Project[] = [
     tags: ["Product Design", "Dashboard"],
     comingSoon: true,
     accent: "purple",
+    cover: "/projects/punchcard.gif",
   },
 ];

@@ -1,0 +1,505 @@
+.study {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(7rem, 12vw, 9rem) clamp(1.25rem, 4vw, 3rem) 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 9vw, 7rem);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  max-width: 46rem;
+}
+
+.back {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.back:hover {
+  color: var(--purple);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.lead {
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.metaLabel {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.metaValue {
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.jump {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 0.7rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-top: 0.5rem;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.jump:hover {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: #fff;
+}
+
+/* ---------- Figures ---------- */
+.heroFigure {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #ede7f6, #f5e6e8);
+  box-shadow: 0 30px 80px rgb(75 44 127 / 0.14);
+}
+
+.heroMedia {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure,
+.figureWide {
+  position: relative;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.figureImg {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: #fff;
+  overflow: hidden;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.figure:hover .figureImg,
+.figureWide:hover .figureImg {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgb(28 21 36 / 0.1);
+}
+
+.caption {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ---------- TL;DR ---------- */
+.tldr {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--purple-deep), var(--purple));
+  color: #fff;
+}
+
+.tldrTag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.7);
+  padding-top: 0.4rem;
+  white-space: nowrap;
+}
+
+.tldrText {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.8vw, 1.85rem);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Sections ---------- */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.sectionNum {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--purple);
+  letter-spacing: 0.05em;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.sectionLead {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 42rem;
+}
+
+.prose {
+  max-width: 42rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.prose p {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--purple);
+}
+
+/* ---------- Gap cards ---------- */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.gapCard {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.6rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.5);
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.gapCard:hover {
+  transform: translateY(-4px);
+  border-color: rgb(75 44 127 / 0.3);
+}
+
+.gapNum {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--purple);
+  letter-spacing: 0.1em;
+}
+
+.gapTitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.gapBody {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ---------- Mode cards ---------- */
+.modeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.modeCard {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.6rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.5);
+  position: relative;
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.modeChosen {
+  border-color: rgb(75 44 127 / 0.45);
+  background: linear-gradient(
+    160deg,
+    rgb(124 92 173 / 0.1),
+    rgb(255 255 255 / 0.4)
+  );
+}
+
+.modeCard:hover {
+  transform: translateY(-4px);
+}
+
+.modeTag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.modeTitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.modeBody {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  flex: 1;
+}
+
+.modeFlag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 0.5rem;
+}
+
+.modeChosen .modeFlag {
+  color: var(--purple);
+}
+
+/* ---------- Sketch pair ---------- */
+.sketchPair {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* ---------- Solution steps ---------- */
+.stepGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.stepCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.6rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.5);
+}
+
+.stepNum {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--purple-light);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.stepBody {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ---------- Reflection ---------- */
+.reflectGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.reflectCard {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.75rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.5);
+}
+
+.reflectTitle {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.reflectBody {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* ---------- Next project ---------- */
+.nextCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: clamp(2rem, 5vw, 3rem);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.45);
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.nextCard:hover {
+  transform: translateY(-4px);
+  border-color: rgb(75 44 127 / 0.3);
+  box-shadow: 0 24px 60px rgb(28 21 36 / 0.08);
+}
+
+.nextLabel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nextTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.nextDesc {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  max-width: 32rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .metaGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cardGrid,
+  .modeGrid,
+  .stepGrid,
+  .reflectGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .tldr {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .sketchPair {
+    grid-template-columns: 1fr;
+  }
+}
