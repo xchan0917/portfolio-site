@@ -1,10 +1,11 @@
 .study {
+  --study-gutter-x: clamp(calc(1.5rem + 50px), calc(5vw + 50px), 100px);
   width: 100%;
   /* Content spans nearly the full screen, with breathing-room padding,
      and caps on very large monitors. */
   max-width: 1500px;
   margin: 0 auto;
-  padding: clamp(7rem, 12vw, 9rem) clamp(1.5rem, 5vw, 50px) 4rem;
+  padding: clamp(7rem, 12vw, 9rem) var(--study-gutter-x) 4rem;
   display: flex;
   flex-direction: column;
   gap: clamp(4rem, 9vw, 7rem);
@@ -61,7 +62,7 @@
 .back {
   position: fixed;
   top: 1.4rem;
-  left: clamp(1.25rem, 4vw, 3rem);
+  left: var(--study-gutter-x, clamp(calc(1.5rem + 50px), calc(5vw + 50px), 100px));
   z-index: 110;
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -595,7 +596,7 @@
   align-items: flex-start;
   gap: clamp(2.5rem, 6vw, 5rem);
   width: max-content;
-  padding-left: clamp(1.5rem, 5vw, 50px);
+  padding-left: var(--study-gutter-x);
   will-change: transform;
 }
 

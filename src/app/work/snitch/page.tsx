@@ -162,9 +162,9 @@ export default function SnitchCaseStudy() {
               <Reveal delay={160}>
                 <p className={styles.statementLead}>
                   Over a 7-hour hackathon, I designed the end-to-end experience
-                  for a proactive accountability agent — pairing self, social,
+                  for a proactive accountability agent that pairs self, social,
                   and optional financial accountability into one system that
-                  fits into the apps people already use.
+                  integrates with apps people already use.
                 </p>
               </Reveal>
             </div>
