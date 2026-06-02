@@ -1,0 +1,76 @@
+/* Canvas-only additions layered on top of the shared case-study styles
+   imported from ../snitch/snitch.module.css, so both case studies stay
+   visually consistent. */
+
+.heroTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.heroTitleLine {
+  display: block;
+}
+
+/* Crop the jitter.video watermark out of the animated solution preview. */
+.previewCrop {
+  transform: scale(1.3);
+  transform-origin: 30% 30%;
+}
+
+/* The interviews section has three figures rather than four. */
+.stats3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Canvas ecosystem diagram — Why Canvas? (Figma, themed to portfolio purple). */
+.ecosystemDiagram {
+  display: block;
+  width: min(100%, 32rem);
+  height: auto;
+  margin-inline: auto;
+  align-self: center;
+}
+
+/* Row of external-calendar logos for the API-sync step. */
+.logoRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 2.25rem);
+  padding: clamp(1.25rem, 3vw, 2rem) 0 0.5rem;
+}
+
+.logoChip {
+  width: clamp(58px, 12vw, 76px);
+  height: clamp(58px, 12vw, 76px);
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  box-shadow: 0 12px 30px rgb(75 44 127 / 0.08);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.logoChip:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgb(75 44 127 / 0.12);
+}
+
+.logoChip img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 720px) {
+  .stats3 {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}

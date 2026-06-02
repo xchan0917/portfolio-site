@@ -12,14 +12,11 @@ export function SelectedProjects() {
     >
       <Reveal className={styles.header}>
         <h2 id="projects-heading" className={styles.heading}>
-          Selected projects
+          Projects
           <span className={styles.arrow} aria-hidden="true">
             ↓
           </span>
         </h2>
-        <p className={styles.subheading}>
-          Strategy-led work across research, product, and emerging AI.
-        </p>
       </Reveal>
 
       <div className={styles.grid}>

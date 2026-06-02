@@ -1,32 +1,87 @@
 .study {
-  max-width: 1080px;
+  width: 100%;
+  /* Content spans nearly the full screen, with breathing-room padding,
+     and caps on very large monitors. */
+  max-width: 1500px;
   margin: 0 auto;
-  padding: clamp(7rem, 12vw, 9rem) clamp(1.25rem, 4vw, 3rem) 4rem;
+  padding: clamp(7rem, 12vw, 9rem) clamp(1.5rem, 5vw, 50px) 4rem;
   display: flex;
   flex-direction: column;
   gap: clamp(4rem, 9vw, 7rem);
 }
 
 /* ---------- Hero ---------- */
+.heroRow {
+  display: grid;
+  /* Title sizes to its content; the TLDR block takes the rest of the width,
+     keeping the two visually connected with only a small gap between them. */
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
 .hero {
+  /* Sits inside the study container so the title lines up with the left edge
+     of the GIF above it. */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.1rem;
-  max-width: 46rem;
+  gap: 20px;
+}
+
+.heroTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.heroTag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgb(75 44 127 / 0.25);
+  background: rgb(124 92 173 / 0.08);
+}
+
+.tldrCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.tldrCol .statement,
+.tldrCol .statementLead {
+  max-width: none;
 }
 
 .back {
+  position: fixed;
+  top: 1.4rem;
+  left: clamp(1.25rem, 4vw, 3rem);
+  z-index: 110;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  transition: color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    opacity 0.35s ease,
+    transform 0.35s ease;
 }
 
 .back:hover {
   color: var(--purple);
+}
+
+.backHidden {
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  pointer-events: none;
 }
 
 .eyebrow {
@@ -47,25 +102,36 @@
 }
 
 .lead {
+  /* Aligns under the title's "S"; the hero already provides the left offset. */
+  max-width: 46rem;
   font-size: clamp(1.05rem, 2.2vw, 1.35rem);
   line-height: 1.55;
   color: var(--ink-soft);
 }
 
-.metaGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
   width: 100%;
   margin-top: 0.75rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
 }
 
+.metaGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
 .metaItem {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.55rem;
 }
 
 .metaLabel {
@@ -77,21 +143,28 @@
 }
 
 .metaValue {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.metaLine {
   font-size: 0.92rem;
   color: var(--ink);
   line-height: 1.4;
 }
 
 .jump {
+  flex-shrink: 0;
+  white-space: nowrap;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink);
-  padding: 0.7rem 1.2rem;
+  padding: 0.5rem 0.85rem;
   border: 1px solid var(--border);
   border-radius: 999px;
-  margin-top: 0.5rem;
   transition:
     background 0.25s ease,
     color 0.25s ease,
@@ -104,10 +177,23 @@
   color: #fff;
 }
 
+@media (max-width: 600px) {
+  .metaRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .jump {
+    align-self: center;
+  }
+}
+
 /* ---------- Figures ---------- */
 .heroFigure {
   position: relative;
-  border-radius: 20px;
+  width: 100%;
+  border-radius: 15px;
   overflow: hidden;
   background: linear-gradient(145deg, #ede7f6, #f5e6e8);
   box-shadow: 0 30px 80px rgb(75 44 127 / 0.14);
@@ -360,6 +446,31 @@
   color: var(--purple);
 }
 
+/* ---------- Wide sections ---------- */
+.wideSection .statement,
+.wideSection .sectionLead {
+  max-width: none;
+}
+
+.leadNoWrap {
+  white-space: nowrap;
+}
+
+/* §06 solution intro — two lines */
+.solutionLead {
+  max-width: 54rem;
+}
+
+.solutionLeadBreak {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .solutionLeadBreak {
+    display: block;
+  }
+}
+
 /* ---------- Sketch pair ---------- */
 .sketchPair {
   display: grid;
@@ -368,48 +479,208 @@
   align-items: start;
 }
 
-/* ---------- Solution steps ---------- */
-.stepGrid {
+/* Brainstorm (portrait) gets a slightly narrower column so it reads smaller
+   and sits closer in scale to the wide navigation photo beside it. */
+.whiteboardPair {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  align-items: start;
+}
+
+/* ---------- Solution media (demo video + mockup) ---------- */
+.solutionMedia {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  justify-items: center;
+  align-items: start;
 }
 
-.stepCard {
+.solutionItem {
+  margin: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  padding: 1.6rem;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: rgb(255 255 255 / 0.5);
+  align-items: center;
+  gap: 1rem;
 }
 
-.stepNum {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--purple-light);
-}
-
-.stepTitle {
+.solutionLabel {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-align: center;
+}
+
+/* Both phones share one height so they read as the same size side by side. */
+.solutionScreen {
+  --screen-h: clamp(440px, 58vh, 600px);
+  position: relative;
+  height: var(--screen-h);
+}
+
+/* Demo video: the source is a 1280x720 file with the portrait phone recording
+   centered between black pillarbox bars. We crop to just the screen by giving
+   the frame the phone's aspect ratio and scaling the video to fill its height,
+   letting overflow hide the black bars on either side. */
+.solutionItem:first-child .solutionScreen {
+  aspect-ratio: 326 / 720;
+  width: auto;
+  overflow: hidden;
+  border-radius: 26px;
+  background: transparent;
+  box-shadow: 0 24px 60px rgb(75 44 127 / 0.12);
+}
+
+.solutionVideo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  transform: translateX(-50%);
+  display: block;
+}
+
+/* iMessage mockup PNG already includes the device bezel and now has a
+   transparent background, so it just needs to be sized to match. */
+.solutionItem:last-child .solutionScreen {
+  aspect-ratio: 634 / 1284;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+}
+
+.solutionImg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+/* ---------- Solution carousel ---------- */
+.carousel {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(2rem, 4vw, 3rem) 0;
+}
+
+.carouselViewport {
+  overflow: hidden;
+  /* Soft fade on both edges so items glide in/out cleanly. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 5%,
+    #000 95%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 5%,
+    #000 95%,
+    transparent
+  );
+}
+
+.carouselTrack {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  width: max-content;
+  padding-left: clamp(1.5rem, 5vw, 50px);
+  will-change: transform;
+}
+
+.carouselCard {
+  flex: 0 0 auto;
+  width: clamp(238px, 70vw, 316px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.carouselBar {
+  width: 34px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--purple);
+  margin-bottom: 0.4rem;
+}
+
+.carouselNum {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.carouselTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.6vw, 1.6rem);
+  font-weight: 400;
+  line-height: 1.15;
   color: var(--ink);
 }
 
-.stepBody {
+.carouselBody {
   font-size: 0.95rem;
   line-height: 1.55;
   color: var(--ink-soft);
+}
+
+/* ---------- Demo video controls ---------- */
+.videoControls {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.videoBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.55);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.videoBtn svg {
+  display: block;
+}
+
+.videoBtn:hover {
+  color: var(--purple);
+  border-color: rgb(75 44 127 / 0.3);
+  transform: translateY(-1px);
 }
 
 /* ---------- Reflection ---------- */
 .reflectGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  padding-top: 0.65rem;
 }
 
 .reflectCard {
@@ -421,6 +692,46 @@
   border-radius: 16px;
   border: 1px solid var(--border);
   background: rgb(255 255 255 / 0.5);
+}
+
+.reflectCardHats {
+  position: relative;
+  overflow: visible;
+}
+
+.reflectHatSketch {
+  position: absolute;
+  top: -1rem;
+  right: 0.65rem;
+  width: clamp(3.25rem, 11vw, 4.5rem);
+  height: auto;
+  color: rgb(75 44 127 / 0.42);
+  pointer-events: none;
+  transform: rotate(14deg);
+  transform-origin: 55% 90%;
+}
+
+.reflectCardHats .reflectTitle {
+  padding-right: 4.5rem;
+}
+
+.reflectCardNext {
+  position: relative;
+  overflow: visible;
+}
+
+.reflectArrowSketch {
+  position: absolute;
+  right: 1rem;
+  bottom: 1.15rem;
+  width: clamp(4rem, 16vw, 5.5rem);
+  height: auto;
+  color: rgb(75 44 127 / 0.42);
+  pointer-events: none;
+}
+
+.reflectCardNext .reflectBody {
+  padding-right: 3.5rem;
 }
 
 .reflectTitle {
@@ -436,28 +747,57 @@
   color: var(--ink-soft);
 }
 
-/* ---------- Next project ---------- */
-.nextCard {
+/* ---------- Case study prev / next (bottom corners, no media) ---------- */
+.caseStudyNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  width: 100%;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  padding-bottom: clamp(0.25rem, 1.5vw, 0.75rem);
+}
+
+.caseStudyNavCard {
+  display: block;
+  flex: 0 1 min(100%, 22rem);
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: 0;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.25s ease;
+}
+
+.caseStudyNavText {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: clamp(2rem, 5vw, 3rem);
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: rgb(255 255 255 / 0.45);
-  transition:
-    transform 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
 }
 
-.nextCard:hover {
-  transform: translateY(-4px);
-  border-color: rgb(75 44 127 / 0.3);
-  box-shadow: 0 24px 60px rgb(28 21 36 / 0.08);
+.caseStudyNavPrev {
+  text-align: left;
 }
 
-.nextLabel {
+.caseStudyNavPrev .caseStudyNavText {
+  align-items: flex-start;
+}
+
+.caseStudyNavNext {
+  margin-left: auto;
+  text-align: right;
+}
+
+.caseStudyNavNext .caseStudyNavText {
+  align-items: flex-end;
+}
+
+.caseStudyNavCard:hover .caseStudyNavTitle {
+  color: var(--purple);
+}
+
+.caseStudyNavLabel {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.12em;
@@ -465,7 +805,7 @@
   color: var(--muted);
 }
 
-.nextTitle {
+.caseStudyNavTitle {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 400;
@@ -473,33 +813,431 @@
   color: var(--ink);
 }
 
-.nextDesc {
+.caseStudyNavDesc {
   font-size: 0.98rem;
   color: var(--ink-soft);
-  max-width: 32rem;
+  max-width: 22rem;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.caseStudyNavArrow {
+  color: var(--purple);
+}
+
+/* ---------- Kicker + statements ---------- */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.statement {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.5vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  max-width: 38rem;
+}
+
+.statementLead {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 40rem;
+}
+
+/* Role statement: same display style as the TL;DR statement but a notch
+   smaller so it sits below the section title in the hierarchy. */
+.roleStatement {
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+/* ---------- Stats strip ---------- */
+.statsStrip {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5.5vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--purple);
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+/* ---------- Question list ---------- */
+.questionList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--purple);
+}
+
+.question {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 3vw, 1.85rem);
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+/* ---------- Decision list ---------- */
+.decisionList {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border);
+}
+
+.decision {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1rem, 4vw, 2.5rem);
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+
+.decisionNum {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+  color: var(--purple-light);
+}
+
+.decisionText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 40rem;
+}
+
+.decisionTag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.decisionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.decisionBody {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* ---------- Sketch cards ---------- */
+.sketchGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+.sketchCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  text-align: center;
+}
+
+.sketchFrame {
+  width: 100%;
+  max-width: 260px;
+  /* Fixed ratio so all three sketch frames are the same length; images are
+     centered and fully visible (white letterboxing blends with the frame). */
+  aspect-ratio: 908 / 1640;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: #fff;
+  overflow: hidden;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.sketchCard:hover .sketchFrame {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgb(28 21 36 / 0.1);
+}
+
+.sketchImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sketchTitle {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.sketchBody {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 24rem;
+}
+
+/* ---------- Reasoning note ---------- */
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.5);
+}
+
+.note p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.note strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- Architecture diagram ---------- */
+.archBlock {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  border-radius: 16px;
+}
+
+.archIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.archTag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.archNote {
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.archDiagram {
+  width: 100%;
+  height: auto;
+}
+
+.archBox {
+  fill: none;
+  stroke: rgb(75 44 127 / 0.25);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 6;
+}
+
+.archTitle {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+
+.archNodeRect {
+  fill: rgb(255 255 255 / 0.9);
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.archHub {
+  fill: var(--purple);
+  stroke: var(--purple);
+}
+
+.archNodeText {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  fill: var(--ink);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.archNodeTextHub {
+  fill: #fff;
+}
+
+.archEdge {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.6;
+}
+
+.archHead {
+  fill: var(--muted);
+}
+
+/* ---------- Stack block ---------- */
+.stackBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.5);
+}
+
+.stackLabel {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.stackRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.stackChip {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.7);
+  color: var(--ink);
+}
+
+.stackNote {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 40rem;
+}
+
+/* ---------- Closing ---------- */
+.closing {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.95vw, 1.2rem);
+  line-height: 1.48;
+  color: var(--ink);
+  max-width: 56rem;
 }
 
 /* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .heroRow {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 900px) {
   .metaGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .statsStrip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem 1.5rem;
+  }
+
   .cardGrid,
   .modeGrid,
-  .stepGrid,
   .reflectGrid {
     grid-template-columns: 1fr;
+  }
+
+  .sketchGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .solutionMedia {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .leadNoWrap {
+    white-space: normal;
+  }
+
+  .archBlock {
+    grid-template-columns: 1fr;
+    align-items: start;
   }
 }
 
 @media (max-width: 640px) {
-  .tldr {
-    flex-direction: column;
-    gap: 0.75rem;
+  .sketchPair,
+  .whiteboardPair {
+    grid-template-columns: 1fr;
   }
 
-  .sketchPair {
+  .decision {
     grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .caseStudyNav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2.5rem;
+  }
+
+  .caseStudyNavNext {
+    margin-left: 0;
   }
 }

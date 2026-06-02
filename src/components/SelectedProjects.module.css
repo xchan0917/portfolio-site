@@ -30,13 +30,6 @@
   font-style: italic;
 }
 
-.subheading {
-  margin-top: 0.65rem;
-  font-size: 1rem;
-  color: var(--muted);
-  max-width: 28rem;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

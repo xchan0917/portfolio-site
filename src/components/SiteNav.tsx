@@ -5,9 +5,24 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { navLinks, site } from "@/lib/site";
 import styles from "./SiteNav.module.css";
 
-export function SiteNav({ glass = false }: { glass?: boolean } = {}) {
+type SiteNavProps = {
+  glass?: boolean;
+  /** Delay first appearance (ms), e.g. homepage hero load. */
+  entranceDelay?: number;
+  /** Keep nav visible when scrolled back to the top. */
+  visibleAtTop?: boolean;
+};
+
+export function SiteNav({
+  glass = false,
+  entranceDelay,
+  visibleAtTop = false,
+}: SiteNavProps = {}) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [headerVisible, setHeaderVisible] = useState(false);
+  const [entranceReady, setEntranceReady] = useState(entranceDelay == null);
+  const [headerVisible, setHeaderVisible] = useState(
+    visibleAtTop && entranceDelay == null,
+  );
   const menuId = useId();
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -16,15 +31,27 @@ export function SiteNav({ glass = false }: { glass?: boolean } = {}) {
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   useEffect(() => {
-    // Hidden at the top; reveals when scrolling up, hides when scrolling down.
+    if (entranceDelay == null) return;
+
+    const timer = window.setTimeout(() => {
+      setEntranceReady(true);
+      setHeaderVisible(visibleAtTop);
+    }, entranceDelay);
+
+    return () => window.clearTimeout(timer);
+  }, [entranceDelay, visibleAtTop]);
+
+  useEffect(() => {
     const TOP_GUARD = 60;
 
     const onScroll = () => {
+      if (!entranceReady) return;
+
       const currentY = window.scrollY;
       const delta = currentY - lastScrollY.current;
 
       if (currentY <= TOP_GUARD) {
-        setHeaderVisible(false);
+        setHeaderVisible(visibleAtTop);
       } else if (delta < -4) {
         setHeaderVisible(true);
       } else if (delta > 4) {
@@ -42,7 +69,7 @@ export function SiteNav({ glass = false }: { glass?: boolean } = {}) {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [entranceReady, visibleAtTop]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -80,9 +107,11 @@ export function SiteNav({ glass = false }: { glass?: boolean } = {}) {
     };
   }, [menuOpen]);
 
+  const isHidden = !menuOpen && (!entranceReady || !headerVisible);
+
   return (
     <header
-      className={`${styles.header} ${glass ? styles.headerGlass : ""} ${!headerVisible && !menuOpen ? styles.headerHidden : ""}`}
+      className={`${styles.header} ${glass ? styles.headerGlass : ""} ${isHidden ? styles.headerHidden : ""}`}
     >
       <div className={styles.inner}>
         <Link href="/" className={styles.brand} onClick={closeMenu} aria-label={site.name}>

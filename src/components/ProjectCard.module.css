@@ -47,7 +47,7 @@
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 15px;
+  border-radius: 8px;
 }
 
 .mediaInner {
@@ -61,7 +61,7 @@
   /* Zoom in from the top-left so the jitter.video watermark in the
      bottom-right corner is cropped out of frame, and nudge left ~1cm. */
   transform-origin: 22% 28%;
-  transform: translateX(var(--media-shift, -1cm)) scale(1.22);
+  transform: translate(var(--media-shift, -1cm), var(--media-shift-y, 0)) scale(1.22);
   transition: transform 0.5s ease;
 }
 
@@ -72,12 +72,14 @@
 
 .link:hover .mediaImage,
 .link:focus-visible .mediaImage {
-  transform: translateX(var(--media-shift, -1cm)) scale(1.27);
+  transform: translate(var(--media-shift, -1cm), var(--media-shift-y, 0)) scale(1.27);
 }
 
-/* PGH Children's Museum (peach accent) nudged ~0.3cm to the right. */
+/* PGH Children's Museum (peach accent) nudged ~0.3cm to the right
+   and ~0.4cm up. */
 .accent_peach {
   --media-shift: -0.7cm;
+  --media-shift-y: -0.4cm;
 }
 
 .accent_purple .mediaInner {
