@@ -1,0 +1,287 @@
+.viewport {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+
+.viewportReady {
+  opacity: 1;
+}
+
+.viewportDragging,
+.viewportDragging * {
+  cursor: grabbing;
+}
+
+.hint {
+  position: fixed;
+  top: clamp(5.5rem, 12vh, 6.5rem);
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  color: var(--muted);
+  pointer-events: none;
+  user-select: none;
+  opacity: 1;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.hintHidden {
+  opacity: 0;
+  transform: translate(-50%, -6px);
+}
+
+.intro {
+  position: fixed;
+  left: clamp(1.25rem, 4vw, 2.5rem);
+  bottom: clamp(1.25rem, 4vw, 2rem);
+  z-index: 3;
+  max-width: min(20rem, 42vw);
+  font-family: var(--font-cursive);
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--purple);
+  pointer-events: none;
+  user-select: none;
+}
+
+.world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card {
+  --card-rotate: 0deg;
+
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transform: rotate(var(--card-rotate));
+  transform-origin: center top;
+  user-select: none;
+  cursor: default;
+  z-index: 1;
+}
+
+.cardStatic {
+  transition: none;
+}
+
+.cardCluster {
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardCluster.cardHovered {
+  z-index: 5;
+  transform: rotate(var(--card-rotate)) scale(1.035);
+  filter: drop-shadow(0 22px 36px rgb(28 21 36 / 0.12));
+}
+
+.cardMedia {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.35rem;
+  border: 1px solid transparent;
+}
+
+.cardStatic .cardMedia {
+  transition: none;
+}
+
+.cardMediaContain {
+  background: rgb(250 247 244 / 0.92);
+}
+
+.cardImage {
+  object-fit: cover;
+}
+
+.cardStatic .cardImage {
+  transition: none;
+}
+
+.cardClusterExpanded {
+  z-index: 12;
+  filter: drop-shadow(0 24px 40px rgb(28 21 36 / 0.14));
+}
+
+.cardClusterExpanded.cardHovered {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.cardCluster .cardCopy {
+  padding-top: 6.5rem;
+  transition: padding-top 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardClusterExpanded .cardCopy {
+  padding-top: 1.15rem;
+}
+
+.cardCluster .clusterMedia {
+  cursor: pointer;
+}
+
+.cardCluster .clusterMedia:focus-visible {
+  outline: 2px solid rgb(124 92 173 / 0.45);
+  outline-offset: 4px;
+  border-radius: 0.35rem;
+}
+
+.cardCluster .clusterFrame {
+  transition:
+    left 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    top 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardCluster.cardHovered .clusterFrame {
+  filter: drop-shadow(0 20px 34px rgb(75 44 127 / 0.2));
+}
+
+.clusterMedia {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  background: transparent;
+}
+
+.cardCluster .clusterMedia.accent_pink {
+  background: transparent;
+}
+
+.clusterFrame {
+  position: absolute;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  filter: drop-shadow(0 12px 24px rgb(28 21 36 / 0.12))
+    drop-shadow(0 2px 8px rgb(75 44 127 / 0.08));
+  transform-origin: center center;
+}
+
+.clusterFrameImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+}
+
+.cardCopy {
+  width: 100%;
+  padding: 0 0.1rem;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.cardCaption {
+  margin-top: 0.15rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.accent_peach {
+  background: linear-gradient(
+    145deg,
+    rgb(240 213 200 / 0.95) 0%,
+    rgb(245 230 232 / 0.75) 100%
+  );
+}
+
+.accent_pink {
+  background: linear-gradient(
+    145deg,
+    rgb(245 230 232 / 0.98) 0%,
+    rgb(240 213 200 / 0.55) 100%
+  );
+}
+
+.accent_purple {
+  background: linear-gradient(
+    145deg,
+    rgb(124 92 173 / 0.18) 0%,
+    rgb(245 230 232 / 0.85) 100%
+  );
+}
+
+.accent_cream {
+  background: linear-gradient(
+    145deg,
+    rgb(250 247 244 / 1) 0%,
+    rgb(240 213 200 / 0.45) 100%
+  );
+}
+
+@media (max-width: 720px) {
+  .hint {
+    font-size: 0.68rem;
+  }
+
+  .intro {
+    max-width: 14rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewport,
+  .hint,
+  .cardCluster,
+  .cardCluster .cardCopy {
+    transition: none;
+  }
+
+  .cardCluster.cardHovered {
+    transform: rotate(var(--card-rotate));
+    filter: none;
+  }
+
+  .cardCluster.cardHovered .clusterFrame {
+    filter: none;
+  }
+
+  .cardCluster .clusterFrame {
+    transition: none;
+  }
+}

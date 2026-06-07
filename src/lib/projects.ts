@@ -6,6 +6,10 @@ export type Project = {
   comingSoon?: boolean;
   accent: "purple" | "peach" | "pink" | "ink";
   cover?: string;
+  /** Solid media placeholder before hover. Overrides the accent default. */
+  idleColor?: string;
+  /** Seconds to skip into the hover clip before playback starts. */
+  coverStartAt?: number;
 };
 
 export const featuredProjects: Project[] = [
@@ -17,6 +21,7 @@ export const featuredProjects: Project[] = [
     tags: ["Agentic AI", "Hackathon"],
     accent: "purple",
     cover: "/projects/snitch.gif",
+    coverStartAt: 1,
   },
   {
     slug: "pgh-childrens-museum",
@@ -55,5 +60,6 @@ export const featuredProjects: Project[] = [
     comingSoon: true,
     accent: "purple",
     cover: "/projects/punchcard.gif",
+    idleColor: "#e6ddd0",
   },
 ];

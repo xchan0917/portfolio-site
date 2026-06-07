@@ -30,9 +30,18 @@ const HERO_COPY: Segment[] = [
   },
 ];
 
+/** Meet Cynthia annotation appears once this prefix has finished typing. */
+const MEET_TRIGGER_TEXT = "She is an interdisciplinary designer";
+const MEET_TRIGGER_CHARS = MEET_TRIGGER_TEXT.length;
+
 const FULL_HEADING = HERO_COPY.map((s) => s.value).join("");
 const TYPE_SPEED_MS = 42;
 const TYPING_START_MS = 900;
+
+/** Hand-drawn arrow for the meet-cynthia annotation — body ends at head base center. */
+const MEET_ARROW_BODY =
+  "M66 6 C84 3 90 19 76 24 C65 28 66 13 77 15 C90 17 88 34 72 38 C59 41 62 25 74 28 C86 31 82 52 64 58 C56 61 51 63 50 67";
+const MEET_ARROW_HEAD = "M46 78 L55.4 68.8 M46 78 L44.6 65.2";
 
 function sliceSegment(value: string, remaining: number) {
   if (remaining <= 0) return { text: "", remaining: 0 };
@@ -204,7 +213,7 @@ export function Hero() {
           </div>
         </div>
 
-        {typingDone || reduceMotion ? (
+        {reduceMotion || visibleChars >= MEET_TRIGGER_CHARS ? (
           <div className={styles.meetAnnotation} aria-hidden="true">
             <span className={styles.meetText}>meet cynthia</span>
             <svg
@@ -215,12 +224,12 @@ export function Hero() {
               <path
                 className={styles.meetArrowPath}
                 pathLength={1}
-                d="M66 6 C84 3 90 19 76 24 C65 28 66 13 77 15 C90 17 88 34 72 38 C59 41 62 25 74 28 C86 31 82 52 64 58 C56 61 50 66 46 78"
+                d={MEET_ARROW_BODY}
               />
               <path
                 className={styles.meetArrowHead}
                 pathLength={1}
-                d="M46 78 L58 75 M46 78 L50 65"
+                d={MEET_ARROW_HEAD}
               />
             </svg>
           </div>

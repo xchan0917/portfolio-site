@@ -2,6 +2,13 @@
    imported from ../snitch/snitch.module.css, so both case studies stay
    visually consistent. */
 
+.heroFigure {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
 .heroTitle {
   display: flex;
   flex-direction: column;
@@ -17,60 +24,836 @@
   transform-origin: 30% 30%;
 }
 
+/* Centered column from stats strip through end of case study */
+.centeredFlow {
+  width: 100%;
+  max-width: 56rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 9vw, 7rem);
+}
+
+.centeredFlow .statsStrip {
+  justify-items: start;
+}
+
+.centeredFlow .statItem {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.centeredFlow .sectionLead {
+  max-width: none;
+}
+
 /* The interviews section has three figures rather than four. */
 .stats3 {
   grid-template-columns: repeat(3, 1fr);
 }
 
-/* Canvas ecosystem diagram — Why Canvas? (Figma, themed to portfolio purple). */
-.ecosystemDiagram {
+/* User journey map — no card chrome; sits on case-study cream */
+.journeyMapFigure {
+  gap: 1rem;
+}
+
+.journeyMapFrame {
+  position: relative;
+  background: transparent;
+  line-height: 0;
+}
+
+.journeyMapImg {
   display: block;
-  width: min(100%, 32rem);
+  width: 100%;
   height: auto;
-  margin-inline: auto;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.journeyMapFigure:hover .journeyMapImg {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Competitive analysis table — transparent PNG, no card chrome */
+.competitiveFigure {
+  position: relative;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.competitiveFrame {
+  background: transparent;
+  line-height: 0;
+}
+
+.competitiveFigure img,
+.competitiveImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  transform: none;
+}
+
+.competitiveFigure:hover img,
+.competitiveFigure:hover .competitiveImg {
+  transform: none;
+  box-shadow: none;
+}
+
+.competitiveCaption {
+  margin: 0;
+  text-align: left;
+  /* Align with visible table edge (PNG has ~4% transparent left margin) */
+  padding-inline-start: 4.1%;
+  max-width: none;
+}
+
+/* ---------- Why Canvas? split layout ---------- */
+.whyCanvasExperience {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+}
+
+.whyCanvasVisual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.whyCanvasVisual::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(100%, 22rem);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(124 92 173 / 0.14) 0%,
+    rgb(245 230 232 / 0.35) 38%,
+    transparent 68%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.whyCanvasVisual .ecosystem {
+  position: relative;
+  z-index: 1;
+  --ecosystem-size: min(100%, 26rem);
+  width: var(--ecosystem-size);
+  max-width: 100%;
+  margin-inline: 0;
   align-self: center;
 }
 
-/* Row of external-calendar logos for the API-sync step. */
-.logoRow {
+.whyCanvasCopy {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(1rem, 3vw, 2.25rem);
-  padding: clamp(1.25rem, 3vw, 2rem) 0 0.5rem;
+  flex-direction: column;
+  gap: 1.35rem;
+  padding-block: 0;
+  min-width: 0;
 }
 
-.logoChip {
-  width: clamp(58px, 12vw, 76px);
-  height: clamp(58px, 12vw, 76px);
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  background: #fff;
+.whyCanvasLead {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.65vw, 1.2rem);
+  line-height: 1.68;
+  max-width: 36rem;
+}
+
+@media (min-width: 901px) {
+  .whyCanvasExperience {
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: 50px;
+    row-gap: 0;
+  }
+
+  .whyCanvasVisual {
+    grid-column: 1;
+    justify-content: flex-start;
+    width: max-content;
+    flex-shrink: 0;
+  }
+
+  .whyCanvasVisual::before {
+    left: 50%;
+    width: var(--ecosystem-size, 26rem);
+  }
+
+  .whyCanvasVisual .ecosystem {
+    --ecosystem-size: clamp(20rem, 24vw, 26rem);
+    --orbit-radius: clamp(
+      8.5rem,
+      calc(var(--ecosystem-size) * 0.35),
+      10.5rem
+    );
+  }
+
+  .whyCanvasCopy {
+    grid-column: 2;
+    max-width: none;
+  }
+
+  .whyCanvasLead {
+    max-width: none;
+  }
+}
+
+/* ---------- Interactive ecosystem (Why Canvas?) ---------- */
+.ecosystem {
+  --ecosystem-size: min(100%, 36rem);
+  /* rem/cqw only — % in translateY was tied to 0×0 orbit anchors and caused wobble */
+  --orbit-radius: clamp(
+    10.75rem,
+    calc(var(--ecosystem-size) * 0.39),
+    13.75rem
+  );
+  --node-icon-size: clamp(2.65rem, 8.5vw, 3.35rem);
+  --hub-size: clamp(6.5rem, 20vw, 8.75rem);
+  position: relative;
+  width: var(--ecosystem-size);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  align-self: center;
+  container-type: inline-size;
+}
+
+.ecosystemHub {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px;
-  box-shadow: 0 12px 30px rgb(75 44 127 / 0.08);
+  pointer-events: none;
+}
+
+.ecosystemOrbitTrack {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  transform-origin: 50% 50%;
+  animation: ecosystem-orbit var(--orbit-duration, 72s) linear infinite;
+}
+
+.ecosystemPaused .ecosystemOrbitTrack,
+.ecosystemPaused .ecosystemOrbitNodeCounter {
+  animation-play-state: paused;
+}
+
+.ecosystemOrbitNode {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: rotate(var(--node-angle)) translateY(calc(-1 * var(--orbit-radius)));
+  transform-origin: 0 0;
+}
+
+/* Cancel placement angle so icons stay upright. */
+.ecosystemOrbitNodeUpright {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotate(calc(-1 * var(--node-angle)));
+  transform-origin: 0 0;
+}
+
+/* Cancel track spin so icons stay upright while orbiting. */
+.ecosystemOrbitNodeCounter {
+  animation: ecosystem-orbit var(--orbit-duration, 72s) linear infinite reverse;
+  transform-origin: 0 0;
+}
+
+.ecosystemNodeBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ink);
+  transform: translate(-50%, -50%);
+  transition: transform 0.35s ease;
+}
+
+.ecosystemNodeBtn:hover,
+.ecosystemNodeBtn:focus-visible,
+.ecosystemNodeBtnActive {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.ecosystemNodeBtn:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.ecosystemNodeCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--node-icon-size);
+  height: var(--node-icon-size);
+  flex-shrink: 0;
+}
+
+.ecosystemIcon {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: rotate(12deg);
+  transition: stroke 0.3s ease;
+}
+
+.ecosystemNodeBtn:hover .ecosystemIcon,
+.ecosystemNodeBtn:focus-visible .ecosystemIcon,
+.ecosystemNodeBtnActive .ecosystemIcon {
+  stroke: var(--purple);
+}
+
+.ecosystemNodeLabel {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(0.82rem, 2.2vw, 0.95rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+  line-height: 1.2;
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  pointer-events: none;
   transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    max-height 0.25s ease,
+    margin-top 0.25s ease;
 }
 
-.logoChip:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 44px rgb(75 44 127 / 0.12);
+.ecosystemNodeBtnActive .ecosystemNodeLabel {
+  opacity: 1;
+  visibility: visible;
+  max-height: 2rem;
+  margin-top: 0.55rem;
 }
 
-.logoChip img {
+.ecosystemHubLogo {
+  width: var(--hub-size);
+  height: auto;
+  object-fit: contain;
+}
+
+@keyframes ecosystem-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ecosystemOrbitTrack,
+  .ecosystemOrbitNodeCounter {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .ecosystem {
+    --orbit-radius: clamp(9.25rem, calc(var(--ecosystem-size) * 0.34), 11rem);
+  }
+
+  .ecosystemNodeLabel {
+    font-size: 0.78rem;
+  }
+}
+
+/* ---------- External calendar sync diagram (§06 step 03) ---------- */
+.syncShowcase {
+  width: 66.666%;
+  max-width: 1000px; /* 2/3 of 1500px study max-width */
+  margin-inline: auto;
+  margin-top: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.syncDiagramSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.syncDiagramPhoneCircle {
+  fill: #e92424;
+}
+
+.syncDiagramPhoneIcon {
+  color: #fff;
+}
+
+.syncDiagramConnector {
+  stroke: var(--purple-light);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.syncDiagramSyncArrow {
+  stroke: var(--purple-light);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+}
+
+.syncDiagramMarker {
+  fill: var(--purple-light);
+}
+
+.syncDiagramPanel {
+  fill: #efede8;
+  stroke: rgb(28 21 36 / 0.08);
+  stroke-width: 1;
+}
+
+.syncDiagramPanelTitle {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  fill: var(--purple-light);
+}
+
+.syncDiagramSyncArrows {
+  pointer-events: none;
+}
+
+.syncDiagramSyncLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--purple-light);
+}
+
+.syncDiagramLogos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  width: 100%;
+  height: 100%;
+}
+
+.syncDiagramLogoChip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+.syncDiagramLogoChip img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+@media (max-width: 640px) {
+  .syncShowcase {
+    width: 100%;
+  }
+
+  .syncDiagramPanelTitle {
+    font-size: 18px;
+  }
+
+  .syncDiagramSyncLabel {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .syncDiagramLogos {
+    gap: 1.1rem;
+  }
+
+  .syncDiagramLogoChip {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* ---------- Solution steps (static grid) ---------- */
+.solutionLeadBlock {
+  padding: clamp(1.25rem, 3vw, 2rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+  border-top: 1px solid var(--border);
+}
+
+.solutionLeadBlock .solutionShowcase {
+  margin-top: clamp(1rem, 2.5vw, 1.75rem);
+  margin-bottom: 0;
+}
+
+.solutionSteps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+  padding: clamp(2rem, 4.5vw, 3.25rem) 0 clamp(1.25rem, 3vw, 2rem);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.solutionStep {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.solutionStepBar {
+  width: 34px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--purple);
+  margin-bottom: 0.1rem;
+}
+
+.solutionStepNum {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.solutionStepTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.solutionStepBody {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ---------- Solution showcase — full study width, responsive grid ---------- */
+.solutionShowcase {
+  margin: clamp(0.75rem, 2vw, 1.25rem) 0 0;
+  width: 100%;
+  max-width: none;
+}
+
+.solutionComparisonGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 526fr) minmax(0, 549fr);
+  gap: clamp(2.25rem, 5.5vw, 4rem);
+  align-items: start;
+}
+
+.solutionComparisonDiagramLeft,
+.solutionComparisonDiagramRight {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.solutionShowcaseDiagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .solutionComparisonGrid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .solutionSteps {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
 }
 
 @media (max-width: 720px) {
   .stats3 {
     grid-template-columns: 1fr;
     gap: 1.75rem;
+  }
+}
+
+/* ---------- Next steps cards (§08 sketches) ---------- */
+.nextStepCard {
+  position: relative;
+  overflow: visible;
+  padding-top: 2rem;
+}
+
+.nextStepSketchCalendar,
+.nextStepSketchGrowth,
+.nextStepSketchFlow {
+  position: absolute;
+  pointer-events: none;
+  color: rgb(75 44 127 / 0.42);
+  height: auto;
+}
+
+.nextStepSketchCalendar {
+  top: -1.15rem;
+  right: -1.1rem;
+  width: clamp(3.25rem, 10vw, 3.85rem);
+  transform: rotate(-8deg);
+  transform-origin: 70% 90%;
+}
+
+.nextStepSketchGrowth {
+  top: -1.2rem;
+  right: -1.05rem;
+  width: clamp(3rem, 9.5vw, 3.65rem);
+  transform: rotate(5deg);
+  transform-origin: 55% 95%;
+}
+
+.nextStepSketchFlow {
+  top: -1.1rem;
+  right: -1.15rem;
+  width: clamp(3.35rem, 10vw, 4rem);
+  transform: rotate(10deg);
+  transform-origin: 75% 88%;
+}
+
+.nextStepCard h3 {
+  padding-right: 2.85rem;
+}
+
+@media (max-width: 768px) {
+  .nextStepSketchCalendar,
+  .nextStepSketchGrowth,
+  .nextStepSketchFlow {
+    top: -0.85rem;
+    right: -0.75rem;
+  }
+
+  .nextStepCard h3 {
+    padding-right: 2.5rem;
+  }
+}
+
+/* ---------- MVP integration flow (§07) ---------- */
+.mvpFlow {
+  --mvp-ink: #1c1524;
+  --mvp-card: #efede8;
+  --mvp-card-muted: #faf9f6;
+  --mvp-border: rgb(28 21 36 / 0.12);
+  --mvp-border-dashed: #9a8fb0;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(1.75rem, 2.75rem)
+    minmax(0, 1.25fr)
+    minmax(1.75rem, 2.75rem)
+    minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(0.65rem, 1.8vw, 1rem);
+  width: 100%;
+  max-width: 56rem;
+  margin-inline: auto;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(0.72rem, 1.2vw, 0.9rem);
+  line-height: 1.25;
+  color: var(--mvp-ink);
+}
+
+.mvpFlowCol,
+.mvpFlowProtoWrap,
+.mvpFlowArrowCol {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.65rem, 1.8vw, 1rem);
+}
+
+.mvpFlowProtoWrap {
+  border: 2px dashed var(--mvp-border-dashed);
+  border-radius: 14px;
+  padding: clamp(0.65rem, 1.8vw, 1rem);
+}
+
+.mvpFlowHeaderSpacer,
+.mvpFlowArrowGap {
+  min-height: clamp(2.75rem, 6.5vw, 3.65rem);
+}
+
+.mvpFlowArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(2.75rem, 6.5vw, 3.65rem);
+}
+
+.mvpFlowArrowSvg {
+  width: 100%;
+  max-width: 3rem;
+  height: auto;
+  fill: none;
+  stroke: var(--mvp-ink);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mvpFlowArrowSvg path {
+  fill: var(--mvp-ink);
+  stroke: none;
+}
+
+.mvpFlowCell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5em;
+  min-height: clamp(2.75rem, 6.5vw, 3.65rem);
+  padding: 0.65em 0.85em;
+  background: var(--mvp-card);
+  border: 2px solid var(--mvp-border);
+  border-radius: 9px;
+  box-shadow: 0 1px 0 rgb(28 21 36 / 0.04);
+  text-align: left;
+}
+
+.mvpFlowCellHeader {
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(0.82rem, 1.35vw, 1rem);
+  letter-spacing: -0.02em;
+}
+
+.mvpFlowCellHeader .mvpFlowCellLabel {
+  font-weight: 600;
+}
+
+.mvpFlowCellDashed {
+  background: var(--mvp-card-muted);
+  border-color: var(--mvp-border-dashed);
+  border-style: dashed;
+}
+
+.mvpFlowCellIcon {
+  flex-shrink: 0;
+  display: flex;
+  color: var(--mvp-ink);
+}
+
+.mvpFlowIcon {
+  width: 1.35em;
+  height: 1.35em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mvpFlowCellLabel {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.mvpFlowCellAnimated {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--mvp-cell-delay, 0ms);
+}
+
+.mvpFlowVisible .mvpFlowCellAnimated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mvpFlowCellAnimated {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .mvpFlow {
+    grid-template-columns: minmax(0, 1fr) minmax(1.25rem, 1.75rem) minmax(0, 1fr) minmax(1.25rem, 1.75rem) minmax(0, 1fr);
+    gap: 0.45rem;
+    max-width: 100%;
+    font-size: 0.68rem;
+  }
+
+  .mvpFlowProtoWrap {
+    padding: 0.45rem;
+  }
+
+  .mvpFlowCell {
+    padding: 0.5em 0.55em;
+    min-height: 2.5rem;
+  }
+
+  .mvpFlowHeaderSpacer,
+  .mvpFlowArrowGap,
+  .mvpFlowArrow {
+    min-height: 2.5rem;
+  }
+
+  .mvpFlowArrowSvg {
+    max-width: 1.75rem;
   }
 }

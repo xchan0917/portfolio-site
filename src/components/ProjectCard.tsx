@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { type CSSProperties, useState } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 import { useInView } from "@/lib/useInView";
 import type { Project } from "@/lib/projects";
 import styles from "./ProjectCard.module.css";
@@ -12,8 +12,69 @@ type ProjectCardProps = {
   index: number;
 };
 
-function getPoster(cover?: string) {
-  return cover ? cover.replace(/\.gif$/, "-poster.jpg") : undefined;
+function getCoverVideo(cover?: string) {
+  return cover?.replace(/\.gif$/i, ".mp4");
+}
+
+function CoverPlayback({
+  project,
+}: {
+  project: Project;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const coverVideo = getCoverVideo(project.cover);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !coverVideo) return;
+
+    const startAt = project.coverStartAt ?? 0;
+
+    const playFromOffset = () => {
+      const duration = video.duration;
+      video.currentTime =
+        Number.isFinite(duration) && duration > 0
+          ? Math.min(startAt, Math.max(duration - 0.05, 0))
+          : startAt;
+      void video.play();
+    };
+
+    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
+      playFromOffset();
+      return;
+    }
+
+    video.addEventListener("loadedmetadata", playFromOffset, { once: true });
+  }, [coverVideo, project.coverStartAt]);
+
+  if (coverVideo) {
+    return (
+      <video
+        ref={videoRef}
+        src={coverVideo}
+        className={styles.mediaVideo}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      />
+    );
+  }
+
+  if (!project.cover) return null;
+
+  return (
+    <Image
+      key="gif"
+      src={project.cover}
+      alt=""
+      fill
+      unoptimized
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 700px"
+      className={styles.mediaImage}
+    />
+  );
 }
 
 function CardContent({
@@ -23,37 +84,11 @@ function CardContent({
   project: Project;
   playing: boolean;
 }) {
-  const poster = getPoster(project.cover);
-
   return (
     <>
       <div className={styles.media}>
-        {project.cover ? (
-          playing ? (
-            // Mount the GIF only while hovered so it restarts and plays.
-            <Image
-              key="gif"
-              src={project.cover}
-              alt={`${project.title} cover`}
-              fill
-              unoptimized
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 700px"
-              className={styles.mediaImage}
-            />
-          ) : (
-            <Image
-              key="poster"
-              src={poster as string}
-              alt={`${project.title} cover`}
-              fill
-              unoptimized
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 700px"
-              className={styles.mediaImage}
-            />
-          )
-        ) : (
-          <div className={styles.mediaInner} />
-        )}
+        <div className={styles.mediaInner} aria-hidden="true" />
+        {project.cover && playing ? <CoverPlayback project={project} /> : null}
         {project.comingSoon ? (
           <span className={styles.badge}>Coming soon</span>
         ) : null}
@@ -88,7 +123,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     <article
       ref={ref}
       className={`${styles.card} ${styles[`accent_${project.accent}`]} ${inView ? styles.cardVisible : ""}`}
-      style={{ "--reveal-delay": `${index * 90}ms` } as CSSProperties}
+      style={
+        {
+          "--reveal-delay": `${index * 90}ms`,
+          ...(project.idleColor ? { "--media-idle": project.idleColor } : {}),
+        } as CSSProperties
+      }
       onMouseEnter={play}
       onMouseLeave={stop}
       onFocus={play}

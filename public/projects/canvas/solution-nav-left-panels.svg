@@ -1,0 +1,38 @@
+<svg width="526" height="639" viewBox="0 0 526 639" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g filter="url(#panelShadow)">
+    <image
+      href="/projects/canvas/figma/solution-left-0.png"
+      xlink:href="/projects/canvas/figma/solution-left-0.png"
+      x="0"
+      y="0"
+      width="214.066"
+      height="376.755"
+      preserveAspectRatio="none"
+    />
+  </g>
+  <image
+    href="/projects/canvas/figma/solution-left-1.png"
+    xlink:href="/projects/canvas/figma/solution-left-1.png"
+    x="100.897"
+    y="14.325"
+    width="43.784"
+    height="22.192"
+    preserveAspectRatio="none"
+  />
+  <g filter="url(#panelShadow)">
+    <image
+      href="/projects/canvas/figma/solution-left-2.png"
+      xlink:href="/projects/canvas/figma/solution-left-2.png"
+      x="194.022"
+      y="220.73"
+      width="327.912"
+      height="410.124"
+      preserveAspectRatio="none"
+    />
+  </g>
+  <defs>
+    <filter id="panelShadow" x="-8" y="-4" width="120%" height="120%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="4" stdDeviation="2" flood-opacity="0.25" />
+    </filter>
+  </defs>
+</svg>

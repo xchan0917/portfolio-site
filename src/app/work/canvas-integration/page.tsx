@@ -6,7 +6,14 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
 import { BackLink } from "../snitch/BackLink";
-import { SolutionCarousel } from "../snitch/SolutionCarousel";
+import { CanvasEcosystem } from "./CanvasEcosystem";
+import { CanvasMvpIntegrationDiagram } from "./CanvasMvpIntegrationDiagram";
+import { CanvasNextSteps } from "./CanvasNextSteps";
+import { CanvasExternalCalendarSyncShowcase } from "./CanvasExternalCalendarSyncShowcase";
+import { CanvasSolutionCalendarTodoShowcase } from "./CanvasSolutionCalendarTodoShowcase";
+import { CanvasSolutionShowcase } from "./CanvasSolutionShowcase";
+import { CanvasSolutionSteps } from "./CanvasSolutionSteps";
+import { CanvasStatsStrip } from "./CanvasStatsStrip";
 import styles from "../snitch/snitch.module.css";
 import cx from "./canvas.module.css";
 
@@ -25,16 +32,19 @@ const META = [
 
 const STATS = [
   {
-    value: "72%",
+    value: 72,
+    suffix: "%",
     label:
       "of students struggled to manage assignments across the dashboard, to-do list, and calendar.",
   },
   {
-    value: "5+ min",
+    value: 5,
+    suffix: "+ min",
     label: "spent per task just toggling between separate pages.",
   },
   {
-    value: "3 / 4",
+    value: 3,
+    suffix: " / 4",
     label: "participants wanted shortcut access to key landing pages.",
   },
 ];
@@ -57,27 +67,6 @@ const SOLUTION_STEPS = [
   },
 ];
 
-const SYNC = [
-  { src: "/projects/canvas/sync-google.png", alt: "Google Calendar" },
-  { src: "/projects/canvas/sync-apple.png", alt: "Apple Calendar" },
-  { src: "/projects/canvas/sync-outlook.png", alt: "Microsoft Outlook" },
-];
-
-const NEXT_STEPS = [
-  {
-    title: "Technical expansion",
-    body: "Bring the full Calendar API integration to life, enabling real-time syncing across courses and centralized scheduling for students and instructors.",
-  },
-  {
-    title: "Strategic growth",
-    body: "Explore a premium tier and district-level offerings, using expanded functionality to create meaningful value for schools seeking more integrated academic tools.",
-  },
-  {
-    title: "Enhanced experience",
-    body: "Refine navigation and assignment flows based on user feedback to make course management smoother, faster, and more intuitive across devices.",
-  },
-];
-
 export default function CanvasCaseStudy() {
   return (
     <div className="pageShell">
@@ -87,12 +76,12 @@ export default function CanvasCaseStudy() {
       <div className="pageContent">
         <main className={styles.study}>
           <Reveal>
-            <figure className={styles.heroFigure}>
+            <figure className={`${styles.heroFigure} ${cx.heroFigure}`}>
               <Image
-                src="/projects/canvas/hero.jpg"
-                alt="Laptop mockup of the redesigned Canvas course interface on a sage green background"
-                width={1024}
-                height={576}
+                src="/projects/canvas/hero-artwork-v2.png"
+                alt="Laptop mockup of the redesigned Canvas course interface"
+                width={1920}
+                height={1080}
                 priority
                 className={styles.heroMedia}
               />
@@ -187,24 +176,23 @@ export default function CanvasCaseStudy() {
               </div>
             </Reveal>
             <Reveal delay={60}>
-              <Image
-                src="/projects/canvas/canvas-ecosystem.png"
-                alt="Canvas at the center of student workflows: calendar, assignments, deadlines, communication, and quizzes"
-                width={541}
-                height={507}
-                className={cx.ecosystemDiagram}
-              />
-            </Reveal>
-            <Reveal delay={120}>
-              <p className={styles.sectionLead}>
-                Of all the platforms we explored, we focused on the one most
-                woven into our daily lives — Canvas by Instructure. As one of
-                the most widely used learning management systems, Canvas
-                supports over 7,000 institutions worldwide, including Carnegie
-                Mellon University. Since students use it every day to check
-                grades, submit assignments, and reach professors, it was the
-                perfect chance to reimagine a platform we personally rely on.
-              </p>
+              <div className={cx.whyCanvasExperience}>
+                <div className={cx.whyCanvasVisual}>
+                  <CanvasEcosystem />
+                </div>
+                <div className={cx.whyCanvasCopy}>
+                  <p className={`${styles.sectionLead} ${cx.whyCanvasLead}`}>
+                    Of all the platforms we explored, we focused on the one most
+                    woven into our daily lives as students: Canvas by
+                    Instructure. As one of the most widely used learning
+                    management systems, Canvas supports over 7,000 institutions
+                    worldwide, including Carnegie Mellon University. Since
+                    students use it every day to check grades, submit
+                    assignments, and reach professors, it was the perfect chance
+                    to reimagine a platform we personally rely on.
+                  </p>
+                </div>
+              </div>
             </Reveal>
           </section>
 
@@ -221,19 +209,22 @@ export default function CanvasCaseStudy() {
             <Reveal delay={80}>
               <p className={styles.sectionLead}>
                 We mapped the key user groups of Canvas and explored how each
-                one interacts with the platform — understanding the experience
-                from every perspective before changing anything.
+                one interacts with the platform, trying to understand the experience
+                from every perspective making any changes.
               </p>
             </Reveal>
             <Reveal delay={120}>
-              <figure className={styles.figureWide}>
-                <Image
-                  src="/projects/canvas/user-journeys.png"
-                  alt="User journey map across student, teacher, and administration roles"
-                  width={2047}
-                  height={1953}
-                  className={styles.figureImg}
-                />
+              <figure className={`${styles.figureWide} ${cx.journeyMapFigure}`}>
+                <div className={cx.journeyMapFrame}>
+                  <Image
+                    src="/projects/canvas/user-journeys.png"
+                    alt="User journey map across student, teacher, and administration roles"
+                    width={2047}
+                    height={1953}
+                    unoptimized
+                    className={cx.journeyMapImg}
+                  />
+                </div>
                 <figcaption className={styles.caption}>
                   Journey mapping how students, teachers, and administrators
                   each move through Canvas.
@@ -260,17 +251,13 @@ export default function CanvasCaseStudy() {
               </p>
             </Reveal>
             <Reveal delay={140}>
-              <div className={`${styles.statsStrip} ${cx.stats3}`}>
-                {STATS.map((s) => (
-                  <div key={s.value} className={styles.statItem}>
-                    <span className={styles.statValue}>{s.value}</span>
-                    <span className={styles.statLabel}>{s.label}</span>
-                  </div>
-                ))}
+              <div className={cx.centeredFlow}>
+                <CanvasStatsStrip stats={STATS} />
               </div>
             </Reveal>
           </section>
 
+          <div className={cx.centeredFlow}>
           {/* 05 — Competitive analysis */}
           <section className={`${styles.section} ${styles.wideSection}`}>
             <Reveal>
@@ -290,24 +277,29 @@ export default function CanvasCaseStudy() {
               </p>
             </Reveal>
             <Reveal delay={120}>
-              <figure className={styles.figureWide}>
-                <Image
-                  src="/projects/canvas/competitive.png"
-                  alt="Competitive analysis comparing Canvas, Google Classroom, and Blackboard Learn"
-                  width={1302}
-                  height={1066}
-                  className={styles.figureImg}
-                />
-                <figcaption className={styles.caption}>
+              <figure className={cx.competitiveFigure}>
+                <div className={cx.competitiveFrame}>
+                  <Image
+                    src="/projects/canvas/competitive-table.png"
+                    alt="Competitive analysis comparing Canvas, Google Classroom, and Blackboard Learn"
+                    width={1302}
+                    height={1066}
+                    className={cx.competitiveImg}
+                  />
+                </div>
+                <figcaption
+                  className={`${styles.caption} ${cx.competitiveCaption}`}
+                >
                   Comparing Canvas against Google Classroom and Blackboard
                   Learn across audience, pricing, and experience.
                 </figcaption>
               </figure>
             </Reveal>
           </section>
+          </div>
 
-          {/* 06 — Solution */}
-          <section className={styles.section} id="solution">
+          {/* 06 — Solution (full study width for diagram showcase) */}
+          <section className={`${styles.section} ${styles.wideSection}`} id="solution">
             <Reveal>
               <div className={styles.sectionHead}>
                 <span className={styles.sectionNum}>06</span>
@@ -318,79 +310,30 @@ export default function CanvasCaseStudy() {
             </Reveal>
             <Reveal delay={80}>
               <p className={styles.sectionLead}>
-                Three focused changes let students stay organized and actually
-                use the features Canvas already has — without relearning the
-                platform.
+                Three focused changes that let students stay organized and actually
+                utilize Canva's existing features without relearning the platform.
               </p>
             </Reveal>
 
-            <SolutionCarousel steps={SOLUTION_STEPS} />
-
-            <Reveal delay={80}>
-              <figure className={styles.heroFigure}>
-                <Image
-                  src="/projects/canvas-integration.gif"
-                  alt="Animated preview of the redesigned Canvas course list"
-                  width={800}
-                  height={600}
-                  unoptimized
-                  className={`${styles.heroMedia} ${cx.previewCrop}`}
-                />
-              </figure>
-            </Reveal>
-
-            <div className={styles.whiteboardPair}>
-              <Reveal>
-                <figure className={styles.figure}>
-                  <Image
-                    src="/projects/canvas/nav.png"
-                    alt="Redesigned course navigation with a quick-access dropdown"
-                    width={1312}
-                    height={1644}
-                    className={styles.figureImg}
-                  />
-                  <figcaption className={styles.caption}>
-                    Course navigation with consistent ordering, aligned colors,
-                    and a dropdown to jump straight to a course.
-                  </figcaption>
-                </figure>
-              </Reveal>
-              <Reveal delay={120}>
-                <figure className={styles.figure}>
-                  <Image
-                    src="/projects/canvas/calendar.png"
-                    alt="Merged calendar and to-do list showing assignment details inline"
-                    width={2206}
-                    height={1244}
-                    className={styles.figureImg}
-                  />
-                  <figcaption className={styles.caption}>
-                    A merged calendar and to-do list — assignment details show
-                    up right in the calendar instead of inside each course.
-                  </figcaption>
-                </figure>
-              </Reveal>
-            </div>
-
-            <Reveal delay={120}>
-              <div className={styles.note}>
-                <p>
-                  The third step centralizes academic and personal schedules
-                  into one interface, syncing Canvas with the calendars students
-                  already live in.
-                </p>
-                <div className={cx.logoRow}>
-                  {SYNC.map((s) => (
-                    <span key={s.alt} className={cx.logoChip}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={s.src} alt={s.alt} />
-                    </span>
-                  ))}
-                </div>
-              </div>
+            <Reveal delay={100}>
+              <CanvasSolutionSteps
+                leadStep={SOLUTION_STEPS[0]}
+                leadContent={<CanvasSolutionShowcase />}
+                steps={[
+                  {
+                    ...SOLUTION_STEPS[1],
+                    showcase: <CanvasSolutionCalendarTodoShowcase />,
+                  },
+                  {
+                    ...SOLUTION_STEPS[2],
+                    showcase: <CanvasExternalCalendarSyncShowcase />,
+                  },
+                ]}
+              />
             </Reveal>
           </section>
 
+          <div className={cx.centeredFlow}>
           {/* 07 — MVP */}
           <section className={`${styles.section} ${styles.wideSection}`}>
             <Reveal>
@@ -403,11 +346,14 @@ export default function CanvasCaseStudy() {
             </Reveal>
             <Reveal delay={80}>
               <p className={styles.sectionLead}>
-                We began with a stripped-down LMS to validate the core needs —
-                assignments, grading, and tool integrations — confirming student
-                and instructor workflows before investing in full-scale UX
-                improvements.
+                We began with a stripped-down LMS to validate core needs:
+                assignments, grading, and tool integrations. The goal was to
+                confirm student and instructor workflows before investing in
+                full-scale UX improvements.
               </p>
+            </Reveal>
+            <Reveal delay={140}>
+              <CanvasMvpIntegrationDiagram />
             </Reveal>
           </section>
 
@@ -431,21 +377,13 @@ export default function CanvasCaseStudy() {
               </p>
             </Reveal>
 
-            <div className={styles.cardGrid}>
-              {NEXT_STEPS.map((s, i) => (
-                <Reveal key={s.title} delay={i * 90}>
-                  <div className={styles.gapCard}>
-                    <h3 className={styles.gapTitle}>{s.title}</h3>
-                    <p className={styles.gapBody}>{s.body}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+            <CanvasNextSteps />
           </section>
 
           <Reveal>
             <CaseStudyNav slug="canvas-integration" />
           </Reveal>
+          </div>
         </main>
         <SiteFooter />
       </div>
