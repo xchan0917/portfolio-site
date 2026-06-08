@@ -121,6 +121,7 @@ function PlaygroundClusterCard({
   return (
     <article
       className={`${styles.card} ${styles.cardCluster} ${expanded ? styles.cardClusterExpanded : ""} ${active ? styles.cardHovered : ""}`}
+      data-frame-count={frames.length}
       style={{
         left: item.x,
         top: item.y,
@@ -133,15 +134,15 @@ function PlaygroundClusterCard({
       onPointerLeave={() => setHovered(false)}
     >
       <div
-        className={styles.clusterMedia}
+        className={`${styles.clusterMedia} ${styles[`accent_${item.accent ?? "cream"}`]}`}
         style={{ height: mediaHeight }}
         role="button"
         tabIndex={0}
         aria-expanded={expanded}
         aria-label={
           expanded
-            ? "Collapse DoorDash screens"
-            : "Expand DoorDash screens into a row"
+            ? `Collapse ${item.title}`
+            : `Expand ${item.title} into a row`
         }
         onPointerDown={onClusterPointerDown}
         onPointerUp={onClusterPointerUp}
@@ -193,6 +194,128 @@ function PlaygroundClusterCard({
   );
 }
 
+function PlaygroundInteractiveCard({
+  item,
+  dragging,
+}: {
+  item: PlaygroundItem;
+  dragging: boolean;
+}) {
+  const mediaHeight = playgroundItemHeight(item);
+  const fit = item.fit ?? "cover";
+  const [hovered, setHovered] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const pointerStartRef = useRef<Vec2 | null>(null);
+  const active = hovered && !dragging;
+  const stillSrc = item.poster ?? item.image!;
+  const gifSrc = item.image!;
+
+  const stopCanvasDrag = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+    },
+    [],
+  );
+
+  const onMediaPointerDown = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      stopCanvasDrag(event);
+      pointerStartRef.current = { x: event.clientX, y: event.clientY };
+    },
+    [stopCanvasDrag],
+  );
+
+  const onMediaPointerUp = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      stopCanvasDrag(event);
+
+      const start = pointerStartRef.current;
+      pointerStartRef.current = null;
+      if (!start || dragging || playing) return;
+
+      const dx = event.clientX - start.x;
+      const dy = event.clientY - start.y;
+      if (Math.hypot(dx, dy) < CLUSTER_CLICK_THRESHOLD) {
+        setPlaying(true);
+      }
+    },
+    [dragging, playing, stopCanvasDrag],
+  );
+
+  const onMediaKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (playing) return;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        setPlaying(true);
+      }
+    },
+    [playing],
+  );
+
+  return (
+    <article
+      className={`${styles.card} ${styles.cardInteractive} ${active ? styles.cardHovered : ""} ${playing ? styles.cardInteractivePlaying : ""}`}
+      style={{
+        left: item.x,
+        top: item.y,
+        width: item.w,
+        zIndex: active || playing ? 8 : 6,
+        ["--card-rotate" as string]: `${item.rotate ?? 0}deg`,
+      }}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => {
+        setHovered(false);
+        setPlaying(false);
+      }}
+    >
+      <div
+        className={`${styles.cardMedia} ${styles[`accent_${item.accent ?? "cream"}`]} ${fit === "contain" ? styles.cardMediaContain : ""}`}
+        style={{ height: mediaHeight }}
+        role="button"
+        tabIndex={0}
+        aria-label={
+          playing
+            ? "DoorDash AUI demo playing"
+            : "Click to play DoorDash AUI demo"
+        }
+        onPointerDown={onMediaPointerDown}
+        onPointerUp={onMediaPointerUp}
+        onPointerCancel={onMediaPointerUp}
+        onPointerLeave={() => setPlaying(false)}
+        onKeyDown={onMediaKeyDown}
+        onBlur={() => setPlaying(false)}
+      >
+        {playing ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={gifSrc}
+            alt=""
+            className={styles.cardImage}
+            style={{ objectFit: fit }}
+            draggable={false}
+          />
+        ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={stillSrc}
+            alt=""
+            className={styles.cardImage}
+            style={{ objectFit: fit }}
+            draggable={false}
+          />
+        )}
+      </div>
+      <div className={styles.cardCopy}>
+        <p className={styles.cardTitle}>{item.title}</p>
+        {item.caption ? (
+          <p className={styles.cardCaption}>{item.caption}</p>
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
 function PlaygroundCard({
   item,
   dragging,
@@ -207,6 +330,12 @@ function PlaygroundCard({
   if (isCluster) {
     return <PlaygroundClusterCard item={item} dragging={dragging} />;
   }
+
+  if (item.playOnClick && item.poster && item.image) {
+    return <PlaygroundInteractiveCard item={item} dragging={dragging} />;
+  }
+
+  const isGif = item.image?.toLowerCase().endsWith(".gif") ?? false;
 
   return (
     <article
@@ -228,6 +357,7 @@ function PlaygroundCard({
           alt=""
           fill
           sizes={`${item.w}px`}
+          unoptimized={isGif}
           className={styles.cardImage}
           style={{ objectFit: fit }}
           draggable={false}

@@ -1,8 +1,16 @@
+.playPage {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.playMain {
+  height: 100%;
+}
+
 .viewport {
   position: relative;
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  height: 100%;
   overflow: hidden;
   cursor: grab;
   touch-action: none;
@@ -91,6 +99,67 @@
   transition: none;
 }
 
+.cardInteractive {
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1),
+    filter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardInteractive.cardHovered {
+  z-index: 5;
+  transform: rotate(var(--card-rotate)) scale(1.035);
+  filter: drop-shadow(0 22px 36px rgb(28 21 36 / 0.12));
+}
+
+.cardInteractive .cardMedia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.cardInteractive .cardMedia:focus-visible {
+  outline: 2px solid rgb(124 92 173 / 0.45);
+  outline-offset: 4px;
+}
+
+.cardInteractive.cardHovered .cardMedia {
+  border-color: var(--border);
+  box-shadow:
+    0 18px 40px rgb(28 21 36 / 0.1),
+    0 2px 8px rgb(28 21 36 / 0.04);
+}
+
+.cardInteractive .cardImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.cardInteractive.cardHovered .cardImage {
+  transform: scale(1.04);
+}
+
+.cardInteractivePlaying .cardImage {
+  animation: mediaReveal 0.45s ease;
+}
+
+@keyframes mediaReveal {
+  from {
+    opacity: 0.82;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .cardCluster {
   transition:
     transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
@@ -142,6 +211,10 @@
   transition: padding-top 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.cardCluster[data-frame-count="2"] .cardCopy {
+  padding-top: 4.5rem;
+}
+
 .cardClusterExpanded .cardCopy {
   padding-top: 1.15rem;
 }
@@ -176,6 +249,10 @@
 }
 
 .cardCluster .clusterMedia.accent_pink {
+  background: transparent;
+}
+
+.cardCluster .clusterMedia.accent_purple {
   background: transparent;
 }
 
@@ -268,8 +345,24 @@
   .viewport,
   .hint,
   .cardCluster,
-  .cardCluster .cardCopy {
+  .cardCluster .cardCopy,
+  .cardInteractive,
+  .cardInteractive .cardMedia,
+  .cardInteractive .cardImage {
     transition: none;
+  }
+
+  .cardInteractive.cardHovered {
+    transform: rotate(var(--card-rotate));
+    filter: none;
+  }
+
+  .cardInteractive.cardHovered .cardImage {
+    transform: none;
+  }
+
+  .cardInteractivePlaying .cardImage {
+    animation: none;
   }
 
   .cardCluster.cardHovered {

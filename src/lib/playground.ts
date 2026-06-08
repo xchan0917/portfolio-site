@@ -16,6 +16,10 @@ export type PlaygroundItem = {
   title: string;
   caption?: string;
   image?: string;
+  /** Still frame shown until the user clicks to play animated media. */
+  poster?: string;
+  /** Animated media only starts after a click/tap on the card. */
+  playOnClick?: boolean;
   /** Overlapping frames — when set, renders a cluster instead of a single image. */
   frames?: PlaygroundClusterFrame[];
   x: number;
@@ -53,14 +57,34 @@ const rawPlaygroundItems: PlaygroundItem[] = [
   {
     id: "tma-graphics",
     title: "Graphics for TMA posts",
-    image: "/play/tma-graphics.png",
     x: 150,
     y: 70,
-    w: 280,
-    imgW: 1080,
-    imgH: 1080,
+    w: 320,
+    clusterH: 265,
     rotate: -2.5,
     accent: "purple",
+    frames: [
+      {
+        src: "/play/tma-graphics.png",
+        w: 220,
+        imgW: 402,
+        imgH: 442,
+        x: 0,
+        y: 16,
+        rotate: -5,
+        zIndex: 1,
+      },
+      {
+        src: "/play/tma-menu-pricing.png",
+        w: 210,
+        imgW: 1024,
+        imgH: 1024,
+        x: 98,
+        y: 0,
+        rotate: 4,
+        zIndex: 2,
+      },
+    ],
   },
   {
     id: "stair-mural",
@@ -118,8 +142,8 @@ const rawPlaygroundItems: PlaygroundItem[] = [
   {
     id: "doordash-aui",
     title: "Experimenting with Doordash's AUI improvement",
-    x: 270,
-    y: 1050,
+    x: 520,
+    y: 980,
     w: 420,
     clusterH: 380,
     rotate: -1.5,
@@ -185,8 +209,8 @@ const rawPlaygroundItems: PlaygroundItem[] = [
     id: "ceramics-vessel",
     title: "Ceramics 9in vessel (thrown)",
     image: "/play/ceramics-vessel.jpeg",
-    x: 920,
-    y: 1260,
+    x: 1180,
+    y: 1580,
     w: 280,
     imgW: 2906,
     imgH: 3322,
@@ -212,8 +236,8 @@ const rawPlaygroundItems: PlaygroundItem[] = [
     title: "Shot on iphone 14 pro and edited",
     caption: "in Adobe lightroom",
     image: "/play/iphone-lightroom.jpeg",
-    x: 1080,
-    y: 710,
+    x: 1240,
+    y: 760,
     w: 270,
     imgW: 1080,
     imgH: 1920,
