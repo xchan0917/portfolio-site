@@ -22,7 +22,7 @@ export function SiteFooter() {
               Made with <span aria-label="love">♥</span> and lots of matcha
             </p>
             <p className={styles.localTime}>
-              <LocalTime label="Your local time" />
+              <LocalTime />
             </p>
           </Reveal>
 

@@ -220,7 +220,8 @@ function PageDoodles({ doodles }: { doodles?: JournalDoodle[] }) {
           );
         }
 
-        if (doodle.type === "sticker" && doodle.stickerSrc) {
+        if (doodle.type === "sticker") {
+          if (!doodle.stickerSrc) return null;
           return (
             // eslint-disable-next-line @next/next/no-img-element
             <img
