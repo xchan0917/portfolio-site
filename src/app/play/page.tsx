@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function PlayPage() {
   return (
-    <div className="pageShell">
+    <div className={`pageShell ${styles.playShell}`}>
       <SiteNav glass visibleAtTop />
       <div className={`pageContent ${styles.playPage}`}>
         <main className={styles.playMain}>
