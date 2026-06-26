@@ -93,7 +93,7 @@ export default function CanvasCaseStudy() {
               <Reveal delay={60}>
                 <h1 className={`${styles.title} ${cx.heroTitle}`}>
                   <span className={cx.heroTitleLine}>Canvas</span>
-                  <span className={cx.heroTitleLine}>Intergration</span>
+                  <span className={cx.heroTitleLine}>Integration</span>
                 </h1>
               </Reveal>
               <Reveal delay={120} className={styles.heroTags}>
@@ -210,7 +210,7 @@ export default function CanvasCaseStudy() {
               <p className={styles.sectionLead}>
                 We mapped the key user groups of Canvas and explored how each
                 one interacts with the platform, trying to understand the experience
-                from every perspective making any changes.
+                from every perspective before making any changes.
               </p>
             </Reveal>
             <Reveal delay={120}>
@@ -311,7 +311,7 @@ export default function CanvasCaseStudy() {
             <Reveal delay={80}>
               <p className={styles.sectionLead}>
                 Three focused changes that let students stay organized and actually
-                utilize Canva's existing features without relearning the platform.
+                utilize Canvas's existing features without relearning the platform.
               </p>
             </Reveal>
 
@@ -369,11 +369,14 @@ export default function CanvasCaseStudy() {
             </Reveal>
             <Reveal delay={80}>
               <p className={styles.sectionLead}>
-                This hackathon gave me real insight into the end-to-end product
-                process, and sharing our final solution was a highlight. I loved
-                getting to bring together both my business background and my
-                design skills. With more time, these are the directions
-                we&apos;d build toward.
+                Scoping was the hardest part of this sprint. We had more
+                directions than time — accessibility, mobile experience,
+                professor-side tools — so committing to three student-focused
+                changes early is what let us finish something cohesive. Journey
+                mapping three user types in the same session helped us see
+                where Canvas was working well enough to leave alone versus where
+                students were losing time every single day. With more time,
+                these are the directions we&apos;d build toward.
               </p>
             </Reveal>
 

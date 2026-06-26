@@ -6,10 +6,15 @@ export type Project = {
   comingSoon?: boolean;
   accent: "purple" | "peach" | "pink" | "ink";
   cover?: string;
+  /** MP4 hover clip when available; gif-only projects omit this. */
+  coverMp4?: string;
   /** Solid media placeholder before hover. Overrides the accent default. */
   idleColor?: string;
   /** Seconds to skip into the hover clip before playback starts. */
   coverStartAt?: number;
+  /** Homepage cover translate overrides (e.g. "-0.8in"). */
+  coverShift?: string;
+  coverShiftY?: string;
 };
 
 export const featuredProjects: Project[] = [
@@ -21,6 +26,7 @@ export const featuredProjects: Project[] = [
     tags: ["Agentic AI", "Hackathon"],
     accent: "purple",
     cover: "/projects/snitch.gif",
+    coverMp4: "/projects/snitch.mp4",
     coverStartAt: 1,
   },
   {
@@ -31,6 +37,7 @@ export const featuredProjects: Project[] = [
     tags: ["Case Study", "User Research"],
     accent: "peach",
     cover: "/projects/pgh-childrens-museum.gif",
+    coverMp4: "/projects/pgh-childrens-museum.mp4",
   },
   {
     slug: "canvas-integration",
@@ -40,6 +47,19 @@ export const featuredProjects: Project[] = [
     tags: ["App Design", "Hackathon"],
     accent: "pink",
     cover: "/projects/canvas-integration.gif",
+    coverMp4: "/projects/canvas-integration.mp4",
+  },
+  {
+    slug: "xhacks",
+    title: "Monet",
+    description:
+      "An AI closet remix app that turns what you already own into fresh outfits.",
+    tags: ["Product Design", "XHacks"],
+    accent: "peach",
+    cover: "/projects/xhacks.gif",
+    coverMp4: "/projects/xhacks.mp4",
+    coverShift: "-0.6in",
+    coverShiftY: "0.3in",
   },
   {
     slug: "plus-rebrand",
@@ -50,6 +70,7 @@ export const featuredProjects: Project[] = [
     comingSoon: true,
     accent: "ink",
     cover: "/projects/plus-rebrand.gif",
+    coverMp4: "/projects/plus-rebrand.mp4",
   },
   {
     slug: "punchcard",
@@ -60,6 +81,7 @@ export const featuredProjects: Project[] = [
     comingSoon: true,
     accent: "purple",
     cover: "/projects/punchcard.gif",
+    coverMp4: "/projects/punchcard.mp4",
     idleColor: "#e6ddd0",
   },
 ];

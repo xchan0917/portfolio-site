@@ -122,7 +122,7 @@
 }
 
 .cardInteractive .cardMedia:focus-visible {
-  outline: 2px solid rgb(124 92 173 / 0.45);
+  outline: 2px solid rgb(176 154 166 / 0.45);
   outline-offset: 4px;
 }
 
@@ -224,7 +224,7 @@
 }
 
 .cardCluster .clusterMedia:focus-visible {
-  outline: 2px solid rgb(124 92 173 / 0.45);
+  outline: 2px solid rgb(176 154 166 / 0.45);
   outline-offset: 4px;
   border-radius: 0.35rem;
 }
@@ -238,7 +238,7 @@
 }
 
 .cardCluster.cardHovered .clusterFrame {
-  filter: drop-shadow(0 20px 34px rgb(75 44 127 / 0.2));
+  filter: drop-shadow(0 20px 34px rgb(139 107 122 / 0.2));
 }
 
 .clusterMedia {
@@ -264,7 +264,7 @@
   border-radius: 0;
   box-shadow: none;
   filter: drop-shadow(0 12px 24px rgb(28 21 36 / 0.12))
-    drop-shadow(0 2px 8px rgb(75 44 127 / 0.08));
+    drop-shadow(0 2px 8px rgb(139 107 122 / 0.08));
   transform-origin: center center;
 }
 
@@ -317,7 +317,7 @@
 .accent_purple {
   background: linear-gradient(
     145deg,
-    rgb(124 92 173 / 0.18) 0%,
+    rgb(176 154 166 / 0.18) 0%,
     rgb(245 230 232 / 0.85) 100%
   );
 }

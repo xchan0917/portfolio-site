@@ -109,6 +109,15 @@ export function SiteNav({
 
   const isHidden = !menuOpen && (!entranceReady || !headerVisible);
 
+  const navLinkProps = (link: (typeof navLinks)[number]) =>
+    "external" in link && link.external
+      ? {
+          href: link.href,
+          target: "_blank" as const,
+          rel: "noopener noreferrer",
+        }
+      : { href: link.href };
+
   return (
     <header
       className={`${styles.header} ${glass ? styles.headerGlass : ""} ${isHidden ? styles.headerHidden : ""}`}
@@ -122,9 +131,18 @@ export function SiteNav({
           <ul className={styles.navList}>
             {navLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className={styles.navLink}>
-                  {link.label}
-                </Link>
+                {"external" in link && link.external ? (
+                  <a
+                    {...navLinkProps(link)}
+                    className={styles.navLink}
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link href={link.href} className={styles.navLink}>
+                    {link.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -159,14 +177,25 @@ export function SiteNav({
             <ul className={styles.dropdownList}>
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className={styles.dropdownLink}
-                    onClick={closeMenu}
-                    tabIndex={menuOpen ? undefined : -1}
-                  >
-                    {link.label}
-                  </Link>
+                  {"external" in link && link.external ? (
+                    <a
+                      {...navLinkProps(link)}
+                      className={styles.dropdownLink}
+                      onClick={closeMenu}
+                      tabIndex={menuOpen ? undefined : -1}
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className={styles.dropdownLink}
+                      onClick={closeMenu}
+                      tabIndex={menuOpen ? undefined : -1}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

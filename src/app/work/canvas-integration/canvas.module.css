@@ -149,7 +149,7 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgb(124 92 173 / 0.14) 0%,
+    rgb(176 154 166 / 0.14) 0%,
     rgb(245 230 232 / 0.35) 38%,
     transparent 68%
   );
@@ -608,6 +608,10 @@
   border-radius: 0.75rem;
 }
 
+.solutionDiagramText {
+  fill: var(--ink);
+}
+
 @media (max-width: 900px) {
   .solutionComparisonGrid {
     grid-template-columns: 1fr;
@@ -641,7 +645,7 @@
 .nextStepSketchFlow {
   position: absolute;
   pointer-events: none;
-  color: rgb(75 44 127 / 0.42);
+  color: rgb(139 107 122 / 0.42);
   height: auto;
 }
 

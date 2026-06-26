@@ -44,8 +44,8 @@
   color: var(--purple);
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid rgb(75 44 127 / 0.25);
-  background: rgb(124 92 173 / 0.08);
+  border: 1px solid rgb(139 107 122 / 0.25);
+  background: rgb(176 154 166 / 0.08);
 }
 
 .tldrCol {
@@ -197,7 +197,7 @@
   border-radius: 15px;
   overflow: hidden;
   background: linear-gradient(145deg, #ede7f6, #f5e6e8);
-  box-shadow: 0 30px 80px rgb(75 44 127 / 0.14);
+  box-shadow: 0 30px 80px rgb(139 107 122 / 0.14);
 }
 
 .heroMedia {
@@ -353,7 +353,7 @@
 
 .gapCard:hover {
   transform: translateY(-4px);
-  border-color: rgb(75 44 127 / 0.3);
+  border-color: rgb(139 107 122 / 0.3);
 }
 
 .gapNum {
@@ -400,10 +400,10 @@
 }
 
 .modeChosen {
-  border-color: rgb(75 44 127 / 0.45);
+  border-color: rgb(139 107 122 / 0.45);
   background: linear-gradient(
     160deg,
-    rgb(124 92 173 / 0.1),
+    rgb(176 154 166 / 0.1),
     rgb(255 255 255 / 0.4)
   );
 }
@@ -533,7 +533,7 @@
   overflow: hidden;
   border-radius: 26px;
   background: transparent;
-  box-shadow: 0 24px 60px rgb(75 44 127 / 0.12);
+  box-shadow: 0 24px 60px rgb(139 107 122 / 0.12);
 }
 
 .solutionVideo {
@@ -672,7 +672,7 @@
 
 .videoBtn:hover {
   color: var(--purple);
-  border-color: rgb(75 44 127 / 0.3);
+  border-color: rgb(139 107 122 / 0.3);
   transform: translateY(-1px);
 }
 
@@ -706,7 +706,7 @@
   right: 0.65rem;
   width: clamp(3.25rem, 11vw, 4.5rem);
   height: auto;
-  color: rgb(75 44 127 / 0.42);
+  color: rgb(139 107 122 / 0.42);
   pointer-events: none;
   transform: rotate(14deg);
   transform-origin: 55% 90%;
@@ -727,7 +727,7 @@
   bottom: 1.15rem;
   width: clamp(4rem, 16vw, 5.5rem);
   height: auto;
-  color: rgb(75 44 127 / 0.42);
+  color: rgb(139 107 122 / 0.42);
   pointer-events: none;
 }
 
@@ -1078,7 +1078,7 @@
 
 .archBox {
   fill: none;
-  stroke: rgb(75 44 127 / 0.25);
+  stroke: rgb(139 107 122 / 0.25);
   stroke-width: 1.5;
   stroke-dasharray: 6 6;
 }

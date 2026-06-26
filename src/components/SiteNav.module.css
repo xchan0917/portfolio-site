@@ -17,8 +17,8 @@
   background: rgb(255 252 247 / 0.45);
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
-  border-bottom: 1px solid rgb(75 44 127 / 0.08);
-  box-shadow: 0 1px 24px rgb(75 44 127 / 0.06);
+  border-bottom: 1px solid rgb(139 107 122 / 0.08);
+  box-shadow: 0 1px 24px rgb(139 107 122 / 0.06);
 }
 
 .headerHidden {
@@ -59,8 +59,8 @@
   color: var(--purple);
   /* Soft brushed / sketched edge */
   text-shadow:
-    0.5px 0.5px 0 rgb(75 44 127 / 0.18),
-    -0.4px 0.4px 0 rgb(75 44 127 / 0.12);
+    0.5px 0.5px 0 rgb(139 107 122 / 0.18),
+    -0.4px 0.4px 0 rgb(139 107 122 / 0.12);
   transform: rotate(-3deg);
   transform-origin: center;
 }
@@ -132,7 +132,7 @@
 
 .menuButton:hover,
 .menuButton:focus-visible {
-  border-color: rgb(75 44 127 / 0.35);
+  border-color: rgb(139 107 122 / 0.35);
   outline: none;
 }
 
@@ -222,7 +222,7 @@
 
 .dropdownLink:hover,
 .dropdownLink:focus-visible {
-  background: rgb(75 44 127 / 0.08);
+  background: rgb(139 107 122 / 0.08);
   color: var(--purple);
   outline: none;
 }

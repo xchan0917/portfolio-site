@@ -6,7 +6,7 @@ import { SiteNav } from "@/components/SiteNav";
 export default function Home() {
   return (
     <div className="pageShell">
-      <SiteNav glass entranceDelay={2000} visibleAtTop />
+      <SiteNav glass entranceDelay={1400} visibleAtTop />
       <div className="pageContent">
         <main>
           <Hero />

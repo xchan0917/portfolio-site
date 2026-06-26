@@ -2,9 +2,9 @@
 
 :root {
   --cream: #faf7f4;
-  --purple: #4b2c7f;
-  --purple-deep: #3a2263;
-  --purple-light: #7c5cad;
+  --purple: #8b6b7a;
+  --purple-deep: #6b4f5c;
+  --purple-light: #b09aa6;
   --peach: #f0d5c8;
   --pink: #f5e6e8;
   --ink: #1c1524;
@@ -40,6 +40,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (hover: hover) {
+  * {
+    cursor: none !important;
+  }
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -52,7 +58,7 @@ a {
 }
 
 ::selection {
-  background: rgb(75 44 127 / 0.2);
+  background: rgb(139 107 122 / 0.2);
   color: var(--ink);
 }
 
@@ -106,7 +112,7 @@ a {
   position: absolute;
   border-radius: 50%;
   background: var(--purple-light);
-  box-shadow: 0 0 20px rgb(124 92 173 / 0.6);
+  box-shadow: 0 0 20px rgb(176 154 166 / 0.6);
   animation: twinkle 4s ease-in-out infinite;
 }
 

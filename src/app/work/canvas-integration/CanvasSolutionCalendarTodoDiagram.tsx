@@ -1,4 +1,5 @@
 import { CanvasSolutionPanelImage } from "./CanvasSolutionPanelImage";
+import cx from "./canvas.module.css";
 
 type CanvasSolutionCalendarTodoDiagramProps = {
   className?: string;
@@ -8,7 +9,7 @@ type CanvasSolutionCalendarTodoDiagramProps = {
 const VB_W = 1199;
 const VB_Y = 200;
 
-const ANNOTATION = "#7c5cad";
+const ANNOTATION_ARROW = "#6b4f5c";
 
 const TODO = { x: 21.8718, y: 222, w: 475, h: 270 };
 const CALENDAR = { x: 699, y: 222, w: 479, h: 270 };
@@ -82,21 +83,21 @@ export function CanvasSolutionCalendarTodoDiagram({
         />
       </g>
 
-      <path d={PLUS_PATH} fill={ANNOTATION} />
+      <path d={PLUS_PATH} fill={ANNOTATION_ARROW} />
 
       {/* After panels — foreignObject would otherwise occlude the merge arrow. */}
       <g transform={`translate(${MERGE_ARROW.x} ${MERGE_ARROW.y})`}>
-        <path d={MERGE_ARROW_HEAD} fill={ANNOTATION} />
+        <path d={MERGE_ARROW_HEAD} fill={ANNOTATION_ARROW} />
         <path
           d={MERGE_ARROW_RIGHT}
-          stroke={ANNOTATION}
+          stroke={ANNOTATION_ARROW}
           strokeWidth={2}
           strokeLinecap="round"
           fill="none"
         />
         <path
           d={MERGE_ARROW_LEFT}
-          stroke={ANNOTATION}
+          stroke={ANNOTATION_ARROW}
           strokeWidth={2}
           strokeLinecap="round"
           fill="none"
@@ -104,7 +105,8 @@ export function CanvasSolutionCalendarTodoDiagram({
       </g>
 
       <text
-        fill={ANNOTATION}
+        className={cx.solutionDiagramText}
+        fill="var(--ink)"
         fontFamily="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
         fontSize="14"
         fontWeight="400"

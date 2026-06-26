@@ -52,15 +52,15 @@
 
 .learningCard:hover {
   transform: translateY(-4px);
-  border-color: rgb(75 44 127 / 0.32);
-  box-shadow: 0 18px 44px rgb(75 44 127 / 0.08);
+  border-color: rgb(139 107 122 / 0.32);
+  box-shadow: 0 18px 44px rgb(139 107 122 / 0.08);
 }
 
 .learningIndex {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.14em;
-  color: rgb(75 44 127 / 0.55);
+  color: rgb(139 107 122 / 0.55);
 }
 
 .learningTitle {
@@ -80,7 +80,7 @@
 .learningSketchPaper {
   position: absolute;
   pointer-events: none;
-  color: rgb(75 44 127 / 0.42);
+  color: rgb(139 107 122 / 0.42);
   height: auto;
 }
 
@@ -234,7 +234,7 @@
   right: 8%;
   top: 50%;
   height: 0;
-  border-top: 1px dashed rgb(75 44 127 / 0.28);
+  border-top: 1px dashed rgb(139 107 122 / 0.28);
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -245,7 +245,7 @@
   height: 11px;
   border-radius: 999px;
   background: var(--purple);
-  box-shadow: 0 0 0 4px rgb(124 92 173 / 0.14);
+  box-shadow: 0 0 0 4px rgb(176 154 166 / 0.14);
   z-index: 1;
 }
 
@@ -269,8 +269,8 @@
   gap: 0.35rem;
   padding: 0.75rem 0.9rem;
   border-radius: 10px; /* small header pill */
-  border: 1px solid rgb(75 44 127 / 0.22);
-  background: rgb(124 92 173 / 0.1);
+  border: 1px solid rgb(139 107 122 / 0.22);
+  background: rgb(176 154 166 / 0.1);
 }
 
 .processNum {
@@ -312,7 +312,7 @@
 }
 
 .processCol:hover .processItem {
-  border-color: rgb(75 44 127 / 0.2);
+  border-color: rgb(139 107 122 / 0.2);
   background: #fff;
 }
 
@@ -403,7 +403,7 @@
   color: var(--purple);
   padding: 0.35rem 0.6rem;
   border-radius: 10px;
-  border: 1px solid rgb(75 44 127 / 0.22);
+  border: 1px solid rgb(139 107 122 / 0.22);
   background: rgb(255 255 255 / 0.88);
   opacity: 0;
   transform: translateY(4px);
@@ -416,7 +416,7 @@
 .affinityTrigger:hover .affinityMedia,
 .affinityTrigger:focus-visible .affinityMedia {
   box-shadow: 0 22px 50px rgb(28 21 36 / 0.1);
-  border-color: rgb(75 44 127 / 0.25);
+  border-color: rgb(139 107 122 / 0.25);
 }
 
 .affinityTrigger:hover .affinityZoomHint,
@@ -426,7 +426,7 @@
 }
 
 .affinityTrigger:focus-visible {
-  outline: 2px solid rgb(75 44 127 / 0.45);
+  outline: 2px solid rgb(139 107 122 / 0.45);
   outline-offset: 3px;
   border-radius: 10px;
 }
@@ -547,12 +547,12 @@
 
 .findingsTab:hover,
 .findingsTab:focus-visible {
-  background: rgb(124 92 173 / 0.06);
+  background: rgb(176 154 166 / 0.06);
   outline: none;
 }
 
 .findingsTabActive {
-  background: rgb(124 92 173 / 0.12);
+  background: rgb(176 154 166 / 0.12);
 }
 
 .findingsTabActive .findingsTabNum,
@@ -619,7 +619,7 @@
   padding: 1rem 1.15rem;
   border-radius: 10px;
   border-left: 3px solid var(--purple);
-  background: rgb(124 92 173 / 0.08);
+  background: rgb(176 154 166 / 0.08);
 }
 
 .findingsImpactLabel {
@@ -737,7 +737,7 @@
   min-width: 0;
   padding: 0.3rem 0.3rem 0.2rem;
   border-radius: 8px;
-  border: 1px solid rgb(75 44 127 / 0.22);
+  border: 1px solid rgb(139 107 122 / 0.22);
   background: #fff;
   box-shadow: none;
   overflow: hidden;
@@ -790,8 +790,8 @@
 }
 
 .sitemapPanelLabelBefore {
-  color: rgb(75 44 127 / 0.82);
-  border: 1px dashed rgb(75 44 127 / 0.28);
+  color: rgb(139 107 122 / 0.82);
+  border: 1px dashed rgb(139 107 122 / 0.28);
   background: #fff;
 }
 
@@ -808,8 +808,8 @@
 
 .sitemapPanelLabelAfter {
   color: var(--purple);
-  border: 1px solid rgb(75 44 127 / 0.28);
-  background: rgb(124 92 173 / 0.08);
+  border: 1px solid rgb(139 107 122 / 0.28);
+  background: rgb(176 154 166 / 0.08);
 }
 
 .sitemapCaption {
@@ -861,7 +861,7 @@
   min-height: 38rem;
   margin-inline: auto;
   padding: clamp(2.25rem, 5vw, 3.15rem);
-  border: 1px solid rgb(75 44 127 / 0.22);
+  border: 1px solid rgb(139 107 122 / 0.22);
   border-radius: 10px;
   overflow: hidden;
   background: rgb(255 255 255 / 0.45);
@@ -959,7 +959,7 @@
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.04em;
-  color: rgb(75 44 127 / 0.75);
+  color: rgb(139 107 122 / 0.75);
 }
 
 .ellipsisMenu {
@@ -1044,7 +1044,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  color: rgb(75 44 127 / 0.5);
+  color: var(--purple-deep);
   pointer-events: none;
   overflow: visible;
 }
@@ -1110,7 +1110,7 @@
   margin: 0;
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: clamp(0.8rem, 1.4vw, 1rem);
-  color: rgb(75 44 127 / 0.75);
+  color: rgb(139 107 122 / 0.75);
   pointer-events: none;
   z-index: 2;
 }
@@ -1157,7 +1157,7 @@
   width: auto;
   max-width: 100%;
   height: auto;
-  border: 1px solid rgb(75 44 127 / 0.35);
+  border: 1px solid rgb(107 79 92 / 0.45);
   border-radius: 14px;
   box-shadow: 0 12px 32px rgb(28 21 36 / 0.06);
   vertical-align: top;
@@ -1312,9 +1312,9 @@
 
 .personaArrow:hover {
   color: var(--purple);
-  border-color: rgb(75 44 127 / 0.3);
+  border-color: rgb(139 107 122 / 0.3);
   background: #fff;
-  box-shadow: 0 12px 28px rgb(75 44 127 / 0.12);
+  box-shadow: 0 12px 28px rgb(139 107 122 / 0.12);
 }
 
 .personaArrow:focus-visible {

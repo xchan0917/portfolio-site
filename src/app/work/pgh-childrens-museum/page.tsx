@@ -230,7 +230,7 @@ export default function PghCaseStudy() {
             </Reveal>
             <Reveal delay={120}>
               <p className={`${styles.sectionLead} ${pgh.roleStatement}`}>
-                As a business student and designer of the team, I saw an opportunity not only to improve usability but also to align the site with the museum’s broader goals which was increasing engagement and improving clarity around its offerings. 
+                As a business student and designer of the team, I saw an opportunity not only to improve usability but also to align the site with the museum’s broader goals, which were increasing engagement and improving clarity around its offerings. 
               </p>
             </Reveal>
             <Reveal delay={140}>
@@ -396,8 +396,8 @@ export default function PghCaseStudy() {
             </Reveal>
             <Reveal delay={80}>
               <p className={styles.sectionLead}>
-                A lightweight branding that emphasizes playful and youthfulness
-                through specific colors and fonts.
+                A lightweight brand direction that feels playful and youthful
+                through specific color and type choices.
               </p>
             </Reveal>
             <Reveal delay={120}>

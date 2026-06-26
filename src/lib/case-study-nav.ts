@@ -13,10 +13,10 @@ export type CaseStudyNavLinks = {
 export const caseStudyNavBySlug: Record<string, CaseStudyNavLinks> = {
   "pgh-childrens-museum": {
     previous: {
-      href: "/work/canvas-integration",
-      title: "Canvas Integration",
+      href: "/work/xhacks",
+      title: "Monet",
       description:
-        "Canvas restructured to reduce friction in everyday student workflows",
+        "A closet remix app that turns what you already own into fresh outfits",
     },
     next: {
       href: "/work/snitch",
@@ -45,6 +45,20 @@ export const caseStudyNavBySlug: Record<string, CaseStudyNavLinks> = {
       title: "Snitch",
       description:
         "An agentic AI product for accountability\nin self scheduled work",
+    },
+    next: {
+      href: "/work/xhacks",
+      title: "Monet",
+      description:
+        "A closet remix app that turns what you already own into fresh outfits",
+    },
+  },
+  xhacks: {
+    previous: {
+      href: "/work/canvas-integration",
+      title: "Canvas Integration",
+      description:
+        "Canvas restructured to reduce friction in everyday student workflows",
     },
     next: {
       href: "/work/pgh-childrens-museum",

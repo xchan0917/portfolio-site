@@ -15,7 +15,8 @@ const VB_H = 732;
 const BEFORE = { x: 4, y: 317.01, w: 356.023, h: 406.99 };
 const AFTER = { x: 195.023, y: 0, w: 349.006, h: 434.01 };
 
-const ANNOTATION = "#7c5cad";
+const ANNOTATION_ARROW = "#6b4f5c";
+const ANNOTATION_TEXT = "#1c1524";
 
 /** Before-panel “Chinese Calligraphy” → after-panel pink “Application Design” square. */
 const ARROW_TRANSFORM =
@@ -43,7 +44,7 @@ export function CanvasSolutionCourseOrderDiagram({
       aria-label="Canvas course list redesign: consistent course order and color alignment with annotation arrow"
     >
       <text
-        fill={ANNOTATION}
+        fill={ANNOTATION_TEXT}
         fontFamily="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
         fontSize="14"
         fontWeight="400"
@@ -72,7 +73,7 @@ export function CanvasSolutionCourseOrderDiagram({
       </g>
 
       <g transform={ARROW_UI_TRANSFORM}>
-        <path d={annotationArrowPath(COURSE_ORDER_ARROW)} fill={ANNOTATION} />
+        <path d={annotationArrowPath(COURSE_ORDER_ARROW)} fill={ANNOTATION_ARROW} />
       </g>
     </svg>
   );

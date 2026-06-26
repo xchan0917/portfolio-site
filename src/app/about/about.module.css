@@ -22,15 +22,15 @@
 
 .glowOrb {
   position: absolute;
-  inset: 8% 10%;
+  inset: 0% 2%;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgb(124 92 173 / 0.4) 0%,
-    rgb(75 44 127 / 0.16) 45%,
-    transparent 72%
+    rgb(176 154 166 / 0.4) 0%,
+    rgb(139 107 122 / 0.18) 50%,
+    transparent 82%
   );
-  filter: blur(42px);
+  filter: blur(48px);
   animation: glowPulse 7s ease-in-out infinite;
 }
 
@@ -42,7 +42,7 @@
   }
   50% {
     transform: scale(1.08);
-    opacity: 1;
+    opacity: 0.96;
   }
 }
 
@@ -66,7 +66,7 @@
     2% 35%,
     39% 35%
   );
-  box-shadow: 0 0 20px rgb(75 44 127 / 0.45);
+  box-shadow: 0 0 24px rgb(139 107 122 / 0.5);
   transform: rotate(var(--star-rotate, 0deg));
   opacity: 0;
 }
@@ -128,7 +128,8 @@
 }
 
 .heroLine,
-.heroLineSub {
+.heroLineSub,
+.heroLineWelcome {
   display: block;
   font-family: var(--font-display);
   font-weight: 400;
@@ -143,76 +144,39 @@
 }
 
 .heroLine {
-  font-size: clamp(2.4rem, 6.5vw, 4rem);
+  font-size: clamp(2.8rem, 8vw, 4.8rem);
 }
 
 .heroLineSub {
-  font-size: clamp(1.8rem, 4.8vw, 3rem);
+  font-size: clamp(2.2rem, 6.5vw, 3.8rem);
   transition-delay: 0.12s;
+}
+
+.heroLineWelcome {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: clamp(0.95rem, 2vw, 1.35rem);
+  line-height: 1.45;
+  transition-delay: 0.12s;
+}
+
+.heroWelcomeLine {
+  display: block;
+}
+
+.heroWelcomeLine:last-child {
+  white-space: nowrap;
+}
+
+.heroSmiley {
+  font-size: 1.35em;
+  line-height: 1;
 }
 
 .heroLineVisible {
   opacity: 1;
   transform: translateY(0);
-}
-
-.credentials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-top: 1.35rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 0.65s ease 0.25s,
-    transform 0.65s ease 0.25s;
-}
-
-.credentialsVisible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.chip {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0.45rem 0.85rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: rgb(255 255 255 / 0.48);
-  color: var(--muted);
-  backdrop-filter: blur(6px);
-}
-
-.scrollHint {
-  margin: clamp(2rem, 5vw, 3rem) 0 0;
-  font-family: var(--font-cursive);
-  font-size: clamp(1.1rem, 2.4vw, 1.35rem);
-  font-weight: 600;
-  color: var(--purple);
-  opacity: 0;
-  transform: translateY(6px);
-  transition:
-    opacity 0.6s ease 0.35s,
-    transform 0.6s ease 0.35s;
-  animation: scrollBounce 2.4s ease-in-out infinite;
-}
-
-.scrollHintVisible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@keyframes scrollBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(6px);
-  }
 }
 
 .heroPhotos {
@@ -243,7 +207,7 @@
 .heroPhotoPrimary {
   top: 4%;
   left: 8%;
-  width: min(72%, 320px);
+  width: min(72%, calc(320px - 0.5in));
   transform: rotate(-3deg);
   z-index: 2;
 }
@@ -277,10 +241,21 @@
   top: calc(4.5rem + env(safe-area-inset-top, 0px));
   z-index: 4;
   margin: 0 auto clamp(2.5rem, 6vw, 4rem);
-  padding: 0.65rem 0;
-  background: rgb(250 247 244 / 0.72);
-  backdrop-filter: blur(14px) saturate(150%);
-  border-block: 1px solid rgb(75 44 127 / 0.08);
+  padding: 0.75rem 0.55rem;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.58) 0%,
+      rgb(236 227 247 / 0.42) 46%,
+      rgb(255 255 255 / 0.34) 100%
+    );
+  backdrop-filter: blur(18px) saturate(165%);
+  -webkit-backdrop-filter: blur(18px) saturate(165%);
+  border: 1px solid rgb(255 255 255 / 0.45);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.55),
+    0 10px 26px rgb(139 107 122 / 0.1);
 }
 
 .jumpList {
@@ -297,13 +272,16 @@
   align-items: center;
   padding: 0.5rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgb(255 255 255 / 0.55);
+  border: 1px solid rgb(255 255 255 / 1);
+  background: #fff;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--ink);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 1),
+    0 2px 8px rgb(139 107 122 / 0.06);
   transition:
     transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
     color 0.25s ease,
@@ -316,8 +294,11 @@
 .jumpLink:hover {
   transform: translateY(-2px);
   color: var(--purple);
-  border-color: rgb(75 44 127 / 0.2);
-  box-shadow: 0 8px 20px rgb(75 44 127 / 0.1);
+  border-color: rgb(255 255 255 / 1);
+  background: #fff;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 1),
+    0 10px 24px rgb(139 107 122 / 0.12);
 }
 
 @keyframes jumpIn {
@@ -333,7 +314,7 @@
 
 /* ----- Intro ----- */
 .introSection,
-.experienceSection,
+.journeySection,
 .lifeSection,
 .gallerySection,
 .factsSection,
@@ -344,6 +325,7 @@
 
 .skillsSection {
   padding-bottom: clamp(3rem, 8vw, 5rem);
+  text-align: center;
 }
 
 .lead {
@@ -353,6 +335,14 @@
   line-height: 1.45;
   letter-spacing: -0.02em;
   color: var(--ink);
+}
+
+.handwrittenName {
+  font-family: var(--font-cursive), cursive;
+  font-size: 0.88em;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--purple);
 }
 
 .pivot {
@@ -366,20 +356,12 @@
   color: var(--purple);
 }
 
-.bodyText,
-.welcome {
+.bodyText {
   margin: 0;
   font-family: var(--font-sans);
   font-size: clamp(1rem, 1.8vw, 1.12rem);
   line-height: 1.65;
   color: var(--ink-soft);
-}
-
-.welcome {
-  margin-top: 0.35rem;
-  font-family: var(--font-display);
-  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
-  color: var(--ink);
 }
 
 .introSection {
@@ -388,7 +370,13 @@
   gap: 1.35rem;
 }
 
-/* ----- Experience + journey ----- */
+/* ----- Design journey ----- */
+.journeySection {
+  --journey-track-pad: 1.25rem;
+  --journey-dot-outset: 0.45rem;
+  --journey-step-gap: 3rem;
+}
+
 .sectionKicker {
   margin: 0 0 0.65rem;
   font-family: var(--font-mono);
@@ -410,62 +398,9 @@
   color: var(--ink);
 }
 
-.experienceList {
-  list-style: none;
-  margin: 0 0 2.75rem;
-  padding: 0;
-  display: grid;
-  gap: 0;
-  border-top: 1px solid var(--border);
-}
-
-.experienceItem {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto;
-  gap: 0.75rem 1.25rem;
-  align-items: baseline;
-  padding: 1.1rem 0;
-  border-bottom: 1px solid var(--border);
-  transition: background 0.25s ease, padding-inline 0.25s ease;
-}
-
-.experienceItem:hover {
-  padding-inline: 0.65rem;
-  background: rgb(255 255 255 / 0.45);
-}
-
-.experienceOrg {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
-  color: var(--ink);
-}
-
-.experienceRole {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 0.98rem;
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-
-.experiencePeriod {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-}
-
 .journeyHeading {
-  margin: 0 0 1.5rem;
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+  max-width: none;
+  margin-left: -0.5in;
 }
 
 .journeyList {
@@ -474,28 +409,82 @@
   padding: 0;
   display: grid;
   gap: 0;
-  border-left: 2px solid rgb(75 44 127 / 0.14);
+  border-left: 2px solid rgb(139 107 122 / 0.14);
 }
 
 .journeyItem {
   display: grid;
   grid-template-columns: 7.5rem minmax(0, 1fr);
   gap: 1rem 1.5rem;
-  padding: 0 0 1.75rem 1.25rem;
+  padding: 0 0 var(--journey-step-gap) var(--journey-track-pad);
   position: relative;
 }
 
-.journeyItem::before {
-  content: "";
+.journeyDot {
   position: absolute;
-  left: -0.45rem;
+  left: calc(var(--journey-dot-outset) * -1);
   top: 0.35rem;
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 50%;
   background: var(--cream);
   border: 2px solid var(--purple);
-  box-shadow: 0 0 0 4px rgb(75 44 127 / 0.08);
+  box-shadow: 0 0 0 4px rgb(139 107 122 / 0.08);
+  transform: scale(0.85);
+  transition:
+    background 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+}
+
+.journeyItem::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--journey-dot-outset) * -1 + 0.3rem);
+  top: 1.1rem;
+  width: 2px;
+  height: 0;
+  border-radius: 1px;
+  background: linear-gradient(
+    180deg,
+    rgb(139 107 122 / 0.55) 0%,
+    rgb(139 107 122 / 0.2) 100%
+  );
+  transition: height 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+  pointer-events: none;
+}
+
+.journeyItemLast::after {
+  display: none;
+}
+
+.journeyItemVisible::after {
+  height: calc(100% - 0.65rem);
+}
+
+.journeyItemVisible .journeyDot {
+  background: var(--purple);
+  transform: scale(1.12);
+  box-shadow:
+    0 0 0 6px rgb(139 107 122 / 0.14),
+    0 0 18px rgb(139 107 122 / 0.28);
+  animation: journeyDotPulse 2.4s ease-in-out 0.35s infinite;
+}
+
+@keyframes journeyDotPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 6px rgb(139 107 122 / 0.14),
+      0 0 16px rgb(139 107 122 / 0.22);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 10px rgb(139 107 122 / 0.07),
+      0 0 26px rgb(139 107 122 / 0.38);
+  }
 }
 
 .journeyYear {
@@ -504,6 +493,31 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--purple);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.journeyBody {
+  opacity: 0;
+  transform: translateX(calc((1 - var(--journey-parity, 0)) * 18px - var(--journey-parity, 0) * 18px));
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+}
+
+.journeyItemVisible .journeyYear {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.05s;
+}
+
+.journeyItemVisible .journeyBody {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.18s;
 }
 
 .journeyTitle {
@@ -512,6 +526,11 @@
   font-size: clamp(1.15rem, 2.2vw, 1.4rem);
   font-weight: 400;
   color: var(--ink);
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .journeyText {
@@ -520,6 +539,23 @@
   font-size: 0.98rem;
   line-height: 1.6;
   color: var(--ink-soft);
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.journeyItemVisible .journeyTitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.28s;
+}
+
+.journeyItemVisible .journeyText {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.42s;
 }
 
 /* ----- Life sections ----- */
@@ -545,6 +581,10 @@
   box-shadow: 0 12px 32px rgb(28 21 36 / 0.06);
 }
 
+.lifeCard:first-child .lifeCardInner {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 456px);
+}
+
 .lifeCard:nth-child(even) .lifeCardInner {
   direction: rtl;
 }
@@ -555,7 +595,7 @@
 }
 
 .lifeSubtitle {
-  margin: 0 0 0.35rem;
+  margin: -0.65rem 0 0.85rem;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.1em;
@@ -576,9 +616,15 @@
   width: 100%;
 }
 
+.carouselPortrait {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
 .carouselViewport {
   position: relative;
-  min-height: 320px;
+  min-height: 0;
 }
 
 .carouselSlide {
@@ -600,6 +646,12 @@
   pointer-events: auto;
 }
 
+.carouselSlidePortrait.carouselSlideActive {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
 .polaroid {
   padding: 0.5rem 0.5rem 1.2rem;
   background: #fff;
@@ -608,11 +660,86 @@
   transform: rotate(calc(var(--life-index, 0) * 1deg - 1deg));
 }
 
+.polaroidPortrait {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  padding: 0.3rem 0.3rem 0.75rem;
+}
+
+.polaroidCompact {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  padding: 0.3rem 0.3rem 0.7rem;
+}
+
+.polaroidFrame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.polaroidFrameLandscape {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+}
+
+.polaroidFrameLandscapeSmall {
+  width: auto;
+  max-width: min(225px, 55vw);
+}
+
+.carouselSlideLandscapeSmall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carouselSlideLandscapeSmall .carouselCaption {
+  max-width: 15rem;
+}
+
+.polaroidFramePortrait {
+  display: block;
+  width: auto;
+  line-height: 0;
+}
+
+.carouselSlidePortrait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carouselSlidePortrait .carouselCaption {
+  width: 100%;
+  max-width: 14rem;
+}
+
 .polaroidImage {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
-  border-radius: 2px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.polaroidFramePortrait .polaroidImage {
+  max-height: min(260px, 48vw);
+  width: auto;
+  height: auto;
+}
+
+.polaroidFramePortrait .polaroidImageLarge {
+  max-height: min(608px, 80vw);
+}
+
+.carouselSlidePortraitLarge .carouselCaption {
+  max-width: 20rem;
 }
 
 .carouselCaption {
@@ -647,7 +774,7 @@
 
 .carouselButton:hover {
   transform: translateY(-1px);
-  border-color: rgb(75 44 127 / 0.25);
+  border-color: rgb(139 107 122 / 0.25);
 }
 
 .carouselCount {
@@ -731,8 +858,8 @@
 
 .factCard:hover {
   transform: translateY(-3px);
-  border-color: rgb(75 44 127 / 0.18);
-  box-shadow: 0 12px 28px rgb(75 44 127 / 0.08);
+  border-color: rgb(139 107 122 / 0.18);
+  box-shadow: 0 12px 28px rgb(139 107 122 / 0.08);
 }
 
 .factCardOpen {
@@ -780,39 +907,183 @@
   opacity: 1;
 }
 
-/* ----- Skills ----- */
-.skillGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.skillsHeading {
+  margin: 0 auto clamp(1.75rem, 4vw, 2.5rem);
+  max-width: min(36rem, 96vw);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.8vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
-.skillChip {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 0.55rem 0.95rem;
+.skillsHeading span {
+  display: block;
+  white-space: nowrap;
+}
+
+.skillsTable {
+  display: flex;
+  justify-content: center;
+}
+
+.skillsPlateWrap {
+  position: relative;
+  width: min(720px, 92vw);
+  overflow: visible;
+}
+
+.skillsPlate {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fruitGrid {
+  position: absolute;
+  inset: 14% 26% 10% 26%;
+  z-index: 2;
+  overflow: visible;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fruitItem {
+  position: absolute;
+  top: var(--fruit-top);
+  left: var(--fruit-left);
+  transform: translate(-50%, -50%);
+  overflow: visible;
+}
+
+.fruitButton {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  overflow: visible;
+  transition: transform 0.2s ease;
+}
+
+.fruitButton:hover .fruitIcon,
+.fruitButton:focus-visible .fruitIcon {
+  animation: fruitHop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fruitButton:focus-visible {
+  outline: 2px solid rgb(139 107 122 / 0.35);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+.fruitButtonActive .fruitIcon {
+  filter: drop-shadow(0 4px 10px rgb(139 107 122 / 0.28));
+  transform: scale(1.08);
+}
+
+.fruitIcon {
+  display: block;
+  width: auto;
+  height: var(--fruit-size, clamp(2.5rem, 6vw, 3.5rem));
+  max-width: calc(var(--fruit-size, 3.5rem) * 1.6);
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgb(28 21 36 / 0.14));
+  animation: fruitBounce var(--jump-duration, 2.8s) ease-in-out infinite;
+  animation-delay: var(--jump-delay, 0s);
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+.skillReveal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: min(17rem, 80%);
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.96);
+  box-shadow: 0 16px 40px rgb(28 21 36 / 0.14);
+  text-align: center;
+  transform: translate(-50%, -50%);
+  animation: skillRevealIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.skillRevealTag {
+  display: inline-block;
+  margin-bottom: 0.55rem;
+  padding: 0.35rem 0.7rem;
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.55);
-  color: var(--ink-soft);
-  backdrop-filter: blur(8px);
-  transition:
-    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease;
+  background: rgb(255 255 255 / 0.9);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--purple);
 }
 
-.skillChip:hover {
-  transform: translateY(-3px);
-  border-color: rgb(75 44 127 / 0.22);
-  color: var(--purple);
-  box-shadow: 0 8px 24px rgb(75 44 127 / 0.1);
+.skillRevealBody {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+@keyframes fruitBounce {
+  0%,
+  84%,
+  100% {
+    transform: translateY(0);
+  }
+
+  90% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes fruitHop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  45% {
+    transform: translateY(-14px) scale(1.1);
+  }
+}
+
+@keyframes skillRevealIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 @media (max-width: 900px) {
@@ -820,19 +1091,62 @@
     grid-template-columns: 1fr;
   }
 
-  .heroPhotos {
-    min-height: 300px;
-    max-width: 420px;
-    margin: 0 auto;
+  .heroWelcomeLine:last-child {
+    white-space: normal;
   }
 
-  .experienceItem {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
+  .heroPhotos {
+    position: relative;
+    width: min(320px, 88vw);
+    min-height: clamp(240px, 62vw, 300px);
+    max-width: none;
+    margin: clamp(1rem, 4vw, 1.5rem) auto 0;
+    transform: translateY(24px);
+    transform-origin: center top;
+  }
+
+  .heroPhotosVisible {
+    transform: translateY(0);
+  }
+
+  .heroPhoto {
+    position: absolute;
+  }
+
+  .heroPhotoPrimary {
+    top: 4%;
+    left: 6%;
+    width: min(68%, 200px);
+    transform: rotate(-3deg);
+  }
+
+  .heroPhotoSecondary {
+    right: 0;
+    bottom: 0;
+    width: min(54%, 165px);
+    transform: rotate(4deg);
+  }
+
+  .heroPhotos:hover .heroPhotoPrimary {
+    transform: rotate(-2deg) translateY(-2px);
+  }
+
+  .heroPhotos:hover .heroPhotoSecondary {
+    transform: rotate(5deg) translateY(-3px);
   }
 
   .lifeCardInner {
     grid-template-columns: 1fr;
+  }
+
+  .lifeCard:first-child .lifeCardInner {
+    grid-template-columns: 1fr;
+  }
+
+  .lifeCard:first-child .carousel {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
   }
 
   .lifeCard:nth-child(even) .lifeCardInner {
@@ -848,7 +1162,27 @@
   }
 }
 
+@media (max-width: 520px) {
+  .skillsHeading {
+    font-size: clamp(1.35rem, 5.2vw, 1.65rem);
+  }
+}
+
 @media (max-width: 560px) {
+  .fruitGrid {
+    inset: 16% 22% 8% 22%;
+  }
+
+  .fruitIcon {
+    height: var(--fruit-size, clamp(2rem, 7.5vw, 2.75rem));
+    max-width: calc(var(--fruit-size, 2.75rem) * 1.6);
+  }
+
+  .skillReveal {
+    width: min(15rem, 86%);
+    padding: 0.85rem 0.95rem;
+  }
+
   .galleryGrid {
     grid-template-columns: 1fr;
   }
@@ -862,19 +1196,43 @@
 @media (prefers-reduced-motion: reduce) {
   .glowOrb,
   .starTwinkle,
-  .scrollHint,
-  .jumpLink {
+  .jumpLink,
+  .journeyItemVisible .journeyDot {
     animation: none;
+  }
+
+  .journeyDot,
+  .journeyYear,
+  .journeyBody,
+  .journeyTitle,
+  .journeyText {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .journeyItem::after {
+    height: calc(100% - 0.65rem);
+    transition: none;
+  }
+
+  .journeyItemLast::after {
+    display: none;
   }
 
   .heroLine,
   .heroLineSub,
-  .credentials,
-  .scrollHint,
+  .heroLineWelcome,
   .heroPhotos {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  @media (max-width: 900px) {
+    .heroPhotos {
+      transform: none;
+    }
   }
 
   .carouselSlide {
@@ -885,7 +1243,14 @@
     transition: none;
   }
 
-  .skillChip:hover,
+  .fruitIcon {
+    animation: none;
+  }
+
+  .skillReveal {
+    animation: none;
+  }
+
   .jumpLink:hover,
   .galleryItem:hover,
   .factCard:hover {

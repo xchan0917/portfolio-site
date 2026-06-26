@@ -1,4 +1,5 @@
 .hero {
+  position: relative;
   min-height: 100dvh;
   min-height: 100svh;
   padding: clamp(7rem, 14vw, 10rem) clamp(1.25rem, 4vw, 3rem) 3rem;
@@ -9,127 +10,54 @@
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
+  overflow: hidden;
 }
+
+/* ── Botanical corner clusters ── */
+
+.botanical {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  width: clamp(200px, 22vw, 310px);
+  animation: botanicalFadeIn 1.4s ease 0s both;
+}
+
+.botanicalTL {
+  top: 0;
+  left: 0;
+}
+
+.botanicalTR {
+  top: 0;
+  right: 0;
+}
+
+.botanicalBL {
+  bottom: 0;
+  left: 0;
+}
+
+.botanicalBR {
+  bottom: 0;
+  right: 0;
+}
+
+@keyframes botanicalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Intro block ── */
 
 .introBlock {
   position: relative;
   margin: 0 auto;
   max-width: 46rem;
-}
-
-.credentials {
-  position: relative;
   z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.6rem;
-  margin-top: 1rem;
 }
 
-.backdrop {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(52rem, 130%);
-  height: min(28rem, 85vw);
-  transform: translate(-50%, -48%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.glowOrb {
-  position: absolute;
-  inset: 5% 0%;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgb(124 92 173 / 0.5) 0%,
-    rgb(75 44 127 / 0.22) 42%,
-    transparent 72%
-  );
-  filter: blur(40px);
-  opacity: 0;
-  transition: opacity 1.2s ease;
-}
-
-.glowVisible {
-  opacity: 0.88;
-  animation: pulse 6s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.88;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
-.starCluster {
-  position: absolute;
-  inset: 0;
-}
-
-.star {
-  position: absolute;
-  background: var(--purple);
-  clip-path: polygon(
-    50% 0%,
-    61% 35%,
-    98% 35%,
-    68% 57%,
-    79% 91%,
-    50% 70%,
-    21% 91%,
-    32% 57%,
-    2% 35%,
-    39% 35%
-  );
-  box-shadow: 0 0 24px rgb(75 44 127 / 0.5);
-  transform: rotate(var(--star-rotate, 0deg));
-  opacity: 0;
-}
-
-.starTwinkle {
-  animation: starTwinkle var(--twinkle-duration, 3.5s)
-    var(--twinkle-delay, 0s) ease-in-out infinite;
-}
-
-.starStatic {
-  opacity: var(--star-peak, 0.85);
-}
-
-@keyframes starTwinkle {
-  0%,
-  100% {
-    opacity: 0;
-    transform: rotate(var(--star-rotate, 0deg)) scale(0.88);
-  }
-  14% {
-    opacity: var(--star-peak, 0.9);
-    transform: rotate(var(--star-rotate, 0deg)) scale(1);
-  }
-  32% {
-    opacity: 0;
-  }
-  48% {
-    opacity: calc(var(--star-peak, 0.9) * 0.55);
-  }
-  58% {
-    opacity: 0;
-  }
-  72% {
-    opacity: var(--star-peak, 0.9);
-  }
-  86% {
-    opacity: 0.12;
-  }
-}
+/* ── Meet annotation ── */
 
 .meetAnnotation {
   position: absolute;
@@ -150,13 +78,13 @@
   color: var(--purple);
   transform: rotate(-7deg);
   opacity: 0;
-  animation: meetTextIn 0.55s ease 0.05s forwards;
+  animation: meetTextIn 0.5s cubic-bezier(0.34, 1.55, 0.64, 1) 0.2s forwards;
 }
 
 @keyframes meetTextIn {
   from {
     opacity: 0;
-    transform: rotate(-7deg) translateY(6px) scale(0.92);
+    transform: rotate(-7deg) translateY(14px) scale(0.78);
   }
   to {
     opacity: 1;
@@ -184,11 +112,11 @@
 }
 
 .meetArrowPath {
-  animation: meetDraw 1s ease 0.45s forwards;
+  animation: meetDraw 0.65s ease 0.52s forwards;
 }
 
 .meetArrowHead {
-  animation: meetDraw 0.3s ease 1.4s forwards;
+  animation: meetDraw 0.22s ease 1.06s forwards;
 }
 
 @keyframes meetDraw {
@@ -196,6 +124,8 @@
     stroke-dashoffset: 0;
   }
 }
+
+/* ── Heading ── */
 
 .heading {
   position: relative;
@@ -207,144 +137,36 @@
   letter-spacing: -0.02em;
   color: var(--ink);
   margin: 0 auto;
-}
-
-.headingHidden {
   opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
 }
 
-.headingVisible {
-  opacity: 1;
-  transition: opacity 0.35s ease;
+/* ── Credentials ── */
+
+.credentials {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.64s both;
 }
 
-.caret {
-  display: inline-block;
-  width: 2px;
-  height: 0.9em;
-  margin-left: 2px;
-  vertical-align: -0.08em;
-  background: var(--purple);
-  animation: caretBlink 0.9s step-end infinite;
-}
-
-@keyframes caretBlink {
-  50% {
+@keyframes heroFadeUp {
+  from {
     opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.revealHidden {
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-.revealVisible {
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
-}
-
-.lovesWrap {
-  position: relative;
-  display: inline-flex;
-  align-items: baseline;
-  white-space: nowrap;
-  vertical-align: baseline;
-}
-
-.loveHeart {
-  position: relative;
-  display: inline-block;
-  padding: 0.08em 0.42em 0.18em 0.38em;
-  vertical-align: baseline;
-}
-
-.heartFrame {
-  position: absolute;
-  left: 50%;
-  top: 52%;
-  width: 118%;
-  height: 135%;
-  transform: translate(-50%, -50%);
-  overflow: visible;
-  pointer-events: none;
-}
-
-.heartOutline {
-  fill: rgb(75 44 127 / 0.07);
-  stroke: var(--purple);
-  stroke-width: 1.5;
-  vector-effect: non-scaling-stroke;
-}
-
-.heartPulse {
-  animation: heartBeat 1.4s ease-in-out infinite;
-  transform-origin: center;
-  transform-box: fill-box;
-}
-
-.loveHeart .scriptAccent {
-  position: relative;
-  z-index: 1;
-}
-
-.lovesS {
-  position: relative;
-  display: inline-block;
-  margin-left: 0.06em;
-  vertical-align: baseline;
-}
-
-.lovesS .scriptAccent {
-  position: relative;
-  z-index: 1;
-}
-
-.sConnector {
-  position: absolute;
-  right: calc(100% + 0.05em);
-  bottom: 0.1em;
-  width: 2rem;
-  height: 1.5rem;
-  color: var(--purple-light);
-  pointer-events: none;
-  overflow: visible;
-}
-
-.scriptAccent {
-  font-family: var(--font-cursive), cursive;
-  font-size: 1.2em;
-  font-weight: 600;
-  color: var(--purple);
-  letter-spacing: 0.02em;
-}
-
-.heartShape {
-  fill: var(--purple);
-  transform-origin: 50px 26px;
-}
-
-@keyframes heartBeat {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.14);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.1);
-  }
-  56% {
-    transform: scale(1);
-  }
-}
+/* ── Chip ── */
 
 .chip {
   font-family: var(--font-mono);
@@ -359,49 +181,29 @@
   backdrop-filter: blur(6px);
 }
 
-@media (max-width: 480px) {
-  .backdrop {
-    width: 140%;
-    height: 22rem;
-  }
+/* ── Responsive ── */
 
-  .sConnector {
-    width: 1.5rem;
-    height: 1.15rem;
+@media (max-width: 600px) {
+  .botanical {
+    width: clamp(140px, 40vw, 200px);
   }
 }
 
+/* ── Reduced motion ── */
+
 @media (prefers-reduced-motion: reduce) {
-  .heartPulse,
-  .glowVisible {
+  .botanical,
+  .heading,
+  .credentials,
+  .meetText {
     animation: none;
-  }
-
-  .starTwinkle {
-    animation: none;
-  }
-
-  .caret {
-    display: none;
-  }
-
-  .revealHidden {
     opacity: 1;
     transform: none;
   }
 
-  .headingHidden {
-    opacity: 1;
-  }
-
-  .meetText {
-    opacity: 1;
-    animation: none;
-  }
-
   .meetArrowPath,
   .meetArrowHead {
-    stroke-dashoffset: 0;
     animation: none;
+    stroke-dashoffset: 0;
   }
 }

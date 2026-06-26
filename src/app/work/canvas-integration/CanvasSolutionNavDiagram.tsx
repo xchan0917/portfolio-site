@@ -17,7 +17,8 @@ const VB_H = 639 - VB_TOP;
 const BEFORE = { x: 0, y: 0, w: 214.066, h: 376.755 };
 const AFTER = { x: 194.022, y: 220.73, w: 327.912, h: 410.124 };
 
-const ANNOTATION = "#7c5cad";
+const ANNOTATION_ARROW = "#6b4f5c";
+const ANNOTATION_TEXT = "#1c1524";
 /** Tail → 70332 header; tip → 67272 ^ caret (viewBox coords, panels at UI_SCALE). */
 const ARROW_TRANSFORM = "matrix(0.6825 0 0 2.0883 83.02 40.80)";
 /** Shrink mockups so annotation copy can sit on empty margin space. */
@@ -41,7 +42,7 @@ export function CanvasSolutionNavDiagram({ className }: CanvasSolutionNavDiagram
       aria-label="Course navigation before and after: dropdown menu pathway with annotation arrow"
     >
       <text
-        fill={ANNOTATION}
+        fill={ANNOTATION_TEXT}
         fontFamily="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
         fontSize="14"
         fontWeight="400"
@@ -66,10 +67,10 @@ export function CanvasSolutionNavDiagram({ className }: CanvasSolutionNavDiagram
       </g>
 
       <g transform={ARROW_UI_TRANSFORM}>
-        <path d={NAV_DROPDOWN_ARROW.bodyPath} fill={ANNOTATION} />
+        <path d={NAV_DROPDOWN_ARROW.bodyPath} fill={ANNOTATION_ARROW} />
         <path
           d={annotationArrowheadPath(NAV_DROPDOWN_ARROW)}
-          fill={ANNOTATION}
+          fill={ANNOTATION_ARROW}
         />
       </g>
     </svg>

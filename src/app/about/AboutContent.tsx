@@ -8,28 +8,25 @@ import {
   useState,
 } from "react";
 import { Reveal } from "@/components/Reveal";
+import { JourneyTimeline } from "@/app/about/JourneyTimeline";
+import { SkillsPlate } from "@/app/about/SkillsPlate";
 import {
-  aboutCurrently,
-  aboutExperience,
-  aboutFacts,
-  aboutGallery,
   aboutHeroName,
-  aboutHeroSub,
-  aboutIntro,
-  aboutJourney,
+  aboutHeroWelcome,
+  aboutIntroChineseName,
   aboutJumpLinks,
   aboutLifeSections,
-  aboutOrigin,
   aboutPivot,
-  aboutSkills,
-  aboutWelcome,
 } from "@/lib/about";
 import styles from "./about.module.css";
 
 const ABOUT_STARS = [
-  { top: "6%", left: "3%", size: 10, rotate: -12, delay: 0.2, duration: 3.4 },
-  { top: "14%", left: "94%", size: 14, rotate: 18, delay: 0.8, duration: 4.2 },
-  { top: "38%", left: "1%", size: 8, rotate: 6, delay: 1.4, duration: 3.1 },
+  { top: "6%", left: "3%", size: 14, rotate: -12, delay: 0.2, duration: 3.4 },
+  { top: "14%", left: "94%", size: 18, rotate: 18, delay: 0.8, duration: 4.2 },
+  { top: "38%", left: "1%", size: 11, rotate: 6, delay: 1.4, duration: 3.1 },
+  { top: "20%", left: "52%", size: 13, rotate: -10, delay: 0.5, duration: 3.7 },
+  { top: "34%", left: "48%", size: 11, rotate: 12, delay: 1.1, duration: 3.5 },
+  { top: "46%", left: "56%", size: 15, rotate: -18, delay: 1.7, duration: 4.1 },
 ] as const;
 
 function useReducedMotion() {
@@ -73,10 +70,35 @@ function AboutStars({ reduceMotion }: { reduceMotion: boolean }) {
 function PhotoCarousel({
   images,
 }: {
-  images: readonly { src: string; alt: string; caption: string }[];
+  images: readonly {
+    src: string;
+    alt: string;
+    caption: string;
+    orientation?: "portrait" | "landscape";
+    width?: number;
+    height?: number;
+    displayScale?: "large" | "small";
+  }[];
 }) {
   const [index, setIndex] = useState(0);
+  const [orientations, setOrientations] = useState<
+    Record<string, "portrait" | "landscape">
+  >({});
   const count = images.length;
+  const activeImage = images[index];
+  const activeIsPortrait =
+    (activeImage?.orientation ?? orientations[activeImage?.src ?? ""]) ===
+    "portrait";
+
+  const markOrientation = useCallback(
+    (src: string, width: number, height: number) => {
+      const orientation = height > width ? "portrait" : "landscape";
+      setOrientations((current) =>
+        current[src] === orientation ? current : { ...current, [src]: orientation },
+      );
+    },
+    [],
+  );
 
   const go = useCallback(
     (direction: -1 | 1) => {
@@ -85,37 +107,73 @@ function PhotoCarousel({
     [count],
   );
 
-  useEffect(() => {
-    if (count <= 1) return;
-    const timer = window.setInterval(() => go(1), 5200);
-    return () => window.clearInterval(timer);
-  }, [count, go]);
-
   return (
-    <div className={styles.carousel}>
+    <div
+      className={`${styles.carousel} ${
+        activeIsPortrait ? styles.carouselPortrait : ""
+      }`}
+    >
       <div className={styles.carouselViewport}>
-        {images.map((image, imageIndex) => (
+        {images.map((image, imageIndex) => {
+          const orientation = image.orientation ?? orientations[image.src];
+          const isPortrait = orientation === "portrait";
+          const imageWidth = image.width ?? 900;
+          const imageHeight = image.height ?? 1100;
+
+          const isLargePortrait = isPortrait && image.displayScale === "large";
+          const isSmallLandscape = !isPortrait && image.displayScale === "small";
+
+          return (
           <figure
             key={image.src}
             className={`${styles.carouselSlide} ${
               imageIndex === index ? styles.carouselSlideActive : ""
-            }`}
+            } ${isPortrait ? styles.carouselSlidePortrait : ""} ${
+              isLargePortrait ? styles.carouselSlidePortraitLarge : ""
+            } ${isSmallLandscape ? styles.carouselSlideLandscapeSmall : ""}`}
           >
-            <div className={styles.polaroid}>
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={900}
-                height={1100}
-                className={styles.polaroidImage}
-                sizes="(max-width: 768px) 88vw, 360px"
-              />
+            <div
+              className={`${styles.polaroid} ${
+                isPortrait ? styles.polaroidPortrait : ""
+              } ${isSmallLandscape ? styles.polaroidCompact : ""}`}
+            >
+              <div
+                className={`${styles.polaroidFrame} ${
+                  isPortrait
+                    ? styles.polaroidFramePortrait
+                    : styles.polaroidFrameLandscape
+                } ${isSmallLandscape ? styles.polaroidFrameLandscapeSmall : ""}`}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={imageWidth}
+                  height={imageHeight}
+                  className={`${styles.polaroidImage} ${
+                    isLargePortrait ? styles.polaroidImageLarge : ""
+                  }`}
+                  sizes={
+                    isLargePortrait
+                      ? "(max-width: 768px) 80vw, 560px"
+                      : isSmallLandscape
+                        ? "(max-width: 768px) 55vw, 225px"
+                        : isPortrait
+                        ? "(max-width: 768px) 56vw, 200px"
+                        : "(max-width: 768px) 88vw, 360px"
+                  }
+                  onLoad={(event) => {
+                    const { naturalWidth, naturalHeight } = event.currentTarget;
+                    markOrientation(image.src, naturalWidth, naturalHeight);
+                  }}
+                />
+              </div>
             </div>
             <figcaption className={styles.carouselCaption}>
               {image.caption}
             </figcaption>
           </figure>
-        ))}
+          );
+        })}
       </div>
 
       {count > 1 ? (
@@ -142,31 +200,6 @@ function PhotoCarousel({
         </div>
       ) : null}
     </div>
-  );
-}
-
-function FactCard({
-  title,
-  body,
-  index,
-}: (typeof aboutFacts)[number] & { index: number }) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <Reveal delay={index * 70}>
-      <button
-        type="button"
-        className={`${styles.factCard} ${open ? styles.factCardOpen : ""}`}
-        onClick={() => setOpen((value) => !value)}
-        aria-expanded={open}
-      >
-        <span className={styles.factIndex}>
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <span className={styles.factTitle}>{title}</span>
-        <p className={styles.factBody}>{body}</p>
-      </button>
-    </Reveal>
   );
 }
 
@@ -203,32 +236,23 @@ export function AboutContent() {
                 {aboutHeroName}
               </span>
               <span
-                className={`${styles.heroLineSub} ${
+                className={`${styles.heroLineWelcome} ${
                   heroReady ? styles.heroLineVisible : ""
                 }`}
               >
-                {aboutHeroSub}
+                {aboutHeroWelcome.map((line, index) => (
+                  <span key={line} className={styles.heroWelcomeLine}>
+                    {line}
+                    {index === 0 ? (
+                      <span className={styles.heroSmiley} aria-hidden="true">
+                        {" "}
+                        ☺
+                      </span>
+                    ) : null}
+                  </span>
+                ))}
               </span>
             </h1>
-
-            <div
-              className={`${styles.credentials} ${
-                heroReady ? styles.credentialsVisible : ""
-              }`}
-            >
-              <span className={styles.chip}>Carnegie Mellon University</span>
-              <span className={styles.chip}>Business + HCI</span>
-              <span className={styles.chip}>Product designer · NYC</span>
-            </div>
-
-            <p
-              className={`${styles.scrollHint} ${
-                heroReady ? styles.scrollHintVisible : ""
-              }`}
-              aria-hidden="true"
-            >
-              Scroll to view!
-            </p>
           </div>
 
           <div
@@ -280,64 +304,29 @@ export function AboutContent() {
 
       <section className={styles.introSection} aria-label="About Cynthia">
         <Reveal>
-          <p className={styles.lead}>{aboutIntro}</p>
+          <p className={styles.lead}>
+            I&apos;m Cynthia (
+            <span className={styles.handwrittenName}>
+              {aboutIntroChineseName}
+            </span>
+            ) Chan, an aspiring product designer focusing on AI products and
+            service design. I excel in strategic thinking and understanding the
+            transformation of ideas → products from all perspectives.
+          </p>
         </Reveal>
         <Reveal delay={80}>
           <p className={styles.pivot}>
             <span className={styles.pivotScript}>{aboutPivot}</span>
           </p>
         </Reveal>
-        <Reveal delay={140}>
-          <p className={styles.bodyText}>{aboutOrigin}</p>
-        </Reveal>
-        <Reveal delay={200}>
-          <p className={styles.bodyText}>{aboutCurrently}</p>
-        </Reveal>
-        <Reveal delay={260}>
-          <p className={styles.welcome}>{aboutWelcome}</p>
-        </Reveal>
       </section>
 
       <section
         id="journey"
-        className={styles.experienceSection}
-        aria-labelledby="experience-heading"
+        className={styles.journeySection}
+        aria-labelledby="journey-heading"
       >
-        <Reveal>
-          <h2 id="experience-heading" className={styles.sectionTitle}>
-            Experience
-          </h2>
-        </Reveal>
-
-        <ul className={styles.experienceList}>
-          {aboutExperience.map((item, index) => (
-            <Reveal key={`${item.org}-${item.role}`} delay={index * 50}>
-              <li className={styles.experienceItem}>
-                <p className={styles.experienceOrg}>{item.org}</p>
-                <p className={styles.experienceRole}>{item.role}</p>
-                <p className={styles.experiencePeriod}>{item.period}</p>
-              </li>
-            </Reveal>
-          ))}
-        </ul>
-
-        <Reveal delay={80}>
-          <h3 className={styles.journeyHeading}>My design journey</h3>
-        </Reveal>
-
-        <ol className={styles.journeyList}>
-          {aboutJourney.map((step, index) => (
-            <Reveal key={step.year} delay={index * 70}>
-              <li className={styles.journeyItem}>
-                <span className={styles.journeyYear}>{step.year}</span>
-                <div className={styles.journeyBody}>
-                  <h4 className={styles.journeyTitle}>{step.title}</h4>
-                  <p className={styles.journeyText}>{step.body}</p>
-                </div>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
+        <JourneyTimeline />
       </section>
 
       <section
@@ -375,77 +364,23 @@ export function AboutContent() {
       </section>
 
       <section
-        id="gallery"
-        className={styles.gallerySection}
-        aria-labelledby="gallery-heading"
+        id="skills"
+        className={styles.skillsSection}
+        aria-labelledby="skills-heading"
       >
-        <Reveal>
-          <p className={styles.sectionKicker}>Dillydallying with life</p>
-          <h2 id="gallery-heading" className={styles.sectionTitle}>
-            Snapshots from my corner of the internet
-          </h2>
-        </Reveal>
-
-        <div className={styles.galleryGrid}>
-          {aboutGallery.map((image, index) => (
-            <Reveal key={image.src} delay={index * 50}>
-              <figure
-                className={styles.galleryItem}
-                style={{ "--gallery-tilt": `${(index % 3) - 1}` } as CSSProperties}
-              >
-                <div className={styles.galleryFrame}>
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    width={800}
-                    height={1000}
-                    className={styles.galleryImage}
-                    sizes="(max-width: 640px) 88vw, (max-width: 1100px) 44vw, 280px"
-                  />
-                </div>
-                <figcaption className={styles.galleryCaption}>
-                  {image.caption}
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="facts"
-        className={styles.factsSection}
-        aria-labelledby="facts-heading"
-      >
-        <Reveal>
-          <p className={styles.sectionKicker}>Tap to reveal</p>
-          <h2 id="facts-heading" className={styles.sectionTitle}>
-            4 random facts about me
-          </h2>
-        </Reveal>
-
-        <div className={styles.factsGrid}>
-          {aboutFacts.map((fact, index) => (
-            <FactCard key={fact.title} {...fact} index={index} />
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.skillsSection} aria-labelledby="skills-heading">
         <Reveal>
           <p className={styles.sectionKicker}>What I bring to the table</p>
-          <h2 id="skills-heading" className={styles.sectionTitle}>
-            Always exploring emerging tools to expand my design toolkit
+          <h2 id="skills-heading" className={styles.skillsHeading}>
+            <span>Strategy, craft, and</span>
+            <span>everything in between</span>
           </h2>
         </Reveal>
 
-        <ul className={styles.skillGrid} aria-label="Skills">
-          {aboutSkills.map((skill, index) => (
-            <Reveal key={skill} delay={60 + index * 40}>
-              <li className={styles.skillChip}>{skill}</li>
-            </Reveal>
-          ))}
-        </ul>
+        <div className={styles.skillsTable}>
+          <Reveal delay={80}>
+            <SkillsPlate />
+          </Reveal>
+        </div>
       </section>
     </main>
   );

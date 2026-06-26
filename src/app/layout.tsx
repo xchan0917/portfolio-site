@@ -5,6 +5,7 @@ import {
   IBM_Plex_Mono,
   Instrument_Serif,
 } from "next/font/google";
+import { CustomCursor } from "@/components/CustomCursor";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -50,6 +51,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${instrumentSerif.variable} ${ibmPlexMono.variable} ${caveat.variable}`}
     >
       <body>
+        <CustomCursor />
         <ScrollToTop />
         {children}
       </body>

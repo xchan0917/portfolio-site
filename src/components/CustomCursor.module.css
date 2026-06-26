@@ -1,0 +1,19 @@
+.cursor {
+  position: fixed;
+  top: -5px;
+  left: -5px;
+  width: 10px;
+  height: 10px;
+  background: var(--ink);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.15s ease;
+  will-change: transform;
+}
+
+@media (hover: none) {
+  .cursor {
+    display: none;
+  }
+}

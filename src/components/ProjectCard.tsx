@@ -12,67 +12,64 @@ type ProjectCardProps = {
   index: number;
 };
 
-function getCoverVideo(cover?: string) {
-  return cover?.replace(/\.gif$/i, ".mp4");
-}
-
-function CoverPlayback({
+function CoverMedia({
   project,
+  playing,
 }: {
   project: Project;
+  playing: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const coverVideo = getCoverVideo(project.cover);
+  const startAt = project.coverStartAt ?? 0;
 
+  // Seek to start frame so video shows a still by default
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !coverVideo) return;
-
-    const startAt = project.coverStartAt ?? 0;
-
-    const playFromOffset = () => {
-      const duration = video.duration;
-      video.currentTime =
-        Number.isFinite(duration) && duration > 0
-          ? Math.min(startAt, Math.max(duration - 0.05, 0))
-          : startAt;
-      void video.play();
-    };
-
+    if (!video) return;
+    const seekToStart = () => { video.currentTime = startAt; };
     if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      playFromOffset();
-      return;
+      seekToStart();
+    } else {
+      video.addEventListener("loadedmetadata", seekToStart, { once: true });
     }
+  }, [startAt]);
 
-    video.addEventListener("loadedmetadata", playFromOffset, { once: true });
-  }, [coverVideo, project.coverStartAt]);
+  // Play on hover, pause and reset when not hovering
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (playing) {
+      void video.play();
+    } else {
+      video.pause();
+      video.currentTime = startAt;
+    }
+  }, [playing, startAt]);
 
-  if (coverVideo) {
+  if (!project.coverMp4) {
+    if (!project.cover) return null;
     return (
-      <video
-        ref={videoRef}
-        src={coverVideo}
-        className={styles.mediaVideo}
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-hidden="true"
+      <Image
+        src={project.cover}
+        alt=""
+        fill
+        unoptimized
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 700px"
+        className={styles.mediaImage}
       />
     );
   }
 
-  if (!project.cover) return null;
-
   return (
-    <Image
-      key="gif"
-      src={project.cover}
-      alt=""
-      fill
-      unoptimized
-      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 700px"
+    <video
+      ref={videoRef}
+      src={project.coverMp4}
       className={styles.mediaImage}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      aria-hidden="true"
     />
   );
 }
@@ -88,7 +85,7 @@ function CardContent({
     <>
       <div className={styles.media}>
         <div className={styles.mediaInner} aria-hidden="true" />
-        {project.cover && playing ? <CoverPlayback project={project} /> : null}
+        <CoverMedia project={project} playing={playing} />
         {project.comingSoon ? (
           <span className={styles.badge}>Coming soon</span>
         ) : null}
@@ -127,6 +124,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         {
           "--reveal-delay": `${index * 90}ms`,
           ...(project.idleColor ? { "--media-idle": project.idleColor } : {}),
+          ...(project.coverShift ? { "--media-shift": project.coverShift } : {}),
+          ...(project.coverShiftY
+            ? { "--media-shift-y": project.coverShiftY }
+            : {}),
         } as CSSProperties
       }
       onMouseEnter={play}

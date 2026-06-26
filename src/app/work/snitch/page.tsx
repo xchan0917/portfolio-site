@@ -21,6 +21,7 @@ const META = [
   { label: "Role", values: ["Product Designer", "PM"] },
   { label: "Team", values: ["2 Designers", "2 Developers"] },
   { label: "Tools", values: ["Figma", "SwiftUI"] },
+  { label: "Award", values: ["Best Implementable Design"] },
 ];
 
 const GAPS = [
@@ -154,7 +155,7 @@ export default function SnitchCaseStudy() {
               </Reveal>
               <Reveal delay={80}>
                 <p className={styles.statement}>
-                  Snitch is an agentic AI that turns plans into follow-through committments.
+                  Snitch is an agentic AI that turns plans into follow-through commitments.
                   It reads your calendar, checks in over iMessage at the moment
                   that matters, and asks for real-time proof.
                 </p>
@@ -164,7 +165,8 @@ export default function SnitchCaseStudy() {
                   Over a 7-hour hackathon, I designed the end-to-end experience
                   for a proactive accountability agent that pairs self, social,
                   and optional financial accountability into one system that
-                  integrates with apps people already use.
+                  integrates with apps people already use. Snitch placed{" "}
+                  <strong>Best Implementable Design</strong> at NovaHacks 2025.
                 </p>
               </Reveal>
             </div>
@@ -535,7 +537,7 @@ export default function SnitchCaseStudy() {
             <Reveal>
               <div className={styles.sectionHead}>
                 <span className={styles.sectionNum}>07</span>
-                <h2 className={styles.sectionTitle}>What I learnt</h2>
+                <h2 className={styles.sectionTitle}>What I learned</h2>
               </div>
             </Reveal>
 
@@ -622,25 +624,20 @@ export default function SnitchCaseStudy() {
                   </svg>
                   <h3 className={styles.reflectTitle}>What&apos;s next</h3>
                   <p className={styles.reflectBody}>
-                    The hackathon limited how deeply we could explore certain
-                    areas, but we strongly believe in the potential here. With
-                    more time, we&apos;d revisit our constraints and bring this
-                    concept fully to life.
+                    The biggest gap we didn&apos;t close was validation around
+                    check-in timing. Snitch&apos;s value lives or dies on the
+                    moment it reaches out — too early and it&apos;s easy to
+                    dismiss, too late and the damage is done. With more time,
+                    I&apos;d prototype sessions focused specifically on cadence
+                    and tone, testing where a nudge feels supportive rather than
+                    hovering. The financial accountability mode is also worth
+                    building out properly — not as a secondary feature, but as a
+                    real third path.
                   </p>
                 </div>
               </Reveal>
             </div>
 
-            <Reveal delay={120}>
-              <p className={styles.closing}>
-                &ldquo;This was my first full one-day hackathon and I loved
-                collaborating with teammates who brought in different skills and
-                perspectives. The constraints made the experience very
-                fast-paced and exciting. I&apos;m looking forward to
-                participating in more events like this in the future!&rdquo;
-                &nbsp;&mdash; Cynthia, 2025
-              </p>
-            </Reveal>
           </section>
 
           <Reveal>
