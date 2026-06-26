@@ -5,6 +5,7 @@ import {
   IBM_Plex_Mono,
   Instrument_Serif,
 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { CustomCursor } from "@/components/CustomCursor";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { site } from "@/lib/site";
@@ -54,6 +55,7 @@ export default function RootLayout({
         <CustomCursor />
         <ScrollToTop />
         {children}
+        <Analytics />
       </body>
     </html>
   );
