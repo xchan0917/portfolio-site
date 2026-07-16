@@ -5,7 +5,7 @@ export const site = {
   description:
     "NYC-based product designer from Carnegie Mellon. UX, strategy, and AI-forward products.",
   email: "Cxchan97@gmail.com",
-  linkedIn: "https://www.linkedin.com/in/cynthiachan",
+  linkedIn: "https://www.linkedin.com/in/cxchan",
   resume:
     "https://drive.google.com/file/d/1qigemt4vYMXcC4SxHIZS1GGX2K0q7-OV/view?usp=drive_link",
   location: "New York, NY",
