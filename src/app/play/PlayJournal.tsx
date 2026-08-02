@@ -828,6 +828,7 @@ function CollageCluster({
       className={`${styles.collagePage} ${paperClass}`}
       aria-label={page.title}
       data-copy={copyIndex}
+      data-page-id={page.id}
       style={{ width: `${pageWidth}px`, maxWidth: "92vw" }}
     >
       <div className={styles.pageInner}>

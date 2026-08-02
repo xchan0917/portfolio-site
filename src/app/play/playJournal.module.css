@@ -1250,8 +1250,14 @@
     max-height: min(72dvh, 640px);
   }
 
-  /* DoorDash AUI phone cluster: keep 621px layout width for centering,
-     but visually scale to ~323px so it fits a 375px phone screen. */
+  /* DoorDash notebook page: expand to full viewport width on mobile
+     so the paper background fills the screen edge-to-edge. */
+  .collagePage[data-page-id="doordash"] {
+    max-width: 100vw;
+  }
+
+  /* DoorDash AUI phone cluster: keep 621px layout width for flex centering
+     but visually scale to ~323px so phones fit inside the 375px page. */
   .compositionClusterFitDoordash .clusterBlock {
     max-width: none;
     transform: scale(0.52);
