@@ -1361,3 +1361,23 @@
     order: 3;
   }
 }
+
+/* ---------- Brand panel: collapse to 1 column on narrow phones ---------- */
+/* The brand grid has logoBadge/logoWordmark with min-width 152px/142px.
+   In a 2-col layout the columns are only ~120px wide at 375px, causing the
+   logos to overflow and get clipped by the panel's overflow:hidden. */
+@media (max-width: 520px) {
+  .brandPanel {
+    min-height: auto;
+    padding: clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  .brandGrid {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+
+  .brandCellInset {
+    padding-left: 0;
+  }
+}

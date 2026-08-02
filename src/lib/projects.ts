@@ -38,6 +38,7 @@ export const featuredProjects: Project[] = [
     accent: "peach",
     cover: "/projects/pgh-childrens-museum.gif",
     coverMp4: "/projects/pgh-childrens-museum.mp4",
+    coverStartAt: 1,
   },
   {
     slug: "canvas-integration",
@@ -48,6 +49,7 @@ export const featuredProjects: Project[] = [
     accent: "pink",
     cover: "/projects/canvas-integration.gif",
     coverMp4: "/projects/canvas-integration.mp4",
+    coverStartAt: 1,
   },
   {
     slug: "xhacks",
@@ -58,6 +60,7 @@ export const featuredProjects: Project[] = [
     accent: "peach",
     cover: "/projects/xhacks.gif",
     coverMp4: "/projects/xhacks.mp4",
+    coverStartAt: 1,
     coverShift: "-0.6in",
     coverShiftY: "0.3in",
   },
@@ -71,6 +74,7 @@ export const featuredProjects: Project[] = [
     accent: "ink",
     cover: "/projects/plus-rebrand.gif",
     coverMp4: "/projects/plus-rebrand.mp4",
+    coverStartAt: 1,
   },
   {
     slug: "punchcard",
@@ -82,6 +86,7 @@ export const featuredProjects: Project[] = [
     accent: "purple",
     cover: "/projects/punchcard.gif",
     coverMp4: "/projects/punchcard.mp4",
+    coverStartAt: 1,
     idleColor: "#e6ddd0",
   },
 ];

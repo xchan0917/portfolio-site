@@ -1168,6 +1168,13 @@
   }
 }
 
+@media (max-width: 640px) {
+  /* Negative indent would clip off-screen on narrow phones */
+  .journeyHeading {
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 560px) {
   .fruitGrid {
     inset: 16% 22% 8% 22%;

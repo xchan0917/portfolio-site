@@ -1222,6 +1222,17 @@
 }
 
 @media (max-width: 640px) {
+  /* Remove the 50px back-link offset — reduce gutter to comfortable phone margin */
+  .study {
+    --study-gutter-x: 1.25rem;
+  }
+
+  /* Move back-link below the nav bar so it doesn't overlap the brand logo */
+  .back {
+    top: 4.25rem;
+    left: 1.25rem;
+  }
+
   .sketchPair,
   .whiteboardPair {
     grid-template-columns: 1fr;
@@ -1240,5 +1251,15 @@
 
   .caseStudyNavNext {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .metaGrid {
+    grid-template-columns: 1fr;
   }
 }

@@ -185,7 +185,23 @@
 
 @media (max-width: 600px) {
   .botanical {
-    width: clamp(140px, 40vw, 200px);
+    width: clamp(120px, 33vw, 160px);
+  }
+}
+
+@media (max-width: 430px) {
+  .botanical {
+    width: clamp(80px, 24vw, 110px);
+  }
+
+  .meetText {
+    font-size: 1.4rem;
+  }
+
+  .meetArrow {
+    width: 60px;
+    height: 50px;
+    margin-left: 2rem;
   }
 }
 

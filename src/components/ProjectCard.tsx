@@ -22,20 +22,31 @@ function CoverMedia({
   const videoRef = useRef<HTMLVideoElement>(null);
   const startAt = project.coverStartAt ?? 0;
 
-  // Seek to start frame so video shows a still by default
+  // On touch devices there's no hover, so always play the video.
+  const isTouchOnly =
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+  // Seek to start frame so video shows a meaningful still by default.
+  // On touch devices, start playing immediately after the seek.
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    const seekToStart = () => { video.currentTime = startAt; };
+    const seekToStart = () => {
+      video.currentTime = startAt;
+      if (isTouchOnly) void video.play();
+    };
     if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
       seekToStart();
     } else {
       video.addEventListener("loadedmetadata", seekToStart, { once: true });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startAt]);
 
-  // Play on hover, pause and reset when not hovering
+  // Play on hover, pause and reset when not hovering (desktop only).
   useEffect(() => {
+    if (isTouchOnly) return;
     const video = videoRef.current;
     if (!video) return;
     if (playing) {
@@ -44,7 +55,7 @@ function CoverMedia({
       video.pause();
       video.currentTime = startAt;
     }
-  }, [playing, startAt]);
+  }, [playing, startAt, isTouchOnly]);
 
   if (!project.coverMp4) {
     if (!project.cover) return null;
@@ -68,7 +79,7 @@ function CoverMedia({
       muted
       loop
       playsInline
-      preload="metadata"
+      preload="auto"
       aria-hidden="true"
     />
   );
