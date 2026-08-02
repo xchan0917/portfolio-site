@@ -409,6 +409,7 @@ function CollageClusterFrames({ page }: { page: JournalPage }) {
       className={`${styles.compositionClusterFit} ${
         page.id === "doordash" ? styles.compositionClusterFitDoordash : ""
       }`}
+      data-expanded={expanded ? "true" : "false"}
     >
       <div
         className={styles.clusterBlock}
