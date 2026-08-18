@@ -132,10 +132,10 @@
   }
 }
 
-/* Crop the jitter.video watermark; nudge frame up-left. */
+/* Crop the jitter.video watermark from the lower-right of the hero clip. */
 .previewCrop {
-  transform: translate(-2cm, -2cm) scale(1.38);
-  transform-origin: 34% 30%;
+  transform: translate(-3%, -2.5%) scale(1.24);
+  transform-origin: 16% 12%;
 }
 
 /* §07–08 — pull reflection up under the laptop mockup */

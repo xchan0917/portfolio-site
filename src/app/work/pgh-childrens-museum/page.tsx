@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { CaseStudyNav } from "@/components/CaseStudyNav";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -141,13 +140,15 @@ export default function PghCaseStudy() {
         <main className={styles.study}>
           <Reveal>
             <figure className={styles.heroFigure}>
-              <Image
-                src="/projects/pgh-childrens-museum.gif"
-                alt="Animated preview of the redesigned Pittsburgh Children's Museum website"
+              <video
+                src="/projects/pgh/hero-scene.mp4"
+                aria-label="Animated preview of the redesigned Pittsburgh Children's Museum website"
                 width={800}
                 height={600}
-                unoptimized
-                priority
+                autoPlay
+                loop
+                muted
+                playsInline
                 className={`${styles.heroMedia} ${pgh.previewCrop}`}
               />
             </figure>
@@ -419,12 +420,15 @@ export default function PghCaseStudy() {
               </Reveal>
               <Reveal delay={80}>
                 <figure className={`${styles.figureWide} ${pgh.solutionFigure}`}>
-                  <Image
-                    src="/projects/pgh/solution.gif"
-                    alt="Animated final design of the Pittsburgh Children's Museum website on a laptop"
+                  <video
+                    src="/projects/pgh/solution.mp4"
+                    aria-label="Animated final design of the Pittsburgh Children's Museum website on a laptop"
                     width={720}
                     height={900}
-                    unoptimized
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                     className={`${styles.heroMedia} ${pgh.solutionGif}`}
                   />
                 </figure>
