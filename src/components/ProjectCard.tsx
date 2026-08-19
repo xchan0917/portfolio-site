@@ -139,6 +139,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           ...(project.coverShiftY
             ? { "--media-shift-y": project.coverShiftY }
             : {}),
+          ...(project.coverScale
+            ? { "--media-scale": project.coverScale }
+            : {}),
+          ...(project.coverScaleHover
+            ? { "--media-scale-hover": project.coverScaleHover }
+            : {}),
         } as CSSProperties
       }
       onMouseEnter={play}

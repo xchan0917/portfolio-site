@@ -15,6 +15,8 @@ export type Project = {
   /** Homepage cover translate overrides (e.g. "-0.8in"). */
   coverShift?: string;
   coverShiftY?: string;
+  coverScale?: number;
+  coverScaleHover?: number;
 };
 
 export const featuredProjects: Project[] = [
@@ -39,6 +41,10 @@ export const featuredProjects: Project[] = [
     cover: "/projects/pgh-childrens-museum.gif",
     coverMp4: "/projects/pgh-childrens-museum.mp4",
     coverStartAt: 1,
+    coverShift: "-2.2cm",
+    coverShiftY: "calc(0.5in - 2.5cm - 1in + 2cm + 0.5cm)",
+    coverScale: 1.42,
+    coverScaleHover: 1.47,
   },
   {
     slug: "canvas-integration",

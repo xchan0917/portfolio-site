@@ -419,7 +419,9 @@ export default function PghCaseStudy() {
                 </div>
               </Reveal>
               <Reveal delay={80}>
-                <figure className={`${styles.figureWide} ${pgh.solutionFigure}`}>
+                <figure
+                  className={`${styles.figureWide} ${pgh.solutionFigurePadTop}`}
+                >
                   <video
                     src="/projects/pgh/solution.mp4"
                     aria-label="Animated final design of the Pittsburgh Children's Museum website on a laptop"
