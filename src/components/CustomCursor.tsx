@@ -13,10 +13,17 @@ export function CustomCursor() {
     const onMove = (e: MouseEvent) => {
       dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
       dot.style.opacity = "1";
+
+      const footer = document.getElementById("footer");
+      if (!footer) return;
+
+      const { top } = footer.getBoundingClientRect();
+      dot.classList.toggle(styles.cursorSun, e.clientY >= top);
     };
 
     const onLeave = () => {
       dot.style.opacity = "0";
+      dot.classList.remove(styles.cursorSun);
     };
 
     const onEnter = () => {

@@ -8,8 +8,27 @@
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  transition: opacity 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    width 0.2s ease,
+    height 0.2s ease,
+    top 0.2s ease,
+    left 0.2s ease,
+    background 0.2s ease;
   will-change: transform;
+}
+
+.cursorSun {
+  top: -10px;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-radius: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Ccircle cx='12' cy='12' r='4.5' fill='%23E8A838'/%3E%3Cg stroke='%23E8A838' stroke-width='1.75' stroke-linecap='round'%3E%3Cline x1='12' y1='2' x2='12' y2='5.5'/%3E%3Cline x1='12' y1='18.5' x2='12' y2='22'/%3E%3Cline x1='2' y1='12' x2='5.5' y2='12'/%3E%3Cline x1='18.5' y1='12' x2='22' y2='12'/%3E%3Cline x1='4.93' y1='4.93' x2='7.41' y2='7.41'/%3E%3Cline x1='16.59' y1='16.59' x2='19.07' y2='19.07'/%3E%3Cline x1='4.93' y1='19.07' x2='7.41' y2='16.59'/%3E%3Cline x1='16.59' y1='7.41' x2='19.07' y2='4.93'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 @media (hover: none) {
