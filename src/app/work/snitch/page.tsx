@@ -20,7 +20,7 @@ const META = [
   { label: "Timeline", values: ["7 hours", "NovaHacks 2025"] },
   { label: "Role", values: ["Product Designer", "PM"] },
   { label: "Team", values: ["2 Designers", "2 Developers"] },
-  { label: "Tools", values: ["Figma", "SwiftUI"] },
+  { label: "Focus", values: ["Agentic AI", "Conversational Design", "Rapid Prototyping"] },
   { label: "Award", values: ["Best Implementable Design"] },
 ];
 
@@ -128,7 +128,7 @@ export default function SnitchCaseStudy() {
           <Reveal>
             <figure className={styles.heroFigure}>
               <Image
-                src="/projects/snitch/hero-mockups.png"
+                src="/projects/snitch/hero-mockups.webp"
                 alt="Snitch app splash screens shown across multiple phones"
                 width={1753}
                 height={1524}

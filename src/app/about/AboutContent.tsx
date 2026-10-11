@@ -262,7 +262,7 @@ export function AboutContent() {
           >
             <figure className={`${styles.heroPhoto} ${styles.heroPhotoPrimary}`}>
               <Image
-                src="/about/hero-portrait.png"
+                src="/about/hero-portrait.webp"
                 alt="Portrait of Cynthia Chan"
                 width={644}
                 height={812}
@@ -273,13 +273,13 @@ export function AboutContent() {
             </figure>
             <figure className={`${styles.heroPhoto} ${styles.heroPhotoSecondary}`}>
               <Image
-                src="/about/hero-collage.png"
+                src="/about/hero-collage.webp"
                 alt="Collage of Cynthia's interests"
                 width={636}
                 height={775}
                 className={styles.heroPhotoImage}
-                priority
                 sizes="(max-width: 900px) 56vw, 240px"
+                loading="lazy"
               />
             </figure>
           </div>

@@ -1,6 +1,7 @@
 .about {
   --about-gutter: clamp(1.25rem, 4vw, 3rem);
   --about-max: 980px;
+  --journey-hang: 0.5in;
 
   max-width: 1400px;
   margin: 0 auto;
@@ -368,6 +369,13 @@
   display: flex;
   flex-direction: column;
   gap: 1.35rem;
+  /* Match the journey timeline hang so lead/pivot share the spine’s left edge */
+  margin-left: calc(
+    (100% - min(100%, var(--about-max))) / 2 - var(--journey-hang, 0.5in)
+  );
+  margin-right: auto;
+  width: min(100%, calc(var(--about-max) + var(--journey-hang, 0.5in)));
+  max-width: calc(var(--about-max) + var(--journey-hang, 0.5in));
 }
 
 /* ----- Design journey ----- */
@@ -400,16 +408,17 @@
 
 .journeyHeading {
   max-width: none;
-  margin-left: -0.5in;
+  margin-left: calc(-1 * var(--journey-hang, 0.5in));
 }
 
 .journeyList {
   list-style: none;
-  margin: 0;
+  margin: 0 0 0 calc(-1 * var(--journey-hang, 0.5in));
   padding: 0;
   display: grid;
   gap: 0;
   border-left: 2px solid rgb(139 107 122 / 0.14);
+  width: calc(100% + var(--journey-hang, 0.5in));
 }
 
 .journeyItem {
@@ -1170,8 +1179,20 @@
 
 @media (max-width: 640px) {
   /* Negative indent would clip off-screen on narrow phones */
+  .introSection {
+    margin-left: auto;
+    margin-right: auto;
+    width: min(100%, var(--about-max));
+    max-width: var(--about-max);
+  }
+
   .journeyHeading {
     margin-left: 0;
+  }
+
+  .journeyList {
+    margin-left: 0;
+    width: 100%;
   }
 }
 

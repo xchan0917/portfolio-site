@@ -1,7 +1,7 @@
 export const aboutHeroName = "I'm Cynthia!";
 
 export const aboutHeroWelcome = [
-  "Welcome to my corner of the internet!",
+  "Welcome to my corner of the internet",
   "Take your time exploring, and thanks for being here!",
 ] as const;
 
@@ -10,8 +10,7 @@ export const aboutIntroChineseName = "鑫洁";
 export const aboutIntro =
   "I'm Cynthia (鑫洁) Chan! I actually started college on a consulting track, which meant two years of learning to pull apart problems from a business and systems angle before I ever opened Figma. Then I found HCI and it just clicked. Now I design products that bring both of those things together.";
 
-export const aboutPivot =
-  "But I wasn't always into product design…";
+export const aboutPivot = "but I did not come from design...";
 
 export const aboutJumpLinks = [
   { label: "How did I get here?", href: "#journey" },
@@ -60,7 +59,7 @@ export const aboutLifeSections = [
     body: "My dream is to travel to every continent at least once and go backpacking someday. For now, I love exploring Pittsburgh where my school is located and meeting locals at the parks! It feels extremely rewarding to visit places other than home and learn about their history and culture.",
     images: [
       {
-        src: "/about/travel-1.png",
+        src: "/about/travel-1.webp",
         alt: "Trekking through Acadia National Park",
         caption: "Trekking through arcadia national park",
         orientation: "landscape",
@@ -69,7 +68,7 @@ export const aboutLifeSections = [
         displayScale: "small",
       },
       {
-        src: "/about/travel-2.png",
+        src: "/about/travel-2.webp",
         alt: "Camel riding in Dubai with my best friend",
         caption: "Camel riding in dubai with my bestfriend",
         orientation: "portrait",
@@ -77,7 +76,7 @@ export const aboutLifeSections = [
         height: 1024,
       },
       {
-        src: "/about/travel-3.png",
+        src: "/about/travel-3.webp",
         alt: "Wild monkey sightings in Costa Rica",
         caption: "Wild monkey sightings in costa rica",
         orientation: "portrait",
@@ -94,7 +93,7 @@ export const aboutLifeSections = [
     body: "Oh! I am also a nail artist :) I am the go-to nail person for most of the people in my year. This is definitely one of my favorite activities because I get to learn so much about my clients during our nail sesh!",
     images: [
       {
-        src: "/about/nails-1.png",
+        src: "/about/nails-1.webp",
         alt: "French fade almond nails with silver accents",
         caption: "soft french ombre with silver gems",
         orientation: "portrait",
@@ -102,7 +101,7 @@ export const aboutLifeSections = [
         height: 1024,
       },
       {
-        src: "/about/nails-2.png",
+        src: "/about/nails-2.webp",
         alt: "Hand-painted y2k coquette nail art",
         caption: "Y2k pastel coquette set",
         orientation: "portrait",
@@ -118,7 +117,7 @@ export const aboutLifeSections = [
     body: "And I LOVE food. I am a huge Beli enthusiast. Catch me on the app at least twice a day either logging my new grub/matcha or finding the best reccs in a new city!!",
     images: [
       {
-        src: "/about/food-1.png",
+        src: "/about/food-1.webp",
         alt: "Giant pastrami sandwich",
         caption: "pastrami bigger than my head",
         orientation: "portrait",
@@ -126,7 +125,7 @@ export const aboutLifeSections = [
         height: 1024,
       },
       {
-        src: "/about/food-2.png",
+        src: "/about/food-2.webp",
         alt: "Truffle fries at a restaurant",
         caption: "truffle fry tower moment",
         orientation: "portrait",
@@ -134,7 +133,7 @@ export const aboutLifeSections = [
         height: 1024,
       },
       {
-        src: "/about/food-3.png",
+        src: "/about/food-3.webp",
         alt: "Omakase sashimi grid",
         caption: "omakase sashimi grid",
         orientation: "portrait",
@@ -142,7 +141,7 @@ export const aboutLifeSections = [
         height: 1024,
       },
       {
-        src: "/about/food-4.png",
+        src: "/about/food-4.webp",
         alt: "Sashimi board with friends",
         caption: "feast courtesy of my sister",
         orientation: "portrait",
@@ -150,7 +149,7 @@ export const aboutLifeSections = [
         height: 1024,
       },
       {
-        src: "/about/food.jpeg",
+        src: "/about/food.webp",
         alt: "Food and matcha finds",
         caption: "delectable matchas in sf",
         orientation: "portrait",

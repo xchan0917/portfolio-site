@@ -39,6 +39,20 @@ export const caseStudyNavBySlug: Record<string, CaseStudyNavLinks> = {
         "Canvas restructured to reduce friction in everyday student workflows",
     },
   },
+  "besty-ai-message-queue": {
+    previous: {
+      href: "/work/snitch",
+      title: "Snitch",
+      description:
+        "An agentic AI product for accountability\nin self scheduled work",
+    },
+    next: {
+      href: "/work/xhacks",
+      title: "Monet",
+      description:
+        "A closet remix app that turns what you already own into fresh outfits",
+    },
+  },
   "canvas-integration": {
     previous: {
       href: "/work/snitch",

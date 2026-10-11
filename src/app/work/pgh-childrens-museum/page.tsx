@@ -26,7 +26,7 @@ const META = [
   { label: "Timeline", values: ["4 weeks", "Spring 2025"] },
   { label: "Role", values: ["Web Designer"] },
   { label: "Team", values: ["4 UI/UX Designers"] },
-  { label: "Tools", values: ["Figma", "Framer"] },
+  { label: "Focus", values: ["User Research", "Information Architecture", "Visual Identity"] },
 ];
 
 const PROCESS_PHASES = [

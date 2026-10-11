@@ -2,8 +2,18 @@ import Image from "next/image";
 import { Josefin_Sans, Red_Hat_Display } from "next/font/google";
 import pgh from "./pgh.module.css";
 
-const redHat = Red_Hat_Display({ subsets: ["latin"], weight: "400" });
-const josefin = Josefin_Sans({ subsets: ["latin"], weight: "400" });
+const redHat = Red_Hat_Display({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  preload: false,
+});
+const josefin = Josefin_Sans({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  preload: false,
+});
 
 const COLORS = [
   { hex: "#01ACD8" },

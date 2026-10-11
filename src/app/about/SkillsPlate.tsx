@@ -48,7 +48,7 @@ export function SkillsPlate() {
       onClick={closeSkill}
     >
       <Image
-        src="/about/skills-plate.png"
+        src="/about/skills-plate.webp"
         alt=""
         width={1024}
         height={729}

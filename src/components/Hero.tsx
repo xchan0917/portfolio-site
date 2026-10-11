@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "./Hero.module.css";
 
 const MEET_ARROW_BODY =

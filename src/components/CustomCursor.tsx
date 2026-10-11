@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./CustomCursor.module.css";
 
 export function CustomCursor() {
+  const pathname = usePathname();
   const dotRef = useRef<HTMLDivElement>(null);
+  const isProto = pathname?.startsWith("/proto");
 
   useEffect(() => {
     const dot = dotRef.current;
-    if (!dot) return;
+    if (!dot || isProto) return;
 
     const onMove = (e: MouseEvent) => {
       dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
@@ -39,7 +42,9 @@ export function CustomCursor() {
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
     };
-  }, []);
+  }, [isProto]);
+
+  if (isProto) return null;
 
   return (
     <div

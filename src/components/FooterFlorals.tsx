@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { useEffect, useState } from "react";
 import styles from "./FooterFlorals.module.css";
 
 const FLORALS = [
   {
-    src: "/florals/lavender.png",
+    src: "/florals/lavender.webp",
     alt: "Lavender illustration",
     width: 72,
     height: 120,
@@ -17,7 +16,7 @@ const FLORALS = [
     opacity: 0.92,
   },
   {
-    src: "/florals/tulip.png",
+    src: "/florals/tulip.webp",
     alt: "Yellow tulip illustration",
     width: 64,
     height: 110,
@@ -27,7 +26,7 @@ const FLORALS = [
     opacity: 0.88,
   },
   {
-    src: "/florals/iris.png",
+    src: "/florals/iris.webp",
     alt: "Iris illustration",
     width: 80,
     height: 130,
@@ -37,7 +36,7 @@ const FLORALS = [
     opacity: 0.9,
   },
   {
-    src: "/florals/lavender.png",
+    src: "/florals/lavender.webp",
     alt: "",
     width: 56,
     height: 94,
@@ -47,7 +46,7 @@ const FLORALS = [
     opacity: 0.75,
   },
   {
-    src: "/florals/iris.png",
+    src: "/florals/iris.webp",
     alt: "",
     width: 68,
     height: 110,
@@ -57,7 +56,7 @@ const FLORALS = [
     opacity: 0.85,
   },
   {
-    src: "/florals/tulip.png",
+    src: "/florals/tulip.webp",
     alt: "",
     width: 52,
     height: 90,
@@ -67,7 +66,7 @@ const FLORALS = [
     opacity: 0.8,
   },
   {
-    src: "/florals/lavender.png",
+    src: "/florals/lavender.webp",
     alt: "",
     width: 48,
     height: 80,
@@ -77,7 +76,7 @@ const FLORALS = [
     opacity: 0.7,
   },
   {
-    src: "/florals/tulip.png",
+    src: "/florals/tulip.webp",
     alt: "",
     width: 58,
     height: 100,
@@ -87,7 +86,7 @@ const FLORALS = [
     opacity: 0.82,
   },
   {
-    src: "/florals/iris.png",
+    src: "/florals/iris.webp",
     alt: "",
     width: 54,
     height: 88,
@@ -97,7 +96,7 @@ const FLORALS = [
     opacity: 0.72,
   },
   {
-    src: "/florals/lavender.png",
+    src: "/florals/lavender.webp",
     alt: "",
     width: 44,
     height: 74,
@@ -107,78 +106,6 @@ const FLORALS = [
     opacity: 0.65,
   },
 ] as const;
-
-function toTransparentPngDataUrl(image: HTMLImageElement) {
-  const canvas = document.createElement("canvas");
-  canvas.width = image.naturalWidth;
-  canvas.height = image.naturalHeight;
-
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  if (!ctx) return null;
-
-  ctx.drawImage(image, 0, 0);
-  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  const { data } = imageData;
-
-  // Remove near-white background while keeping soft watercolor edges.
-  const threshold = 246; // 0..255
-  const softness = 22; // fade range
-
-  for (let i = 0; i < data.length; i += 4) {
-    const r = data[i] ?? 0;
-    const g = data[i + 1] ?? 0;
-    const b = data[i + 2] ?? 0;
-
-    const min = Math.min(r, g, b);
-    const max = Math.max(r, g, b);
-    const isNeutral = max - min < 16;
-
-    if (!isNeutral) continue;
-
-    const brightness = (r + g + b) / 3;
-    if (brightness < threshold - softness) continue;
-
-    const t = Math.min(1, Math.max(0, (brightness - (threshold - softness)) / softness));
-    const alpha = data[i + 3] ?? 255;
-    data[i + 3] = Math.round(alpha * (1 - t));
-  }
-
-  ctx.putImageData(imageData, 0, 0);
-  return canvas.toDataURL("image/png");
-}
-
-function FloralImage({ src, alt }: { src: string; alt: string }) {
-  const [dataUrl, setDataUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    const image = new window.Image();
-    image.crossOrigin = "anonymous";
-    image.src = src;
-
-    image.onload = () => {
-      if (cancelled) return;
-      const url = toTransparentPngDataUrl(image);
-      if (!cancelled && url) setDataUrl(url);
-    };
-
-    return () => {
-      cancelled = true;
-    };
-  }, [src]);
-
-  return (
-    <Image
-      src={dataUrl ?? src}
-      alt={alt}
-      width={1}
-      height={1}
-      className={styles.floralImg}
-      unoptimized={Boolean(dataUrl)}
-      sizes="(max-width: 768px) 80px, 120px"
-    />
-  );
-}
 
 export function FooterFlorals() {
   return (
@@ -206,15 +133,23 @@ export function FooterFlorals() {
             style={
               {
                 width: Math.round(
-                  floral.width * (floral.src.includes("lavender") ? 0.95 : 0.82)
+                  floral.width * (floral.src.includes("lavender") ? 0.95 : 0.82),
                 ),
                 height: Math.round(
-                  floral.height * (floral.src.includes("lavender") ? 0.95 : 0.82)
+                  floral.height * (floral.src.includes("lavender") ? 0.95 : 0.82),
                 ),
               } as CSSProperties
             }
           >
-            <FloralImage src={floral.src} alt={floral.alt} />
+            <Image
+              src={floral.src}
+              alt={floral.alt}
+              width={floral.width}
+              height={floral.height}
+              className={styles.floralImg}
+              sizes="120px"
+              loading="lazy"
+            />
           </div>
         </div>
       ))}

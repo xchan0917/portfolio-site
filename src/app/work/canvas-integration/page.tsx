@@ -27,7 +27,7 @@ const META = [
   { label: "Timeline", values: ["1 week", "2025"] },
   { label: "Role", values: ["Product Designer", "PM"] },
   { label: "Team", values: ["2 Designers", "2 PMs"] },
-  { label: "Tools", values: ["Figma", "After Effects"] },
+  { label: "Focus", values: ["Workflow Design", "Systems Thinking", "Motion Prototyping"] },
 ];
 
 const STATS = [
@@ -78,7 +78,7 @@ export default function CanvasCaseStudy() {
           <Reveal>
             <figure className={`${styles.heroFigure} ${cx.heroFigure}`}>
               <Image
-                src="/projects/canvas/hero-artwork-v2.png"
+                src="/projects/canvas/hero-artwork-v2.webp"
                 alt="Laptop mockup of the redesigned Canvas course interface"
                 width={1920}
                 height={1080}

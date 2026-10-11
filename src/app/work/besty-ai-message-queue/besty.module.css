@@ -1,0 +1,855 @@
+/* Two-line hero title, matching the Canvas case study. */
+.heroTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.heroTitleLine {
+  display: block;
+}
+
+/* ---------- Draft scaffolding ----------
+   Everything below marks a slot waiting on real content. Drop the class once
+   the copy or asset lands. */
+
+.slot {
+  font-style: italic;
+  color: var(--muted);
+}
+
+.placeholderFrame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 16px;
+  border: 1px dashed rgb(139 107 122 / 0.4);
+  background: rgb(245 230 232 / 0.35);
+}
+
+.placeholderLabel {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.placeholderHero {
+  aspect-ratio: 16 / 9;
+  border-radius: 15px;
+}
+
+/* Matches the sketch frames on the other case studies. */
+.placeholderPortrait {
+  max-width: 260px;
+  aspect-ratio: 908 / 1640;
+}
+
+.placeholderWide {
+  aspect-ratio: 16 / 10;
+}
+
+/* Decisions the copy still depends on. Marked so they can never be mistaken
+   for finished prose. */
+.toFill {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  max-width: 44rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 14px;
+  border: 1px dashed rgb(139 107 122 / 0.4);
+  background: rgb(245 230 232 / 0.35);
+}
+
+.toFill .slot {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.toFillList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.toFillItem {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.toFillTerm {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+/* Stands in for a meta value that has not been decided yet. */
+.toFillChip {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px dashed rgb(139 107 122 / 0.45);
+  background: rgb(245 230 232 / 0.35);
+}
+
+@media (max-width: 640px) {
+  .toFillItem {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
+
+.problemHead {
+  align-items: center;
+}
+
+.problemSketchWrap {
+  position: relative;
+  flex: 0 0 auto;
+  width: 4.75rem;
+  height: 4.75rem;
+  margin: 0 0 0 auto;
+}
+
+.problemSketchWrap svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: rotate(4deg);
+  transform-origin: center;
+}
+
+/* Problem narrative spans the full study column. */
+.problemProse {
+  display: block;
+  width: 100%;
+  max-width: none;
+}
+
+.problemProse p {
+  width: 100%;
+  max-width: none;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .problemHead {
+    flex-wrap: wrap;
+  }
+
+  .problemSketchWrap {
+    flex-basis: 100%;
+    width: 4.75rem;
+    height: 4.75rem;
+    margin: 0.35rem auto 0;
+  }
+}
+
+.frictionSplit {
+  display: grid;
+  grid-template-columns: minmax(13.5rem, 0.78fr) minmax(0, 1.22fr);
+  gap: 0.9rem;
+  align-items: stretch;
+  margin-top: 1.15rem;
+}
+
+.frictionSteps,
+.frictionVisual {
+  border-radius: 22px;
+  min-height: 16.5rem;
+}
+
+.frictionSteps {
+  display: flex;
+  align-items: center;
+  padding: 2rem 1.85rem;
+  background: rgb(255 255 255 / 0.72);
+  border: 1px solid var(--border);
+}
+
+.frictionSteps p {
+  margin: 0;
+  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+.frictionVisual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.35rem 1.5rem;
+  background: rgb(245 230 232 / 0.55);
+}
+
+.accountStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: min(100%, 28rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.accountCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 0.95rem;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.82);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.accountOpen {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 8px 22px rgb(28 21 36 / 0.06);
+}
+
+.accountMark {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  color: var(--purple);
+}
+
+.accountDot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--purple);
+}
+
+.lockMark {
+  width: 0.95rem;
+  height: 0.95rem;
+  display: block;
+}
+
+.accountText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.accountText strong {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+.accountText em {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.accountState {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--purple);
+  white-space: nowrap;
+}
+
+.frictionCaption {
+  margin: 2rem 0 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.costBlock {
+  margin-top: 1.35rem;
+}
+
+.protoFigure {
+  margin: 0.35rem auto 0;
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.protoVideo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: #fff;
+  pointer-events: none;
+}
+
+.protoVideo::-webkit-media-controls,
+.protoVideo::-webkit-media-controls-enclosure,
+.protoVideo::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+@media (max-width: 800px) {
+  .frictionSplit {
+    grid-template-columns: 1fr;
+  }
+
+  .frictionSteps,
+  .frictionVisual {
+    min-height: 0;
+  }
+}
+
+.stats2 {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 2rem 2.25rem;
+  margin-top: 0.35rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.statValue {
+  display: inline-flex;
+  align-items: baseline;
+  font-variant-numeric: tabular-nums;
+}
+
+.digitWindow {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.digitReel {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.12, 0.72, 0.18, 1);
+}
+
+.digit {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+
+.decimal {
+  display: inline-block;
+  line-height: 1;
+}
+
+.statSuffix {
+  white-space: nowrap;
+}
+
+.statCopy {
+  max-width: none;
+}
+
+.statBlock {
+  width: min(100%, 17.5rem);
+  align-items: flex-start;
+  text-align: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .digitReel {
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .stats2 {
+    grid-template-columns: 1fr;
+  }
+
+  .statCopy {
+    max-width: none;
+  }
+}
+
+/* ---------- Opportunity identity map ---------- */
+.identityMap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.15fr);
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+  align-items: stretch;
+  width: 100%;
+  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+}
+
+.mapPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.mapEyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.mapPanelBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex: 1;
+  min-height: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.mapStack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.35rem;
+  width: min(100%, 14.5rem);
+  max-width: 100%;
+  margin: clamp(3rem, 8vw, 5.5rem) auto 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mapCard {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  min-width: 0;
+  padding: 0.7rem 0.95rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.92);
+  position: relative;
+}
+
+.mapStack .mapCard:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 1.35rem;
+  bottom: -1.35rem;
+  width: 1px;
+  height: 1.35rem;
+  background: rgb(139 107 122 / 0.35);
+}
+
+.mapCardIcon {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--purple);
+  flex-shrink: 0;
+}
+
+.mapCardText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.mapCardText strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.mapCardText em {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.mapCaption {
+  margin: 1.15rem 0 0;
+  width: 100%;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.mapBridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-width: 6.5rem;
+  max-width: 8rem;
+  align-self: stretch;
+}
+
+.mapBridgeLabel {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.mapBridgeArrow {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.mapFlow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1.85rem 0.35rem 1rem;
+  box-sizing: border-box;
+  gap: 0.15rem;
+}
+
+.mapIdentity {
+  display: grid;
+  place-items: center;
+  width: min(100%, 11.5rem);
+  min-height: 2.6rem;
+  padding: 0.55rem 1rem;
+  border-radius: 12px;
+  background: var(--purple-deep);
+  color: #faf7f4;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.mapConnectors {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  height: 4.75rem;
+  margin: 0.55rem 0;
+  overflow: visible;
+  color: var(--purple-light);
+}
+
+.mapLink {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
+
+.mapPorts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.15rem;
+  width: 100%;
+  max-width: 24rem;
+  margin: 0.45rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mapPorts li {
+  display: grid;
+  place-items: center;
+  min-height: 2.45rem;
+  padding: 0.45rem 0.4rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgb(255 255 255 / 0.95);
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+}
+
+.mapQueue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.12rem;
+  width: min(100%, 13rem);
+  min-height: 3.15rem;
+  margin-top: 0.2rem;
+  padding: 0.65rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgb(232 224 228 / 0.95);
+  text-align: center;
+}
+
+.mapQueue strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.mapQueue em {
+  font-style: normal;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+@media (max-width: 860px) {
+  .identityMap {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .mapStack {
+    margin-top: 3rem;
+  }
+
+  .mapBridge {
+    flex-direction: row;
+    justify-content: flex-start;
+    min-width: 0;
+    max-width: none;
+    padding: 0 0.15rem;
+  }
+
+  .mapBridgeLabel {
+    text-align: left;
+  }
+
+  .mapBridgeArrow {
+    transform: rotate(90deg);
+  }
+}
+
+/* ---------- Solution steps ---------- */
+.stepList {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 8vw, 5.5rem);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 1.65rem;
+}
+
+.stepText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.stepNum {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--purple);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.stepLead {
+  width: 100%;
+  max-width: none;
+  margin: 0.55rem 0 0;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.momentCards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.momentCard {
+  margin: 0;
+  padding: 1.35rem 1.45rem 1.4rem;
+  border-radius: 20px;
+  background: #f3eeea;
+}
+
+.momentCardTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin: 0 0 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.momentCardBody {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.momentFrame {
+  aspect-ratio: 21 / 8;
+  max-height: 220px;
+}
+
+.momentCardsPair {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.claimRow {
+  display: grid;
+  grid-template-columns: minmax(14rem, 22rem) minmax(0, 1fr);
+  gap: clamp(2.25rem, 4vw, 3.5rem);
+  align-items: center;
+  margin-top: 1.75rem;
+}
+
+.claimStack {
+  display: flex;
+  flex-direction: column;
+  gap: 3.75rem;
+  max-width: 26rem;
+}
+
+.claimCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.claimVisual {
+  display: block;
+  width: 82%;
+  height: auto;
+}
+
+.refreshRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2.5rem;
+  margin-top: 1.1rem;
+}
+
+.refreshVisual {
+  display: block;
+  width: min(58%, 640px);
+  height: auto;
+  flex: 0 0 auto;
+}
+
+.futureList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.futureRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.15rem;
+  padding: 1.4rem 1.5rem;
+  border-radius: 16px;
+  background: rgb(255 255 255 / 0.72);
+}
+
+.futureIcon {
+  flex: 0 0 auto;
+  width: 1.65rem;
+  height: 1.65rem;
+  margin-top: 0.12rem;
+  color: var(--ink-soft);
+}
+
+.futureCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.futureTitle {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.futureBody {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 900px) {
+  .momentCards,
+  .momentCardsPair,
+  .claimRow,
+  .refreshRow {
+    grid-template-columns: 1fr;
+  }
+
+  .refreshRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .refreshVisual {
+    width: 100%;
+  }
+}

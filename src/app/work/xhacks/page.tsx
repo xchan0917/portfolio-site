@@ -64,7 +64,7 @@ const META = [
   { label: "Timeline", values: ["3 days", "XHacks 2026"] },
   { label: "Role", values: ["Product Designer"] },
   { label: "Team", values: ["2 Designers", "2 Developers"] },
-  { label: "Tools", values: ["Figma", "v0 dev"] },
+  { label: "Focus", values: ["Consumer AI", "Sustainable Design", "Product Strategy"] },
 ];
 
 const PAIN_POINTS = [
@@ -338,7 +338,7 @@ export default function XhacksCaseStudy() {
           <Reveal>
             <figure className={`${styles.heroFigure} ${monet.heroFigure}`}>
               <Image
-                src="/projects/xhacks/monet-cover.png"
+                src="/projects/xhacks/monet-cover.webp"
                 alt="Monet closet remix app shown on two phones"
                 width={1920}
                 height={1080}

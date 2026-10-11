@@ -12,91 +12,141 @@ type ProjectCardProps = {
   index: number;
 };
 
+function useIsTouchOnly() {
+  const [touchOnly, setTouchOnly] = useState(false);
+
+  useEffect(() => {
+    setTouchOnly(
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches,
+    );
+  }, []);
+
+  return touchOnly;
+}
+
 function CoverMedia({
   project,
   playing,
+  inView,
 }: {
   project: Project;
   playing: boolean;
+  inView: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [loadVideo, setLoadVideo] = useState(false);
+  const [videoVisible, setVideoVisible] = useState(false);
   const startAt = project.coverStartAt ?? 0;
+  const isTouchOnly = useIsTouchOnly();
+  const poster = project.coverPoster;
+  const isAnimatedGif = Boolean(project.cover?.endsWith(".gif"));
 
-  // On touch devices there's no hover, so always play the video.
-  const isTouchOnly =
-    typeof window !== "undefined" &&
-    window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+  // Mount the video only when the user is likely to see it play.
+  useEffect(() => {
+    if (!project.coverMp4) return;
+    if (playing || (isTouchOnly && inView)) {
+      setLoadVideo(true);
+    }
+  }, [project.coverMp4, playing, isTouchOnly, inView]);
 
-  // Seek to start frame so video shows a meaningful still by default.
-  // On touch devices, start playing immediately after the seek.
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !loadVideo) return;
+
     const seekToStart = () => {
-      video.currentTime = startAt;
-      if (isTouchOnly) void video.play();
+      try {
+        video.currentTime = startAt;
+      } catch {
+        /* ignore seek errors before metadata */
+      }
     };
+
     if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
       seekToStart();
     } else {
       video.addEventListener("loadedmetadata", seekToStart, { once: true });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startAt]);
+  }, [loadVideo, startAt]);
 
-  // Play on hover, pause and reset when not hovering (desktop only).
   useEffect(() => {
-    if (isTouchOnly) return;
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !loadVideo) return;
+
+    if (isTouchOnly) {
+      void video.play().then(() => setVideoVisible(true)).catch(() => {});
+      return;
+    }
+
     if (playing) {
-      void video.play();
+      void video
+        .play()
+        .then(() => setVideoVisible(true))
+        .catch(() => {});
     } else {
       video.pause();
-      video.currentTime = startAt;
+      try {
+        video.currentTime = startAt;
+      } catch {
+        /* ignore */
+      }
+      setVideoVisible(false);
     }
-  }, [playing, startAt, isTouchOnly]);
+  }, [playing, startAt, isTouchOnly, loadVideo]);
 
-  if (!project.coverMp4) {
-    if (!project.cover) return null;
-    return (
-      <Image
-        src={project.cover}
-        alt=""
-        fill
-        unoptimized
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 700px"
-        className={styles.mediaImage}
-      />
-    );
-  }
+  if (!project.coverMp4 && !poster && !project.cover) return null;
 
   return (
-    <video
-      ref={videoRef}
-      src={project.coverMp4}
-      className={styles.mediaImage}
-      muted
-      loop
-      playsInline
-      preload="auto"
-      aria-hidden="true"
-    />
+    <>
+      {poster || project.cover ? (
+        <Image
+          src={poster || project.cover!}
+          alt=""
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 700px"
+          className={styles.mediaImage}
+          unoptimized={isAnimatedGif && !poster}
+          loading="lazy"
+        />
+      ) : null}
+      {loadVideo && project.coverMp4 ? (
+        <video
+          ref={videoRef}
+          src={project.coverMp4}
+          className={styles.mediaVideo}
+          muted
+          loop
+          playsInline
+          preload="none"
+          poster={poster}
+          aria-hidden="true"
+          style={{ opacity: videoVisible ? 1 : 0 }}
+        />
+      ) : null}
+    </>
   );
 }
 
 function CardContent({
   project,
   playing,
+  inView,
 }: {
   project: Project;
   playing: boolean;
+  inView: boolean;
 }) {
+  const hasCoverMedia = Boolean(
+    project.cover || project.coverMp4 || project.coverPoster,
+  );
+
   return (
     <>
       <div className={styles.media}>
-        <div className={styles.mediaInner} aria-hidden="true" />
-        <CoverMedia project={project} playing={playing} />
+        <div
+          className={`${styles.mediaInner} ${hasCoverMedia ? "" : styles.mediaEmpty}`}
+          aria-hidden="true"
+        />
+        <CoverMedia project={project} playing={playing} inView={inView} />
         {project.comingSoon ? (
           <span className={styles.badge}>Coming soon</span>
         ) : null}
@@ -145,6 +195,15 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           ...(project.coverScaleHover
             ? { "--media-scale-hover": project.coverScaleHover }
             : {}),
+          ...(project.coverPosterShift != null
+            ? { "--media-poster-shift": project.coverPosterShift }
+            : {}),
+          ...(project.coverPosterShiftY != null
+            ? { "--media-poster-shift-y": project.coverPosterShiftY }
+            : {}),
+          ...(project.coverPosterScale != null
+            ? { "--media-poster-scale": project.coverPosterScale }
+            : {}),
         } as CSSProperties
       }
       onMouseEnter={play}
@@ -157,11 +216,11 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           className={`${styles.link} ${styles.linkStatic}`}
           aria-label={project.title}
         >
-          <CardContent project={project} playing={playing} />
+          <CardContent project={project} playing={playing} inView={inView} />
         </div>
       ) : (
         <Link href={`/work/${project.slug}`} className={styles.link}>
-          <CardContent project={project} playing={playing} />
+          <CardContent project={project} playing={playing} inView={inView} />
         </Link>
       )}
     </article>

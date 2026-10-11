@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FooterFlorals } from "@/components/FooterFlorals";
+import { FooterFloralsLoader } from "@/components/FooterFloralsLoader";
 import { LocalTime } from "@/components/LocalTime";
 import { Reveal } from "@/components/Reveal";
 import { site } from "@/lib/site";
@@ -8,7 +8,7 @@ import styles from "./SiteFooter.module.css";
 export function SiteFooter() {
   return (
     <footer className={styles.footer} id="footer">
-      <FooterFlorals />
+      <FooterFloralsLoader />
 
       <div className={styles.inner}>
         <div className={styles.top}>

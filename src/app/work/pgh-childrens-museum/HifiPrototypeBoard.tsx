@@ -36,7 +36,7 @@ const COL_4 = {
   alt: "Polished high-fidelity prototype with carousels and footer structure",
 };
 
-const IMG_QUALITY = 100;
+const IMG_QUALITY = 75;
 
 function HifiFrame({
   image,

@@ -52,7 +52,7 @@
 }
 
 .brandChar {
-  font-family: "Ma Shan Zheng", var(--font-cursive), cursive;
+  font-family: var(--font-brand-script), var(--font-cursive), cursive;
   font-size: 2rem;
   line-height: 1;
   letter-spacing: 0.06em;

@@ -26,10 +26,15 @@ export function CanvasSolutionPanelImage({
           overflow: "hidden",
         }}
       >
+        {/* foreignObject cannot host next/image reliably; keep native img. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt=""
+          width={Math.round(w)}
+          height={Math.round(h)}
+          loading="lazy"
+          decoding="async"
           style={{
             display: "block",
             width: "100%",
