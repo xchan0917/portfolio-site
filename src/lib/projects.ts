@@ -45,7 +45,7 @@ export const featuredProjects: Project[] = [
     description: "Unify incoming messages across multiple accounts.",
     tags: ["Product Design", "Messaging"],
     accent: "purple",
-    coverPoster: "/projects/besty-ai-message-queue-poster-v4.webp",
+    coverPoster: "/projects/besty-ai-message-queue-poster-v5.webp",
     coverMp4: "/projects/besty-ai-message-queue.mp4",
     coverStartAt: 0,
     /* Hover clip framing */
@@ -53,7 +53,7 @@ export const featuredProjects: Project[] = [
     coverShiftY: "0",
     coverScale: 1.25,
     coverScaleHover: 1.3,
-    /* Static poster is pre-cropped to the desired frame */
+    /* Full two-laptop hero (same art as case study), fitted to 4:3 */
     coverPosterShift: "0",
     coverPosterShiftY: "0",
     coverPosterScale: 1,
@@ -69,11 +69,14 @@ export const featuredProjects: Project[] = [
     cover: "/projects/xhacks.gif",
     coverMp4: "/projects/xhacks.mp4",
     coverStartAt: 1,
-    /* Landscape mockup — fill the 4:3 card and crop the jitter.video mark. */
-    coverShift: "-0.5cm",
+    /* Horizontal Monet cover — keep full two-phone frame */
+    coverShift: "0",
     coverShiftY: "0",
-    coverScale: 1.28,
-    coverScaleHover: 1.32,
+    coverScale: 1.05,
+    coverScaleHover: 1.08,
+    coverPosterShift: "0",
+    coverPosterShiftY: "0",
+    coverPosterScale: 1,
   },
   {
     slug: "pgh-childrens-museum",

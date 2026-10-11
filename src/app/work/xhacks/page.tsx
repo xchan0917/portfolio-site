@@ -340,8 +340,9 @@ export default function XhacksCaseStudy() {
               <Image
                 src="/projects/xhacks/monet-cover.webp"
                 alt="Monet closet remix app shown on two phones"
-                width={1920}
-                height={1080}
+                width={1024}
+                height={576}
+                unoptimized
                 priority
                 className={`${styles.heroMedia} ${monet.heroCover}`}
               />

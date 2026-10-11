@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
-import { Reveal } from "@/components/Reveal";
+import { Reveal, RevealSequence } from "@/components/Reveal";
 import { CaseStudyNav } from "@/components/CaseStudyNav";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -18,11 +18,9 @@ export const metadata: Metadata = {
     "Unifying incoming messages across multiple accounts into a single queue.",
 };
 
-type MetaItem = { label: string; values: string[]; toFill?: boolean };
-
-const META: MetaItem[] = [
-  { label: "Timeline", values: [], toFill: true },
-  { label: "Role", values: [], toFill: true },
+const META = [
+  { label: "Timeline", values: ["May 2026 – Aug 2027"] },
+  { label: "Role", values: ["Product Designer"] },
   {
     label: "Team",
     values: [
@@ -89,7 +87,7 @@ const MOMENTS: Moment[] = [
       {
         title: "Claim opens the conversation",
         body: "Claim loads the thread and shows “[name] is replying,” so a second person does not answer the same guest.",
-        visual: "/projects/besty/someone-else-replying.gif",
+        visual: "/projects/besty/someone-else-replying.mp4",
       },
       {
         title: "Sentiment, kept light",
@@ -106,7 +104,7 @@ const MOMENTS: Moment[] = [
       {
         title: "Live refresh",
         body: "The queue updates every two seconds on its own. A new message is already there, and nothing on the page should interrupt that.",
-        visual: "/projects/besty/reload-time.gif",
+        visual: "/projects/besty/reload-time.mp4",
         visualSide: "left",
       },
       {
@@ -124,7 +122,7 @@ const MOMENTS: Moment[] = [
       {
         title: "The reply stays the same",
         body: "Drafting and sending still work like the existing inbox. Sending completes the task. A later message starts a new one.",
-        visual: "/projects/besty/message.gif",
+        visual: "/projects/besty/message.mp4",
       },
       {
         title: "Only that property",
@@ -135,6 +133,33 @@ const MOMENTS: Moment[] = [
     frame: "Screen — to add",
   },
 ];
+
+function MomentClip({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className: string;
+}) {
+  const poster = src.replace(/\.mp4$/, "-poster.webp");
+  return (
+    <video
+      className={className}
+      src={src}
+      poster={poster}
+      aria-label={alt}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      disablePictureInPicture
+      controlsList="nodownload nofullscreen noremoteplayback"
+    />
+  );
+}
 
 function MissMark() {
   return (
@@ -237,7 +262,7 @@ export default function BestyCaseStudy() {
       <div className="pageContent">
         <main className={styles.study}>
           <Reveal>
-            <figure className={styles.heroFigure}>
+            <figure className={`${styles.heroFigure} ${cx.heroFigure}`}>
               <Image
                 src="/projects/besty/hero-mockups.webp"
                 alt="Besty.AI Message Queue shown across two laptop mockups"
@@ -291,15 +316,11 @@ export default function BestyCaseStudy() {
                 <div key={m.label} className={styles.metaItem}>
                   <span className={styles.metaLabel}>{m.label}</span>
                   <span className={styles.metaValue}>
-                    {m.toFill ? (
-                      <span className={cx.toFillChip}>To fill</span>
-                    ) : (
-                      m.values.map((v) => (
-                        <span key={v} className={styles.metaLine}>
-                          {v}
-                        </span>
-                      ))
-                    )}
+                    {m.values.map((v) => (
+                      <span key={v} className={styles.metaLine}>
+                        {v}
+                      </span>
+                    ))}
                   </span>
                 </div>
               ))}
@@ -344,19 +365,14 @@ export default function BestyCaseStudy() {
             <Reveal delay={100}>
               <div className={cx.frictionSplit}>
                 <div className={cx.frictionSteps}>
-                  <p>
-                    Create a +1, +2, +3 email address.
-                    <br />
-                    Log out of account.
-                    <br />
-                    Sign in to other created accounts.
-                    <br />
-                    Learn other portfolio&apos;s workflow content.
-                    <br />
-                    Check for missed messages.
-                    <br />
-                    Repeat for the next portfolio account.
-                  </p>
+                  <ol className={cx.frictionStepList}>
+                    <li>Create a +1, +2, +3 email address.</li>
+                    <li>Log out of account.</li>
+                    <li>Sign in to other created accounts.</li>
+                    <li>Learn other portfolio&apos;s workflow content.</li>
+                    <li>Check for missed messages.</li>
+                    <li>Repeat for the next portfolio account.</li>
+                  </ol>
                 </div>
                 <div className={cx.frictionVisual}>
                   <ul className={cx.accountStack}>
@@ -439,7 +455,7 @@ export default function BestyCaseStudy() {
               </div>
             </Reveal>
 
-            <Reveal delay={160}>
+            <Reveal soft threshold={0.28} rootMargin="0px 0px -12% 0px">
               <figure
                 className={cx.identityMap}
                 aria-label="Identity model: today each portfolio is a separate login; the queue needs one identity assigned to every portfolio."
@@ -624,12 +640,14 @@ export default function BestyCaseStudy() {
               <figure className={cx.protoFigure}>
                 <video
                   className={cx.protoVideo}
-                  src="/projects/besty/prototype.mp4?v=2"
+                  src="/projects/besty/prototype.mp4"
+                  poster="/projects/besty/prototype-poster.webp"
                   aria-label="Besty AI Message Queue prototype"
                   autoPlay
                   muted
                   loop
                   playsInline
+                  preload="auto"
                   disablePictureInPicture
                   controlsList="nodownload nofullscreen noremoteplayback"
                 />
@@ -653,16 +671,17 @@ export default function BestyCaseStudy() {
             </Reveal>
 
             <div className={cx.stepList}>
-              {MOMENTS.map((moment, i) => (
-                <Reveal key={moment.step} delay={i * 90}>
-                  <div className={cx.step}>
-                    <div className={cx.stepText}>
-                      <span className={cx.stepNum}>Moment {moment.step}</span>
-                      <h3 className={cx.stepTitle}>{moment.title}</h3>
-                      {moment.lead ? (
-                        <p className={cx.stepLead}>{moment.lead}</p>
-                      ) : null}
-                    </div>
+              {MOMENTS.map((moment) => (
+                <div key={moment.step} className={cx.step}>
+                    <Reveal soft threshold={0.35} rootMargin="0px 0px -10% 0px">
+                      <div className={cx.stepText}>
+                        <span className={cx.stepNum}>Moment {moment.step}</span>
+                        <h3 className={cx.stepTitle}>{moment.title}</h3>
+                        {moment.lead ? (
+                          <p className={cx.stepLead}>{moment.lead}</p>
+                        ) : null}
+                      </div>
+                    </Reveal>
                     {moment.parts.some(
                       (part) => (part.visual || part.plain) && !part.solo,
                     ) ? (
@@ -677,20 +696,28 @@ export default function BestyCaseStudy() {
                           ? moment.parts
                               .filter((part) => part.visual && !part.solo)
                               .map((part) => (
-                                <Image
+                                <Reveal
                                   key={part.visual}
-                                  className={cx.refreshVisual}
-                                  src={part.visual!}
-                                  alt="The message queue refreshing, with a new guest message already in the list."
-                                  width={960}
-                                  height={720}
-                                  unoptimized
-                                  loading="lazy"
-                                  sizes="(max-width: 900px) 92vw, 560px"
-                                />
+                                  soft
+                                  delay={80}
+                                  threshold={0.3}
+                                  rootMargin="0px 0px -10% 0px"
+                                >
+                                  <MomentClip
+                                    className={cx.refreshVisual}
+                                    src={part.visual!}
+                                    alt="The message queue refreshing, with a new guest message already in the list."
+                                  />
+                                </Reveal>
                               ))
                           : null}
-                        <div className={cx.claimStack}>
+                        <RevealSequence
+                          soft
+                          step={420}
+                          threshold={0.3}
+                          rootMargin="0px 0px -12% 0px"
+                          className={cx.claimStack}
+                        >
                           {moment.parts
                             .filter(
                               (part) => (part.visual || part.plain) && !part.solo,
@@ -706,23 +733,25 @@ export default function BestyCaseStudy() {
                                 <p className={cx.momentCardBody}>{part.body}</p>
                               </div>
                             ))}
-                        </div>
+                        </RevealSequence>
                         {moment.parts.some((part) => part.visualSide === "left")
                           ? null
                           : moment.parts
                               .filter((part) => part.visual && !part.solo)
                               .map((part) => (
-                                <Image
+                                <Reveal
                                   key={part.visual}
-                                  className={cx.claimVisual}
-                                  src={part.visual!}
-                                  alt="Maria Alvarez’s row shows Daniel K. is replying, while the other conversations still offer Claim."
-                                  width={960}
-                                  height={720}
-                                  unoptimized
-                                  loading="lazy"
-                                  sizes="(max-width: 900px) 92vw, 560px"
-                                />
+                                  soft
+                                  delay={100}
+                                  threshold={0.3}
+                                  rootMargin="0px 0px -10% 0px"
+                                >
+                                  <MomentClip
+                                    className={cx.claimVisual}
+                                    src={part.visual!}
+                                    alt="Maria Alvarez’s row shows Daniel K. is replying, while the other conversations still offer Claim."
+                                  />
+                                </Reveal>
                               ))}
                       </div>
                     ) : null}
@@ -739,15 +768,10 @@ export default function BestyCaseStudy() {
                               <p className={cx.momentCardBody}>{part.body}</p>
                             </div>
                           </div>
-                          <Image
+                          <MomentClip
                             className={cx.claimVisual}
                             src={part.visual!}
                             alt="Amanda McSherry’s thread in the existing inbox, with a reply typed and sent."
-                            width={960}
-                            height={720}
-                            unoptimized
-                            loading="lazy"
-                            sizes="(max-width: 900px) 92vw, 560px"
                           />
                         </div>
                       ))}
@@ -789,8 +813,7 @@ export default function BestyCaseStudy() {
                         </span>
                       </div>
                     )}
-                  </div>
-                </Reveal>
+                </div>
               ))}
             </div>
           </section>

@@ -1,18 +1,13 @@
 .heroFigure {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 16 / 9;
-  background: linear-gradient(145deg, #f8efee, #e4dcec);
+  background: transparent;
+  box-shadow: none;
 }
 
 .heroFigure .heroCover {
   display: block;
-  width: 56.25%;
+  width: 100%;
   height: auto;
-  max-width: none;
-  transform: rotate(-90deg);
-  transform-origin: center center;
+  transform: none;
 }
 
 /* ---------- Reflection sketches ---------- */
