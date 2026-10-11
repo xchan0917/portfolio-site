@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 const META = [
-  { label: "Timeline", values: ["May 2026 – Aug 2027"] },
+  { label: "Timeline", values: ["2 months", "2026"] },
   { label: "Role", values: ["Product Designer"] },
   {
     label: "Team",
